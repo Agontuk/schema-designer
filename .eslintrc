@@ -1,0 +1,55 @@
+{
+    extends: ['eslint:recommended', 'plugin:react/recommended'],
+    parser: 'babel-eslint',
+    plugins: ['react'],
+    rules: {
+        semi: 2,
+        quotes: [2, 'single'],
+        key-spacing: [2, {beforeColon: false, afterColon: true}],
+        keyword-spacing: [2, {before: true, after: true, overrides: {}}],
+        eol-last: 0,
+        strict: [2, 'never'],
+        camelcase: [2, {properties: 'never'}],
+        indent: [2, 4, {VariableDeclarator: {var: 2, let: 2, const: 2}, SwitchCase: 1}],
+        comma-spacing: [2, {before: false, after: true}],
+        arrow-parens: [2, 'always'],
+        arrow-spacing: [2, {before: true, after: true}],
+        space-before-function-paren: [2, 'always'],
+        space-before-blocks: 2,
+        space-infix-ops: 2,
+        object-curly-spacing: [2, 'always'],
+        template-curly-spacing: [2, 'always'],
+        brace-style: [2, '1tbs', { 'allowSingleLine': true }],
+        jsx-quotes: [2, 'prefer-single'],
+        no-shadow: 0,
+        no-mixed-spaces-and-tabs: 2,
+        no-console: 0,
+        no-var: 2,
+        react/jsx-indent: [2, 4],
+        react/display-name: 0,
+        react/no-deprecated: 2,
+        react/no-unknown-property: 2,
+        react/jsx-closing-bracket-location: 2,
+        react/jsx-key: 2,
+        react/jsx-no-undef: 2,
+        react/jsx-space-before-closing: [2, 'always'],
+        react/jsx-curly-spacing: [2, 'always'],
+        react/no-render-return-value: 2
+    },
+
+    globals: {},
+
+    env: {
+        es6: true,
+        browser: true,
+        node: true
+    },
+
+    parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true
+        }
+    }
+}

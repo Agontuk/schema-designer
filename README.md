@@ -1,0 +1,1 @@
+# Laravel database schema builder
