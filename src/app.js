@@ -1,12 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import Counter from 'containers/counter';
+import Schema from 'containers/Schema';
 
 const App = () => {
     return (
         <Provider store={ store }>
-            <Counter />
+            <Schema />
         </Provider>
     );
 };
