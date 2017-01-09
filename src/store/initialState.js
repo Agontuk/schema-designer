@@ -1,4 +1,8 @@
 const initialState = {
+    ui: {
+        showTableModal: false,
+        showColumnModal: false
+    },
     database: {
         name: 'social_network'
     },
