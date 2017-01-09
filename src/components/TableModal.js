@@ -1,38 +1,49 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
-import Form from 'react-bootstrap/lib/Form';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import Col from 'react-bootstrap/lib/Col';
 
 class TableModal extends Component {
+    handleSubmit = () => {
+        const name = this.refs.tableName.value.trim();
+        const softDelete = this.refs.softdelete.checked;
+        const timeStamp = this.refs.timestamp.checked;
+
+        if (!name) {
+            return;
+        }
+
+        this.props.saveTable({
+            id: Math.random().toString(36).substring(7),
+            name, softDelete, timeStamp
+        });
+    }
+
     render () {
-        const { showTableModal, onHideTableModal } = this.props;
+        const { showTableModal, toggleTableModal } = this.props;
 
         return (
             <Modal
                 show={ showTableModal }
-                onHide={ onHideTableModal }
+                onHide={ toggleTableModal }
                 dialogClassName='modal-sm'
             >
                 <Modal.Header>
-                    <button type='button' className='close' onClick={ onHideTableModal }>
+                    <button type='button' className='close' onClick={ toggleTableModal }>
                         <span>&times;</span>
                     </button>
                     <Modal.Title>Create Table</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <Form horizontal>
-                        <FormGroup>
-                            <Col className='control-label' sm={ 2 }>Name:</Col>
-                            <Col sm={ 10 }>
-                                <FormControl type='text' ref='name' />
-                            </Col>
-                        </FormGroup>
+                    <form className='form-horizontal'>
+                        <div className='form-group'>
+                            <label className='col-xs-2 control-label'>Name:</label>
+                            <div className='col-xs-10'>
+                                <input type='text' ref='tableName' className='form-control' />
+                            </div>
+                        </div>
                         <div className='checkbox'>
                             <label>
-                                <input type='checkbox' ref='delete' /> Soft Delete
+                                <input type='checkbox' ref='softdelete' /> Soft Delete
                             </label>
                         </div>
                         <div className='checkbox'>
@@ -40,15 +51,20 @@ class TableModal extends Component {
                                 <input type='checkbox' ref='timestamp' /> Timestamp
                             </label>
                         </div>
-                    </Form>
+                    </form>
                 </Modal.Body>
 
                 <Modal.Footer className='modal-footer text-right'>
-                    <button type='button' className='btn btn-primary'>Save</button>
                     <button
                         type='button'
                         className='btn btn-primary'
-                        onClick={ onHideTableModal }
+                        onClick={ this.handleSubmit }
+                    >Save
+                    </button>
+                    <button
+                        type='button'
+                        className='btn btn-primary'
+                        onClick={ toggleTableModal }
                     >Cancel
                     </button>
                 </Modal.Footer>
@@ -59,7 +75,8 @@ class TableModal extends Component {
 
 TableModal.propTypes = {
     showTableModal: PropTypes.bool.isRequired,
-    onHideTableModal: PropTypes.func.isRequired
+    toggleTableModal: PropTypes.func.isRequired,
+    saveTable: PropTypes.func.isRequired
 };
 
 export default TableModal;

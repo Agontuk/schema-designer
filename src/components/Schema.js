@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import DbForm from './DbForm';
-import TableModal from './TableModal';
+import TableModal from '../containers/TableModal';
 
 class Schema extends Component {
     render () {
-        const { dbName, saveDbName, showTableModal, toggleTableModal } = this.props;
+        const { dbName, saveDbName, toggleTableModal } = this.props;
 
         return (
             <div>
@@ -19,7 +19,7 @@ class Schema extends Component {
                     <DbForm name={ dbName } onSubmit={ saveDbName } />
                 }
 
-                <TableModal showTableModal={ showTableModal } onHideTableModal={ toggleTableModal } />
+                <TableModal />
             </div>
         );
     }
@@ -27,7 +27,6 @@ class Schema extends Component {
 
 Schema.propTypes = {
     dbName: PropTypes.string.isRequired,
-    showTableModal: PropTypes.bool.isRequired,
     saveDbName: PropTypes.func.isRequired,
     toggleTableModal: PropTypes.func.isRequired
 };
