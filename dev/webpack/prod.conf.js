@@ -5,7 +5,7 @@ const { plugins } = config;
 
 module.exports = merge(config, {
     entry: {
-        'app': `${ config.context }/main`
+        'schema': `${ config.context }/main`
     },
     plugins: plugins.concat([
         new webpack.optimize.OccurrenceOrderPlugin(),

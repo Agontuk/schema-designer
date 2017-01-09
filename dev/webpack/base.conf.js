@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ROOT_PATH = path.join(__dirname, '..', '..');
 const APP_PATH = `${ ROOT_PATH }/src`;
@@ -16,7 +17,19 @@ module.exports = {
             { test: /\.js$/, loader: 'eslint', exclude: /node_modules/ }
         ],
         loaders: [
-            { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
+            {
+                test: /\.js$/,
+                loader: 'babel', exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('style', 'css?minimize!sass'),
+                exclude: /node_modules/
+            }
         ]
     },
     resolve: {
@@ -30,6 +43,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: `${ ROOT_PATH }/index.html`
-        })
+        }),
+        new ExtractTextPlugin('schema.css'),
     ]
 };
