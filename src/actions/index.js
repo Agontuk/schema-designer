@@ -11,7 +11,7 @@ const makeActionCreator =  (type, ...argNames) => {
 };
 
 // Action Constants
-export const INCREMENT = 'INCREMENT';
+export const SAVE_DB_NAME = 'SAVE_DB_NAME';
 
 // Action creators
-export const increment = makeActionCreator(INCREMENT);
+export const saveDbName = makeActionCreator(SAVE_DB_NAME, 'name');

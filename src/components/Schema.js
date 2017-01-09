@@ -3,18 +3,23 @@ import DbForm from './DbForm';
 
 class Schema extends Component {
     render () {
-        const { dbName } = this.props;
+        const { dbName, saveDbName } = this.props;
 
         return (
             <div>
-                <DbForm name={ dbName } />
+                { dbName ?
+                    <h2>Database Name: {dbName}</h2>
+                :
+                    <DbForm name={ dbName } onSubmit={ saveDbName } />
+                }
             </div>
         );
     }
 }
 
 Schema.propTypes = {
-    dbName: PropTypes.string.isRequired
+    dbName: PropTypes.string.isRequired,
+    saveDbName: PropTypes.func.isRequired
 };
 
 export default Schema;

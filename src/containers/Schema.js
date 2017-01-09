@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Schema from 'components/Schema';
-// import { increment } from 'actions';
+import { saveDbName } from 'actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -8,8 +8,12 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
-    return {};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveDbName: (name) => {
+            dispatch(saveDbName(name));
+        }
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schema);
