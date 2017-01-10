@@ -1,5 +1,8 @@
 .db-table {
-    max-width: 220px;
+    max-width: 250px;
+    -webkit-box-shadow: inset -2px -2px 5px 0px rgba(17,61,59,0.75);
+    -moz-box-shadow: inset -2px -2px 5px 0px rgba(17,61,59,0.75);
+    box-shadow: inset -2px -2px 5px 0px rgba(17,61,59,0.75);
 }
 
 .table-header {
@@ -13,6 +16,30 @@
 }
 
 .table-header span {
-    padding: 0 4px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.db-columns {
+    padding: 0;
+    list-style: none;
+}
+
+.db-columns li {
+    border-bottom: 1px solid gray;
+    padding: 10px;
+}
+
+.db-columns li:last-child {
+    border-bottom: 0;
+}
+
+.db-columns .pull-left span {
+    margin: 0 5px;
+    font-style: italic;
+}
+
+.db-columns .pull-right span {
+    margin: 0 5px;
     cursor: pointer;
 }

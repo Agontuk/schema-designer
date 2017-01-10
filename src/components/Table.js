@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Columns from '../containers/Columns';
 
 class Table extends Component {
     editTable = () => {
@@ -29,6 +30,8 @@ class Table extends Component {
                         <span className='glyphicon glyphicon-remove' onClick={ this.removeTable }></span>
                     </div>
                 </div>
+
+                <Columns tableId={ data.get('id') } />
             </div>
         );
     }
