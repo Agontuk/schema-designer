@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
 class Table extends Component {
+    editTable = () => {
+        const { data, onEditTable } = this.props;
+        onEditTable(data);
+    }
+
     removeTable = () => {
         const { data, onRemoveTable } = this.props;
         onRemoveTable(data.get('id'));
@@ -26,7 +31,8 @@ class Table extends Component {
 
 Table.propTypes = {
     data: PropTypes.object.isRequired,
-    onRemoveTable: PropTypes.func.isRequired
+    onRemoveTable: PropTypes.func.isRequired,
+    onEditTable: PropTypes.func.isRequired
 };
 
 export default Table;

@@ -3,7 +3,7 @@ import Table from './Table';
 
 class Tables extends Component {
     render () {
-        const { tables, removeTable } = this.props;
+        const { tables, removeTable, editTable } = this.props;
 
         return (
             <div>
@@ -13,6 +13,7 @@ class Tables extends Component {
                             key={ table.get('id') }
                             data={ table }
                             onRemoveTable={ removeTable }
+                            onEditTable={ editTable }
                         />
                     );
                 })}
@@ -23,7 +24,8 @@ class Tables extends Component {
 
 Tables.propTypes = {
     tables: PropTypes.object.isRequired,
-    removeTable: PropTypes.func.isRequired
+    removeTable: PropTypes.func.isRequired,
+    editTable: PropTypes.func.isRequired
 };
 
 export default Tables;

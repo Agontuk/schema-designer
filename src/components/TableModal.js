@@ -13,14 +13,23 @@ class TableModal extends Component {
             return;
         }
 
-        this.props.saveTable({
-            id: Math.random().toString(36).substring(7),
-            name, softDelete, timeStamp
-        });
+        const { saveTable, updateTable, editMode, editData } = this.props;
+
+        if (editMode) {
+            updateTable({
+                id: editData.get('id'),
+                name, softDelete, timeStamp
+            });
+        } else {
+            saveTable({
+                id: Math.random().toString(36).substring(7),
+                name, softDelete, timeStamp
+            });
+        }
     }
 
     render () {
-        const { showTableModal, toggleTableModal } = this.props;
+        const { showTableModal, toggleTableModal, editData, editMode } = this.props;
 
         return (
             <Modal
@@ -32,7 +41,9 @@ class TableModal extends Component {
                     <button type='button' className='close' onClick={ toggleTableModal }>
                         <span>&times;</span>
                     </button>
-                    <Modal.Title>Create Table</Modal.Title>
+                    <Modal.Title>
+                        { editMode ? 'Update Table' : 'Create Table' }
+                    </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -40,17 +51,30 @@ class TableModal extends Component {
                         <div className='form-group'>
                             <label className='col-xs-2 control-label'>Name:</label>
                             <div className='col-xs-10'>
-                                <input type='text' ref='tableName' className='form-control' />
+                                <input
+                                    type='text'
+                                    ref='tableName'
+                                    className='form-control'
+                                    defaultValue={ editData.get('name') }
+                                />
                             </div>
                         </div>
                         <div className='checkbox'>
                             <label>
-                                <input type='checkbox' ref='softdelete' /> Soft Delete
+                                <input
+                                    type='checkbox'
+                                    ref='softdelete'
+                                    defaultChecked={ editData.get('softDelete') }
+                                /> Soft Delete
                             </label>
                         </div>
                         <div className='checkbox'>
                             <label>
-                                <input type='checkbox' ref='timestamp' /> Timestamp
+                                <input
+                                    type='checkbox'
+                                    ref='timestamp'
+                                    defaultChecked={ editData.get('timeStamp') }
+                                /> Timestamp
                             </label>
                         </div>
                     </form>
@@ -61,7 +85,7 @@ class TableModal extends Component {
                         type='button'
                         className='btn btn-primary'
                         onClick={ this.handleSubmit }
-                    >Save
+                    >{ editMode ? 'Update' : 'Save' }
                     </button>
                     <button
                         type='button'
@@ -77,8 +101,11 @@ class TableModal extends Component {
 
 TableModal.propTypes = {
     showTableModal: PropTypes.bool.isRequired,
+    editMode: PropTypes.bool.isRequired,
+    editData: PropTypes.object.isRequired,
     toggleTableModal: PropTypes.func.isRequired,
-    saveTable: PropTypes.func.isRequired
+    saveTable: PropTypes.func.isRequired,
+    updateTable: PropTypes.func.isRequired
 };
 
 export default TableModal;

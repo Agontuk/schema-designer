@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import TableModal from 'components/TableModal';
-import { saveTable, toggleTableModal } from 'actions';
+import { saveTable, toggleTableModal, updateTable } from 'actions';
 
 const mapStateToProps = (state) => {
     return {
-        showTableModal: state.ui.getIn(['table', 'showModal'])
+        showTableModal: state.ui.getIn(['table', 'showModal']),
+        editMode: state.ui.getIn(['table', 'edit']),
+        editData: state.ui.getIn(['table', 'editData'])
     };
 };
 
@@ -15,6 +17,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         saveTable: (data) => {
             dispatch(saveTable(data));
+            dispatch(toggleTableModal());
+        },
+        updateTable: (data) => {
+            dispatch(updateTable(data));
             dispatch(toggleTableModal());
         }
     };

@@ -11,6 +11,14 @@ export default (state = initialState, action) => {
             return state.filter((table) => {
                 return table.get('id') !== action.id;
             });
+        case types.UPDATE_TABLE:
+            return state.map((table) => {
+                if (table.get('id') === action.data.id) {
+                    return fromJS(action.data);
+                }
+
+                return table;
+            });
         default:
             return state;
     }
