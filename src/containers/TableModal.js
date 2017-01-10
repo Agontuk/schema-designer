@@ -4,7 +4,7 @@ import { saveTable, toggleTableModal } from 'actions';
 
 const mapStateToProps = (state) => {
     return {
-        showTableModal: state.ui.get('showTableModal')
+        showTableModal: state.ui.getIn(['table', 'showModal'])
     };
 };
 

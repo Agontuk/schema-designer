@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 
 class TableModal extends Component {
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
+
         const name = this.refs.tableName.value.trim();
         const softDelete = this.refs.softdelete.checked;
         const timeStamp = this.refs.timestamp.checked;
@@ -34,7 +36,7 @@ class TableModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <form className='form-horizontal'>
+                    <form className='form-horizontal' onSubmit={ this.handleSubmit }>
                         <div className='form-group'>
                             <label className='col-xs-2 control-label'>Name:</label>
                             <div className='col-xs-10'>

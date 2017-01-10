@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import DbForm from './DbForm';
 import TableModal from '../containers/TableModal';
+import Tables from '../containers/Tables';
 
 class Schema extends Component {
     render () {
@@ -9,7 +10,7 @@ class Schema extends Component {
         return (
             <div>
                 { dbName ?
-                    <div>
+                    <div className='container text-center'>
                         <h2>Database Name: {dbName}</h2>
                         <button type='button' className='btn btn-primary' onClick={ toggleTableModal }>
                             <span className='glyphicon glyphicon-plus'></span> Create Table
@@ -18,6 +19,8 @@ class Schema extends Component {
                 :
                     <DbForm name={ dbName } onSubmit={ saveDbName } />
                 }
+
+                <Tables />
 
                 <TableModal />
             </div>
