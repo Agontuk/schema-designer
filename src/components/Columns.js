@@ -3,7 +3,7 @@ import Column from './Column';
 
 class Columns extends Component {
     render () {
-        const { columns } = this.props;
+        const { columns, tableId, removeColumn } = this.props;
 
         if (columns.size === 0) {
             return null;
@@ -16,6 +16,8 @@ class Columns extends Component {
                         <Column
                             key={ column.get('id') }
                             data={ column }
+                            tableId={ tableId }
+                            onRemoveColumn={ removeColumn }
                         />
                     );
                 })}
@@ -25,7 +27,9 @@ class Columns extends Component {
 }
 
 Columns.propTypes = {
-    columns: PropTypes.object.isRequired
+    columns: PropTypes.object.isRequired,
+    tableId: PropTypes.string.isRequired,
+    removeColumn: PropTypes.func.isRequired
 };
 
 export default Columns;

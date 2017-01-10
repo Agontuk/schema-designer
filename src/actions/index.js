@@ -32,6 +32,6 @@ export const enableTableEdit = makeActionCreator(ENABLE_TABLE_EDIT, 'data');
 export const updateTable = makeActionCreator(UPDATE_TABLE, 'data');
 export const toggleColumnModal = makeActionCreator(TOGGLE_COLUMN_MODAL, 'tableId');
 export const saveColumn = makeActionCreator(SAVE_COLUMN, 'data', 'tableId');
-export const removeColumn = makeActionCreator(REMOVE_COLUMN, 'id');
+export const removeColumn = makeActionCreator(REMOVE_COLUMN, 'columnId', 'tableId');
 export const enableColumnEdit = makeActionCreator(ENABLE_COLUMN_EDIT, 'data');
 export const updateColumn = makeActionCreator(UPDATE_COLUMN, 'data');

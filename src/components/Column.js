@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
 class Column extends Component {
+    removeColumn = () => {
+        const { data, onRemoveColumn, tableId } = this.props;
+        onRemoveColumn(data.get('id'), tableId);
+    }
+
     render () {
         const { data } = this.props;
 
@@ -11,7 +16,7 @@ class Column extends Component {
                 </div>
                 <div className='pull-right'>
                     <span className='glyphicon glyphicon-pencil'></span>
-                    <span className='glyphicon glyphicon-remove'></span>
+                    <span className='glyphicon glyphicon-remove' onClick={ this.removeColumn }></span>
                 </div>
             </li>
         );
@@ -19,7 +24,9 @@ class Column extends Component {
 }
 
 Column.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    tableId: PropTypes.string.isRequired,
+    onRemoveColumn: PropTypes.func.isRequired
 };
 
 export default Column;
