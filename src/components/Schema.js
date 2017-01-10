@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import DbForm from './DbForm';
 import TableModal from '../containers/TableModal';
+import ColumnModal from '../containers/ColumnModal';
 import Tables from '../containers/Tables';
 
 class Schema extends Component {
@@ -23,6 +24,8 @@ class Schema extends Component {
                 <Tables />
 
                 <TableModal />
+
+                <ColumnModal />
             </div>
         );
     }

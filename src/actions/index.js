@@ -17,6 +17,11 @@ export const SAVE_TABLE = 'SAVE_TABLE';
 export const REMOVE_TABLE = 'REMOVE_TABLE';
 export const ENABLE_TABLE_EDIT = 'ENABLE_TABLE_EDIT';
 export const UPDATE_TABLE = 'UPDATE_TABLE';
+export const TOGGLE_COLUMN_MODAL = 'TOGGLE_COLUMN_MODAL';
+export const SAVE_COLUMN = 'SAVE_COLUMN';
+export const REMOVE_COLUMN = 'REMOVE_COLUMN';
+export const ENABLE_COLUMN_EDIT = 'ENABLE_COLUMN_EDIT';
+export const UPDATE_COLUMN = 'UPDATE_COLUMN';
 
 // Action creators
 export const saveDbName = makeActionCreator(SAVE_DB_NAME, 'name');
@@ -25,3 +30,8 @@ export const saveTable = makeActionCreator(SAVE_TABLE, 'data');
 export const removeTable = makeActionCreator(REMOVE_TABLE, 'id');
 export const enableTableEdit = makeActionCreator(ENABLE_TABLE_EDIT, 'data');
 export const updateTable = makeActionCreator(UPDATE_TABLE, 'data');
+export const toggleColumnModal = makeActionCreator(TOGGLE_COLUMN_MODAL, 'tableId');
+export const saveColumn = makeActionCreator(SAVE_COLUMN, 'data');
+export const removeColumn = makeActionCreator(REMOVE_COLUMN, 'id');
+export const enableColumnEdit = makeActionCreator(ENABLE_COLUMN_EDIT, 'data');
+export const updateColumn = makeActionCreator(UPDATE_COLUMN, 'data');

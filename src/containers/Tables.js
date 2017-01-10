@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Tables from '../components/Tables';
-import { removeTable, enableTableEdit, toggleTableModal } from '../actions';
+import { removeTable, enableTableEdit, toggleTableModal, toggleColumnModal } from '../actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => {
         editTable: (data) => {
             dispatch(enableTableEdit(data));
             dispatch(toggleTableModal());
+        },
+        toggleColumnModal: (tableId) => {
+            dispatch(toggleColumnModal(tableId));
         }
     };
 };

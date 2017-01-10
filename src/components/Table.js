@@ -11,6 +11,11 @@ class Table extends Component {
         onRemoveTable(data.get('id'));
     }
 
+    toggleColumnModal = () => {
+        const { data, onToggleColumnModal } = this.props;
+        onToggleColumnModal(data.get('id'));
+    }
+
     render () {
         const { data } = this.props;
 
@@ -19,7 +24,7 @@ class Table extends Component {
                 <div className='table-header clearfix'>
                     <h4 className='pull-left'>{ data.get('name') }</h4>
                     <div className='pull-right'>
-                        <span className='glyphicon glyphicon-plus'></span>
+                        <span className='glyphicon glyphicon-plus' onClick={ this.toggleColumnModal }></span>
                         <span className='glyphicon glyphicon-pencil' onClick={ this.editTable }></span>
                         <span className='glyphicon glyphicon-remove' onClick={ this.removeTable }></span>
                     </div>
@@ -32,7 +37,8 @@ class Table extends Component {
 Table.propTypes = {
     data: PropTypes.object.isRequired,
     onRemoveTable: PropTypes.func.isRequired,
-    onEditTable: PropTypes.func.isRequired
+    onEditTable: PropTypes.func.isRequired,
+    onToggleColumnModal: PropTypes.func.isRequired
 };
 
 export default Table;
