@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
     return {
         showColumnModal: state.ui.getIn(['column', 'showModal']),
         editMode: state.ui.getIn(['column', 'edit']),
-        editData: state.ui.getIn(['column', 'editData'])
+        editData: state.ui.getIn(['column', 'editData']),
+        tableId: state.ui.getIn(['column', 'tableId'])
     };
 };
 
@@ -15,8 +16,8 @@ const mapDispatchToProps = (dispatch) => {
         toggleColumnModal: () =>  {
             dispatch(toggleColumnModal());
         },
-        saveColumn: (data) => {
-            dispatch(saveColumn(data));
+        saveColumn: (data, tableId) => {
+            dispatch(saveColumn(data, tableId));
             dispatch(toggleColumnModal());
         },
         updateColumn: (data) => {

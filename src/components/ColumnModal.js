@@ -2,31 +2,49 @@ import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 
 class ColumnModal extends Component {
-    // handleSubmit = (event) => {
-    //     event.preventDefault();
-    //
-    //     const name = this.refs.tableName.value.trim();
-    //     const softDelete = this.refs.softdelete.checked;
-    //     const timeStamp = this.refs.timestamp.checked;
-    //
-    //     if (!name) {
-    //         return;
-    //     }
-    //
-    //     const { saveColumn, updateColumn, editMode, editData } = this.props;
-    //
-    //     if (editMode) {
-    //         updateColumn({
-    //             id: editData.get('id'),
-    //             name, softDelete, timeStamp
-    //         });
-    //     } else {
-    //         saveColumn({
-    //             id: Math.random().toString(36).substring(7),
-    //             name, softDelete, timeStamp
-    //         });
-    //     }
-    // }
+    handleSubmit = (event) => {
+        event.preventDefault();
+    }
+
+    getFormData = () => {
+        const name = this.refs.name.value.trim();
+        const type = this.refs.type.value;
+        const length = this.refs.length.value.trim();
+        const defValue = this.refs.defValue.value.trim();
+        const comment = this.refs.comment.value.trim();
+        const autoInc = this.refs.autoInc.checked;
+        const nullable = this.refs.nullable.checked;
+        const unique = this.refs.unique.checked;
+        const index = this.refs.index.checked;
+
+        if (!name) {
+            return false;
+        }
+
+        return { name, type, length, defValue, comment, autoInc, nullable, unique, index };
+    }
+
+    saveColumnAndExit = () => {
+        const data = this.getFormData();
+
+        if (!data) {
+            return;
+        }
+
+        const { saveColumn, updateColumn, editMode, editData, tableId } = this.props;
+
+        if (editMode) {
+            updateColumn({
+                id: editData.get('id'),
+                ...data
+            });
+        } else {
+            saveColumn({
+                id: Math.random().toString(36).substring(7),
+                ...data
+            }, tableId);
+        }
+    }
 
     render () {
         const { showColumnModal, toggleColumnModal, editData, editMode } = this.props;
@@ -52,7 +70,7 @@ class ColumnModal extends Component {
                             <div className='col-xs-9'>
                                 <input
                                     type='text'
-                                    ref='tableName'
+                                    ref='name'
                                     className='form-control'
                                     defaultValue={ editData.get('name') }
                                 />
@@ -61,12 +79,12 @@ class ColumnModal extends Component {
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Type:</label>
                             <div className='col-xs-9'>
-                                <select className='form-control'>
-                                    <option>INT</option>
-                                    <option>BIGINT</option>
-                                    <option>String</option>
-                                    <option>Text</option>
-                                    <option>Long Text</option>
+                                <select className='form-control' ref='type'>
+                                    <option value='integer'>INT</option>
+                                    <option value='bigInteger'>BIGINT</option>
+                                    <option value='string'>String</option>
+                                    <option value='text'>Text</option>
+                                    <option value='longText'>Long Text</option>
                                 </select>
                             </div>
                         </div>
@@ -92,16 +110,16 @@ class ColumnModal extends Component {
                             <label className='col-xs-3 control-label'>Misc:</label>
                             <div className='col-xs-9'>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' /> A.I.
+                                    <input type='checkbox' ref='autoInc' /> A.I.
                                 </label>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' /> Nullable
+                                    <input type='checkbox' ref='nullable' /> Nullable
                                 </label>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' /> Unique
+                                    <input type='checkbox' ref='unique' /> Unique
                                 </label>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' /> Index
+                                    <input type='checkbox' ref='index' /> Index
                                 </label>
                             </div>
                         </div>
@@ -113,7 +131,7 @@ class ColumnModal extends Component {
                         <button type='button' className='btn btn-primary'>Save &amp; Continue</button> : null
                     }
 
-                    <button type='button' className='btn btn-primary'>
+                    <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndExit }>
                         { editMode ? 'Update Column' : 'Save & Exit' }
                     </button>
                     <button type='button' className='btn btn-default' onClick={ toggleColumnModal }>Cancel</button>
@@ -127,6 +145,7 @@ ColumnModal.propTypes = {
     showColumnModal: PropTypes.bool.isRequired,
     editMode: PropTypes.bool.isRequired,
     editData: PropTypes.object.isRequired,
+    tableId: PropTypes.string.isRequired,
     toggleColumnModal: PropTypes.func.isRequired,
     saveColumn: PropTypes.func.isRequired,
     updateColumn: PropTypes.func.isRequired
