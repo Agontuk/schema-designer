@@ -42,6 +42,9 @@ export default (state = initialState, action) => {
 
             return state.setIn(['column', 'showModal'], true).setIn(['column', 'tableId'], action.tableId);
         }
+        case types.ENABLE_COLUMN_EDIT:
+            return state.setIn(['column', 'edit'], true).setIn(['column', 'editData'], fromJS(action.data))
+                .setIn(['column', 'tableId'], action.tableId);
         default:
             return state;
     }

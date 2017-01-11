@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(saveColumn(data, tableId));
             dispatch(toggleColumnModal());
         },
-        updateColumn: (data) => {
-            dispatch(updateColumn(data));
+        updateColumn: (data, tableId) => {
+            dispatch(updateColumn(data, tableId));
             dispatch(toggleColumnModal());
         }
     };

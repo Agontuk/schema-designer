@@ -37,7 +37,7 @@ class ColumnModal extends Component {
             updateColumn({
                 id: editData.get('id'),
                 ...data
-            });
+            }, tableId);
         } else {
             saveColumn({
                 id: Math.random().toString(36).substring(7),
@@ -79,7 +79,7 @@ class ColumnModal extends Component {
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Type:</label>
                             <div className='col-xs-9'>
-                                <select className='form-control' ref='type'>
+                                <select className='form-control' ref='type' defaultValue={ editData.get('type') }>
                                     <option value='integer'>INT</option>
                                     <option value='bigInteger'>BIGINT</option>
                                     <option value='string'>String</option>
@@ -91,35 +91,66 @@ class ColumnModal extends Component {
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Length:</label>
                             <div className='col-xs-9'>
-                                <input type='text' ref='length' className='form-control' />
+                                <input
+                                    type='text'
+                                    ref='length'
+                                    className='form-control'
+                                    defaultValue={ editData.get('length') }
+                                />
                             </div>
                         </div>
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Default Value:</label>
                             <div className='col-xs-9'>
-                                <input type='text' ref='defValue' className='form-control' />
+                                <input
+                                    type='text'
+                                    ref='defValue'
+                                    className='form-control'
+                                    defaultValue={ editData.get('defValue') }
+                                />
                             </div>
                         </div>
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Comment:</label>
                             <div className='col-xs-9'>
-                                <input type='text' ref='comment' className='form-control' />
+                                <input
+                                    type='text'
+                                    ref='comment'
+                                    className='form-control'
+                                    defaultValue={ editData.get('comment') }
+                                />
                             </div>
                         </div>
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Misc:</label>
                             <div className='col-xs-9'>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' ref='autoInc' /> A.I.
+                                    <input
+                                        type='checkbox'
+                                        ref='autoInc'
+                                        defaultChecked={ editData.get('autoInc') }
+                                    /> A.I.
                                 </label>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' ref='nullable' /> Nullable
+                                    <input
+                                        type='checkbox'
+                                        ref='nullable'
+                                        defaultChecked={ editData.get('nullable') }
+                                    /> Nullable
                                 </label>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' ref='unique' /> Unique
+                                    <input
+                                        type='checkbox'
+                                        ref='unique'
+                                        defaultChecked={ editData.get('unique') }
+                                    /> Unique
                                 </label>
                                 <label className='checkbox-inline'>
-                                    <input type='checkbox' ref='index' /> Index
+                                    <input
+                                        type='checkbox'
+                                        ref='index'
+                                        defaultChecked={ editData.get('index') }
+                                    /> Index
                                 </label>
                             </div>
                         </div>

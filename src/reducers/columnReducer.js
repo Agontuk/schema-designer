@@ -9,14 +9,8 @@ export default (state = initialState, action) => {
             return state.setIn([action.tableId, action.data.id], fromJS(action.data));
         case types.REMOVE_COLUMN:
             return state.deleteIn([action.tableId, action.columnId]);
-        // case types.UPDATE_TABLE:
-        //     return state.map((table) => {
-        //         if (table.get('id') === action.data.id) {
-        //             return fromJS(action.data);
-        //         }
-        //
-        //         return table;
-        //     });
+        case types.UPDATE_COLUMN:
+            return state.setIn([action.tableId, action.data.id], fromJS(action.data));
         default:
             return state;
     }

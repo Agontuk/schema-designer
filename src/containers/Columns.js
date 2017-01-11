@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import Columns from '../components/Columns';
-import { removeColumn } from '../actions';
+import { removeColumn, enableColumnEdit, toggleColumnModal } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
     const columns = state.columns.get(ownProps.tableId);
@@ -14,11 +14,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         removeColumn: (columnId, tableId) => {
             dispatch(removeColumn(columnId, tableId));
+        },
+        editColumn: (data, tableId) => {
+            dispatch(enableColumnEdit(data, tableId));
+            dispatch(toggleColumnModal(tableId));
         }
-        // editColumn: (data) => {
-        //     dispatch(enableColumnEdit(data));
-        //     dispatch(toggleColumnModal());
-        // },
         // toggleColumnModal: (tableId) => {
         //     dispatch(toggleColumnModal(tableId));
         // }
