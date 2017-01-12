@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
+import ForeignKeyForm from './ForeignKeyForm';
 
 class ColumnModal extends Component {
     handleSubmit = (event) => {
@@ -16,12 +17,13 @@ class ColumnModal extends Component {
         const nullable = this.refs.nullable.checked;
         const unique = this.refs.unique.checked;
         const index = this.refs.index.checked;
+        const foreignKey = this.refs.foreignKey.getData();
 
         if (!name) {
             return false;
         }
 
-        return { name, type, length, defValue, comment, autoInc, nullable, unique, index };
+        return { name, type, length, defValue, comment, autoInc, nullable, unique, index, foreignKey };
     }
 
     saveColumnAndExit = () => {
@@ -47,7 +49,7 @@ class ColumnModal extends Component {
     }
 
     render () {
-        const { showColumnModal, toggleColumnModal, editData, editMode } = this.props;
+        const { showColumnModal, toggleColumnModal, editData, editMode, tables, tableId, columns } = this.props;
 
         return (
             <Modal
@@ -154,6 +156,14 @@ class ColumnModal extends Component {
                                 </label>
                             </div>
                         </div>
+
+                        <ForeignKeyForm
+                            ref='foreignKey'
+                            columns={ columns }
+                            tables={ tables }
+                            tableId={ tableId }
+                            editData={ editData }
+                        />
                     </form>
                 </Modal.Body>
 
@@ -177,6 +187,8 @@ ColumnModal.propTypes = {
     editMode: PropTypes.bool.isRequired,
     editData: PropTypes.object.isRequired,
     tableId: PropTypes.string.isRequired,
+    tables: PropTypes.object.isRequired,
+    columns: PropTypes.object.isRequired,
     toggleColumnModal: PropTypes.func.isRequired,
     saveColumn: PropTypes.func.isRequired,
     updateColumn: PropTypes.func.isRequired

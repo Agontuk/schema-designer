@@ -7,7 +7,9 @@ const mapStateToProps = (state) => {
         showColumnModal: state.ui.getIn(['column', 'showModal']),
         editMode: state.ui.getIn(['column', 'edit']),
         editData: state.ui.getIn(['column', 'editData']),
-        tableId: state.ui.getIn(['column', 'tableId'])
+        tableId: state.ui.getIn(['column', 'tableId']),
+        tables: state.tables,
+        columns: state.columns
     };
 };
 
