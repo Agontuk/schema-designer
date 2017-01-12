@@ -12,9 +12,9 @@ class ForeignKeyForm extends Component {
         const { editData } = this.props;
 
         const tableId = editData.getIn(['foreignKey', 'on', 'id']) || '';
-        const tableName = editData.getIn(['foreignKey', 'on', 'id']) || '';
+        const tableName = editData.getIn(['foreignKey', 'on', 'name']) || '';
         const columnId = editData.getIn(['foreignKey', 'references', 'id']) || '';
-        const columnName = editData.getIn(['foreignKey', 'references', 'id']) || '';
+        const columnName = editData.getIn(['foreignKey', 'references', 'name']) || '';
 
         this.setState({
             currentForeignTableId: tableId,

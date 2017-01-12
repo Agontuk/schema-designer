@@ -56,6 +56,7 @@ class TableModal extends Component {
                                     ref='tableName'
                                     className='form-control'
                                     defaultValue={ editData.get('name') }
+                                    autoFocus
                                 />
                             </div>
                         </div>
