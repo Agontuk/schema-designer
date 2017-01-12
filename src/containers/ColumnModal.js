@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ColumnModal from 'components/ColumnModal';
-import { saveColumn, toggleColumnModal, updateColumn } from 'actions';
+import { saveColumn, toggleColumnModal, updateColumn, saveForeignKeyRelation } from 'actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -20,10 +20,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         saveColumn: (data, tableId) => {
             dispatch(saveColumn(data, tableId));
+            dispatch(saveForeignKeyRelation(data.foreignKey, tableId));
             dispatch(toggleColumnModal());
         },
         updateColumn: (data, tableId) => {
             dispatch(updateColumn(data, tableId));
+            dispatch(saveForeignKeyRelation(data.foreignKey, tableId));
             dispatch(toggleColumnModal());
         }
     };

@@ -9,9 +9,7 @@ class Tables extends Component {
         if (tables.size !== prevProps.tables.size) {
             // New tables available, make all tables draggable
             jsPlumb.ready(() => {
-                jsPlumb.draggable(document.querySelectorAll('.draggable'), {
-                    handle: '.table-header'
-                });
+                jsPlumb.draggable(document.querySelectorAll('.draggable'));
             });
         }
     }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import DbForm from './DbForm';
+import DrawRelationLine from './DrawRelationLine';
 import TableModal from '../containers/TableModal';
 import ColumnModal from '../containers/ColumnModal';
 import Tables from '../containers/Tables';
@@ -26,6 +27,8 @@ class Schema extends Component {
                 <TableModal />
 
                 <ColumnModal />
+
+                <DrawRelationLine />
             </div>
         );
     }
