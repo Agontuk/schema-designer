@@ -19,9 +19,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(enableColumnEdit(data, tableId));
             dispatch(toggleColumnModal(tableId));
         }
-        // toggleColumnModal: (tableId) => {
-        //     dispatch(toggleColumnModal(tableId));
-        // }
     };
 };
 
