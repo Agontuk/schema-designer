@@ -1,7 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import jsPlumb from 'jsPlumb';
 import Table from './Table';
 
 class Tables extends Component {
+    componentDidUpdate (prevProps) {
+        const { tables } = this.props;
+
+        if (tables.size !== prevProps.tables.size) {
+            // New tables available, make all tables draggable
+            jsPlumb.ready(() => {
+                jsPlumb.draggable(document.querySelectorAll('.draggable'), {
+                    handle: '.table-header'
+                });
+            });
+        }
+    }
+
     render () {
         const { tables, removeTable, editTable, toggleColumnModal } = this.props;
 

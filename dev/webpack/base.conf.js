@@ -45,5 +45,10 @@ module.exports = {
             template: `${ ROOT_PATH }/index.html`
         }),
         new ExtractTextPlugin('schema.css'),
+    ],
+    externals: [
+        {
+            'jsPlumb': 'window.jsPlumb'
+        }
     ]
 };

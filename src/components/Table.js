@@ -21,7 +21,7 @@ class Table extends Component {
         const { data } = this.props;
 
         return (
-            <div className='db-table'>
+            <div className={ `db-table draggable ${ data.get('id') }` }>
                 <div className='table-header clearfix'>
                     <h4 className='pull-left'>{ data.get('name') }</h4>
                     <div className='pull-right'>
