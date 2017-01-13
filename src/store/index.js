@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import createLogger from 'redux-logger';
-import Reducers from 'reducers';
+import Reducers from '../reducers';
 
 const logger = createLogger();
 const middleware = [];
@@ -12,4 +12,14 @@ if (process.env.NODE_ENV !== 'production') {
     extension = window.devToolsExtension ? window.devToolsExtension() : extension;
 }
 
-export default createStore(Reducers, {}, compose(applyMiddleware(...middleware), extension));
+const store = createStore(Reducers, {}, compose(applyMiddleware(...middleware), extension));
+
+if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () => {
+        const nextRootReducer = require('../reducers/index').default;
+        store.replaceReducer(nextRootReducer);
+    });
+}
+
+export default store;
