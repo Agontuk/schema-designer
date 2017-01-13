@@ -60,7 +60,9 @@ class ForeignKeyForm extends Component {
 
         this.setState({
             currentForeignTableId: selected,
-            currentForeignTableName: name
+            currentForeignTableName: name,
+            currentForeignColumnId: '',
+            currentForeignColumnName: ''
         });
     }
 

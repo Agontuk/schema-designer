@@ -12,8 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeColumn: (columnId, tableId) => {
-            dispatch(removeColumn(columnId, tableId));
+        removeColumn: (columnData, tableId) => {
+            dispatch(removeColumn(columnData, tableId));
         },
         editColumn: (data, tableId) => {
             dispatch(enableColumnEdit(data, tableId));

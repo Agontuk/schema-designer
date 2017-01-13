@@ -8,7 +8,7 @@ class Column extends Component {
 
     removeColumn = () => {
         const { data, onRemoveColumn, tableId } = this.props;
-        onRemoveColumn(data.get('id'), tableId);
+        onRemoveColumn(data.toJS(), tableId);
     }
 
     render () {
