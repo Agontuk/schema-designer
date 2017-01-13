@@ -26,6 +26,24 @@ class ColumnModal extends Component {
         return { name, type, length, defValue, comment, autoInc, nullable, unique, index, foreignKey };
     }
 
+    saveColumnAndContinue = () => {
+        const data = this.getFormData();
+
+        if (!data) {
+            return;
+        }
+
+        const { saveColumn, tableId } = this.props;
+        const hideModal = false;
+
+        saveColumn({
+            id: Math.random().toString(36).substring(7),
+            ...data
+        }, tableId, hideModal);
+
+        this.refs.form.reset();
+    }
+
     saveColumnAndExit = () => {
         const data = this.getFormData();
 
@@ -66,7 +84,7 @@ class ColumnModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <form className='form-horizontal' onSubmit={ this.handleSubmit }>
+                    <form className='form-horizontal' ref='form' onSubmit={ this.handleSubmit }>
                         <div className='form-group'>
                             <label className='col-xs-3 control-label'>Name:</label>
                             <div className='col-xs-9'>
@@ -75,6 +93,7 @@ class ColumnModal extends Component {
                                     ref='name'
                                     className='form-control'
                                     defaultValue={ editData.get('name') }
+                                    autoFocus
                                 />
                             </div>
                         </div>
@@ -169,7 +188,9 @@ class ColumnModal extends Component {
 
                 <Modal.Footer className='modal-footer text-right'>
                     { !editMode ?
-                        <button type='button' className='btn btn-primary'>Save &amp; Continue</button> : null
+                        <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndContinue }>
+                            Save &amp; Continue
+                        </button> : null
                     }
 
                     <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndExit }>

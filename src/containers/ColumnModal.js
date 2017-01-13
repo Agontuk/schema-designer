@@ -24,10 +24,13 @@ const mapDispatchToProps = (dispatch) => {
         toggleColumnModal: () =>  {
             dispatch(toggleColumnModal());
         },
-        saveColumn: (data, tableId) => {
+        saveColumn: (data, tableId, hideModal = true) => {
             dispatch(saveColumn(data, tableId));
             dispatch(saveForeignKeyRelation(data, tableId));
-            dispatch(toggleColumnModal());
+
+            if (hideModal) {
+                dispatch(toggleColumnModal());
+            }
         },
         updateColumn: (data, tableId) => {
             dispatch(updateColumn(data, tableId));
