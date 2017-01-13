@@ -1,8 +1,35 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
+import classnames from 'classnames';
 import ForeignKeyForm from './ForeignKeyForm';
 
 class ColumnModal extends Component {
+    state = {
+        isUnsigned: false,
+        foreignKeyEnabled: false
+    }
+
+    // componentWillReceiveProps (nextProps) {
+    //     const unsigned = nextProps.editData.get('unsigned');
+    //     const foreignKey = nextProps.editData.get('foreignKey');
+    //
+    //     this.setState({
+    //         isUnsigned: unsigned === undefined ? false : unsigned,
+    //         foreignKeyEnabled: foreignKey === undefined ? false : true
+    //     });
+    // }
+
+    updateUnsignedValue = (event) => {
+        this.setState({
+            isUnsigned: event.target.checked,
+            foreignKeyEnabled: false
+        });
+    }
+
+    updateForeignKeyValue = (event) => {
+        this.setState({ foreignKeyEnabled: event.target.checked });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
     }
@@ -18,7 +45,11 @@ class ColumnModal extends Component {
         const unique = this.refs.unique.checked;
         const index = this.refs.index.checked;
         const unsigned = this.refs.unsigned.checked;
-        const foreignKey = this.refs.foreignKey.getData();
+        let foreignKey = this.refs.foreignKey;
+
+        if (foreignKey) {
+            foreignKey = foreignKey.getData();
+        }
 
         if (!name) {
             return false;
@@ -71,6 +102,7 @@ class ColumnModal extends Component {
 
     render () {
         const { showColumnModal, toggleColumnModal, editData, editMode, tables, tableId, columns } = this.props;
+        const { isUnsigned, foreignKeyEnabled } = this.state;
 
         return (
             <Modal
@@ -180,19 +212,32 @@ class ColumnModal extends Component {
                                     <input
                                         type='checkbox'
                                         ref='unsigned'
-                                        defaultChecked={ editData.get('unsigned') }
+                                        checked={ isUnsigned }
+                                        onChange={ this.updateUnsignedValue }
                                     /> Unsigned
+                                </label>
+                            </div>
+                            <div className='col-xs-9 col-xs-offset-3'>
+                                <label className={ classnames('checkbox-inline', { disabled: !isUnsigned }) }>
+                                    <input
+                                        type='checkbox'
+                                        checked={ foreignKeyEnabled }
+                                        disabled={ !isUnsigned }
+                                        onChange={ this.updateForeignKeyValue }
+                                    /> Foreign Key
                                 </label>
                             </div>
                         </div>
 
-                        <ForeignKeyForm
-                            ref='foreignKey'
-                            columns={ columns }
-                            tables={ tables }
-                            tableId={ tableId }
-                            editData={ editData }
-                        />
+                        { foreignKeyEnabled ?
+                            <ForeignKeyForm
+                                ref='foreignKey'
+                                columns={ columns }
+                                tables={ tables }
+                                tableId={ tableId }
+                                editData={ editData }
+                            /> : null
+                        }
                     </form>
                 </Modal.Body>
 
