@@ -17,13 +17,16 @@ class ColumnModal extends Component {
         const nullable = this.refs.nullable.checked;
         const unique = this.refs.unique.checked;
         const index = this.refs.index.checked;
+        const unsigned = this.refs.unsigned.checked;
         const foreignKey = this.refs.foreignKey.getData();
 
         if (!name) {
             return false;
         }
 
-        return { name, type, length, defValue, comment, autoInc, nullable, unique, index, foreignKey };
+        return {
+            name, type, length, defValue, comment, autoInc, nullable, unique, index, unsigned, foreignKey
+        };
     }
 
     saveColumnAndContinue = () => {
@@ -172,6 +175,13 @@ class ColumnModal extends Component {
                                         ref='index'
                                         defaultChecked={ editData.get('index') }
                                     /> Index
+                                </label>
+                                <label className='checkbox-inline'>
+                                    <input
+                                        type='checkbox'
+                                        ref='unsigned'
+                                        defaultChecked={ editData.get('unsigned') }
+                                    /> Unsigned
                                 </label>
                             </div>
                         </div>
