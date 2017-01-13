@@ -1,8 +1,9 @@
 .db-table {
-    max-width: 250px;
-    -webkit-box-shadow: inset -2px -2px 5px 0px rgba(17,61,59,0.75);
-    -moz-box-shadow: inset -2px -2px 5px 0px rgba(17,61,59,0.75);
-    box-shadow: inset -2px -2px 5px 0px rgba(17,61,59,0.75);
+    max-width: 220px;
+    min-width: 180px;
+    -webkit-box-shadow: inset -2px -2px 6px 0px rgba(17,61,59,0.75), 0px -2px 1px 0px rgba(17,61,59,0.75);
+    -moz-box-shadow: inset -2px -2px 6px 0px rgba(17,61,59,0.75), 0px -2px 1px 0px rgba(17,61,59,0.75);
+    box-shadow: inset -2px -2px 6px 0px rgba(17,61,59,0.75), 0px -2px 1px 0px rgba(17,61,59,0.75);
 }
 
 .table-header {

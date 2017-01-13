@@ -25,6 +25,7 @@ class DbForm extends Component {
                             type='text'
                             placeholder='Enter database name'
                             defaultValue={ name }
+                            autoFocus
                         />
                     </form>
                 </div>
