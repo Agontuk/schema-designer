@@ -9,16 +9,6 @@ class ColumnModal extends Component {
         foreignKeyEnabled: false
     }
 
-    // componentWillReceiveProps (nextProps) {
-    //     const unsigned = nextProps.editData.get('unsigned');
-    //     const foreignKey = nextProps.editData.get('foreignKey');
-    //
-    //     this.setState({
-    //         isUnsigned: unsigned === undefined ? false : unsigned,
-    //         foreignKeyEnabled: foreignKey === undefined ? false : true
-    //     });
-    // }
-
     updateUnsignedValue = (event) => {
         this.setState({
             isUnsigned: event.target.checked,
