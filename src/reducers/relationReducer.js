@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import * as types from 'actions';
+import * as types from '../actions';
 
 const initialState = fromJS([]);
 
@@ -7,9 +7,8 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case types.REMOVE_TABLE:
             // Drop all associated relations for this table
-            return state.filter((relation) => {
-                return relation.get('source') !== action.id && relation.get('target') !== action.id;
-            });
+            return state.filter((relation) => (relation.get('source') !== action.id &&
+                relation.get('target') !== action.id));
         case types.REMOVE_COLUMN: {
             // Drop all associated relations for this column
             const foreignKey = action.columnData.foreignKey;
@@ -18,16 +17,13 @@ export default (state = initialState, action) => {
             if (foreignKey !== undefined) {
                 const foreignTableId = foreignKey.on.id;
 
-                return state.filter((relation) => {
-                    return relation.get('source') !== currentTableId && relation.get('target') !== foreignTableId;
-                });
-            } else {
-                // Remove relations which reference this column
-                return state.filter((relation) => {
-                    return relation.getIn(['data', 'on', 'id']) !== currentTableId &&
-                        relation.getIn(['data', 'references', 'id']) !== action.columnData.id;
-                });
+                return state.filter((relation) => (relation.get('source') !== currentTableId &&
+                    relation.get('target') !== foreignTableId));
             }
+
+            // Remove relations which reference this column
+            return state.filter((relation) => (relation.getIn(['data', 'on', 'id']) !== currentTableId &&
+                    relation.getIn(['data', 'references', 'id']) !== action.columnData.id));
         }
         case types.SAVE_FOREIGN_KEY_RELATION:
             if (action.columnData.foreignKey !== undefined) {
@@ -74,12 +70,10 @@ export default (state = initialState, action) => {
                         ...foreignKey
                     }
                 }));
-            } else {
-                // Remove any relation referred by the current column
-                return state.filter((relation) => {
-                    return relation.getIn(['data', 'referrer']) !== action.columnData.id;
-                });
             }
+
+            // Remove any relation referred by the current column
+            return state.filter((relation) => (relation.getIn(['data', 'referrer']) !== action.columnData.id));
         }
         default:
             return state;

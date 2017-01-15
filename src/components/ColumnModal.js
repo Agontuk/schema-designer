@@ -9,33 +9,18 @@ class ColumnModal extends Component {
         foreignKeyEnabled: false
     }
 
-    updateUnsignedValue = (event) => {
-        this.setState({
-            isUnsigned: event.target.checked,
-            foreignKeyEnabled: false
-        });
-    }
-
-    updateForeignKeyValue = (event) => {
-        this.setState({ foreignKeyEnabled: event.target.checked });
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-    }
-
     getFormData = () => {
-        const name = this.refs.name.value.trim();
-        const type = this.refs.type.value;
-        const length = this.refs.length.value.trim();
-        const defValue = this.refs.defValue.value.trim();
-        const comment = this.refs.comment.value.trim();
-        const autoInc = this.refs.autoInc.checked;
-        const nullable = this.refs.nullable.checked;
-        const unique = this.refs.unique.checked;
-        const index = this.refs.index.checked;
-        const unsigned = this.refs.unsigned.checked;
-        let foreignKey = this.refs.foreignKey;
+        const name = this.name.value.trim();
+        const type = this.type.value;
+        const length = this.length.value.trim();
+        const defValue = this.defValue.value.trim();
+        const comment = this.comment.value.trim();
+        const autoInc = this.autoInc.checked;
+        const nullable = this.nullable.checked;
+        const unique = this.unique.checked;
+        const index = this.index.checked;
+        const unsigned = this.unsigned.checked;
+        let foreignKey = this.foreignKey;
 
         if (foreignKey) {
             foreignKey = foreignKey.getData();
@@ -48,6 +33,10 @@ class ColumnModal extends Component {
         return {
             name, type, length, defValue, comment, autoInc, nullable, unique, index, unsigned, foreignKey
         };
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
     }
 
     saveColumnAndContinue = () => {
@@ -65,7 +54,7 @@ class ColumnModal extends Component {
             ...data
         }, tableId, hideModal);
 
-        this.refs.form.reset();
+        this.form.reset();
     }
 
     saveColumnAndExit = () => {
@@ -90,7 +79,18 @@ class ColumnModal extends Component {
         }
     }
 
-    render () {
+    updateUnsignedValue = (event) => {
+        this.setState({
+            isUnsigned: event.target.checked,
+            foreignKeyEnabled: false
+        });
+    }
+
+    updateForeignKeyValue = (event) => {
+        this.setState({ foreignKeyEnabled: event.target.checked });
+    }
+
+    render() {
         const { showColumnModal, toggleColumnModal, editData, editMode, tables, tableId, columns } = this.props;
         const { isUnsigned, foreignKeyEnabled } = this.state;
 
@@ -109,13 +109,18 @@ class ColumnModal extends Component {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <form className='form-horizontal' ref='form' onSubmit={ this.handleSubmit }>
+                    <form
+                        className='form-horizontal'
+                        ref={ (form) => { this.form = form; } }
+                        onSubmit={ this.handleSubmit }
+                    >
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label'>Name:</label>
+                            <label className='col-xs-3 control-label' htmlFor='name'>Name:</label>
                             <div className='col-xs-9'>
                                 <input
                                     type='text'
-                                    ref='name'
+                                    id='name'
+                                    ref={ (name) => { this.name = name; } }
                                     className='form-control'
                                     defaultValue={ editData.get('name') }
                                     autoFocus
@@ -123,9 +128,14 @@ class ColumnModal extends Component {
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label'>Type:</label>
+                            <label className='col-xs-3 control-label' htmlFor='type'>Type:</label>
                             <div className='col-xs-9'>
-                                <select className='form-control' ref='type' defaultValue={ editData.get('type') }>
+                                <select
+                                    className='form-control'
+                                    id='type'
+                                    ref={ (type) => { this.type = type; } }
+                                    defaultValue={ editData.get('type') }
+                                >
                                     <option value='integer'>INT</option>
                                     <option value='bigInteger'>BIGINT</option>
                                     <option value='string'>String</option>
@@ -135,82 +145,94 @@ class ColumnModal extends Component {
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label'>Length:</label>
+                            <label className='col-xs-3 control-label' htmlFor='length'>Length:</label>
                             <div className='col-xs-9'>
                                 <input
                                     type='text'
-                                    ref='length'
+                                    id='length'
+                                    ref={ (length) => { this.length = length; } }
                                     className='form-control'
                                     defaultValue={ editData.get('length') }
                                 />
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label'>Default Value:</label>
+                            <label className='col-xs-3 control-label' htmlFor='defVal'>Default Value:</label>
                             <div className='col-xs-9'>
                                 <input
                                     type='text'
-                                    ref='defValue'
+                                    id='defVal'
+                                    ref={ (defValue) => { this.defValue = defValue; } }
                                     className='form-control'
                                     defaultValue={ editData.get('defValue') }
                                 />
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label'>Comment:</label>
+                            <label className='col-xs-3 control-label' htmlFor='comment'>Comment:</label>
                             <div className='col-xs-9'>
                                 <input
                                     type='text'
-                                    ref='comment'
+                                    id='comment'
+                                    ref={ (comment) => { this.comment = comment; } }
                                     className='form-control'
                                     defaultValue={ editData.get('comment') }
                                 />
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label'>Misc:</label>
+                            <strong className='col-xs-3 control-label'>Misc:</strong>
                             <div className='col-xs-9'>
-                                <label className='checkbox-inline'>
+                                <label className='checkbox-inline' htmlFor='autoInc'>
                                     <input
                                         type='checkbox'
-                                        ref='autoInc'
+                                        id='autoInc'
+                                        ref={ (autoInc) => { this.autoInc = autoInc; } }
                                         defaultChecked={ editData.get('autoInc') }
                                     /> A.I.
                                 </label>
-                                <label className='checkbox-inline'>
+                                <label className='checkbox-inline' htmlFor='nullable'>
                                     <input
                                         type='checkbox'
-                                        ref='nullable'
+                                        id='nullable'
+                                        ref={ (nullable) => { this.nullable = nullable; } }
                                         defaultChecked={ editData.get('nullable') }
                                     /> Nullable
                                 </label>
-                                <label className='checkbox-inline'>
+                                <label className='checkbox-inline' htmlFor='unique'>
                                     <input
                                         type='checkbox'
-                                        ref='unique'
+                                        id='unique'
+                                        ref={ (unique) => { this.unique = unique; } }
                                         defaultChecked={ editData.get('unique') }
                                     /> Unique
                                 </label>
-                                <label className='checkbox-inline'>
+                                <label className='checkbox-inline' htmlFor='index'>
                                     <input
                                         type='checkbox'
-                                        ref='index'
+                                        id='index'
+                                        ref={ (index) => { this.index = index; } }
                                         defaultChecked={ editData.get('index') }
                                     /> Index
                                 </label>
-                                <label className='checkbox-inline'>
+                                <label className='checkbox-inline' htmlFor='unsigned'>
                                     <input
                                         type='checkbox'
-                                        ref='unsigned'
+                                        id='unsigned'
+                                        ref={ (unsigned) => { this.unsigned = unsigned; } }
                                         checked={ isUnsigned }
                                         onChange={ this.updateUnsignedValue }
                                     /> Unsigned
                                 </label>
                             </div>
                             <div className='col-xs-9 col-xs-offset-3'>
-                                <label className={ classnames('checkbox-inline', { disabled: !isUnsigned }) }>
+                                <label
+                                    className={ classnames('checkbox-inline', { disabled: !isUnsigned }) }
+                                    htmlFor='foreign'
+                                >
                                     <input
                                         type='checkbox'
+                                        id='foreign'
                                         checked={ foreignKeyEnabled }
                                         disabled={ !isUnsigned }
                                         onChange={ this.updateForeignKeyValue }
@@ -221,7 +243,7 @@ class ColumnModal extends Component {
 
                         { foreignKeyEnabled ?
                             <ForeignKeyForm
-                                ref='foreignKey'
+                                ref={ (foreignKey) => { this.foreignKey = foreignKey; } }
                                 columns={ columns }
                                 tables={ tables }
                                 tableId={ tableId }

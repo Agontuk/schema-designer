@@ -17,7 +17,7 @@ class Table extends Component {
         onToggleColumnModal(data.get('id'));
     }
 
-    render () {
+    render() {
         const { data } = this.props;
 
         return (

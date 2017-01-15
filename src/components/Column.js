@@ -11,7 +11,7 @@ class Column extends Component {
         onRemoveColumn(data.toJS(), tableId);
     }
 
-    render () {
+    render() {
         const { data } = this.props;
 
         return (
@@ -29,6 +29,22 @@ class Column extends Component {
 }
 
 Column.propTypes = {
+    // data: React.PropTypes.shape({
+    //     id: React.PropTypes.string.isRequired,
+    //     name: React.PropTypes.string.isRequired,
+    //     type: React.PropTypes.string.isRequired,
+    //     comment: React.PropTypes.string.isRequired,
+    //     autoInc: React.PropTypes.bool.isRequired,
+    //     unique: React.PropTypes.bool.isRequired,
+    //     index: React.PropTypes.bool.isRequired,
+    //     unsigned: React.PropTypes.bool.isRequired,
+    //     nullable: React.PropTypes.bool.isRequired,
+    //     length: React.PropTypes.number.isRequired,
+    //     defValue: React.PropTypes.oneOfType([
+    //         React.PropTypes.string,
+    //         React.PropTypes.number
+    //     ]).isRequired
+    // }).isRequired,
     data: PropTypes.object.isRequired,
     tableId: PropTypes.string.isRequired,
     onRemoveColumn: PropTypes.func.isRequired,

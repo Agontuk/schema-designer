@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import * as types from 'actions';
+import * as types from '../actions';
 
 const initialState = fromJS({});
 
@@ -12,17 +12,15 @@ export default (state = initialState, action) => {
             return state.setIn([action.tableId, action.data.id], fromJS(action.data));
         case types.REMOVE_COLUMN: {
             // Update all columns which reference this column as a foreign key
-            const newState = state.map((table) => {
-                return table.map((column) => {
-                    const referenceId = column.getIn(['foreignKey', 'references', 'id']);
+            const newState = state.map((table) => table.map((column) => {
+                const referenceId = column.getIn(['foreignKey', 'references', 'id']);
 
-                    if (referenceId === action.columnData.id) {
-                        return column.delete('foreignKey');
-                    }
+                if (referenceId === action.columnData.id) {
+                    return column.delete('foreignKey');
+                }
 
-                    return column;
-                });
-            });
+                return column;
+            }));
 
             return newState.deleteIn([action.tableId, action.columnData.id]);
         }

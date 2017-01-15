@@ -1,14 +1,12 @@
-const makeActionCreator =  (type, ...argNames) => {
-    return (...args) => {
-        let action = { type };
+const makeActionCreator = (type, ...argNames) => ((...args) => {
+    const action = { type };
 
-        argNames.forEach((arg, index) => {
-            action[argNames[index]] = args[index];
-        });
+    argNames.forEach((arg, index) => {
+        action[argNames[index]] = args[index];
+    });
 
-        return action;
-    };
-};
+    return action;
+});
 
 // Action Constants
 export const SAVE_DB_NAME = 'SAVE_DB_NAME';

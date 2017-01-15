@@ -12,7 +12,7 @@ class DbForm extends Component {
         this.props.onSubmit(name);
     }
 
-    render () {
+    render() {
         const { name } = this.props;
 
         return (

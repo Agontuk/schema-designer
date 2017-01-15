@@ -18,17 +18,21 @@ class TableModal extends Component {
         if (editMode) {
             updateTable({
                 id: editData.get('id'),
-                name, softDelete, timeStamp
+                name,
+                softDelete,
+                timeStamp
             });
         } else {
             saveTable({
                 id: Math.random().toString(36).substring(7),
-                name, softDelete, timeStamp
+                name,
+                softDelete,
+                timeStamp
             });
         }
     }
 
-    render () {
+    render() {
         const { showTableModal, toggleTableModal, editData, editMode } = this.props;
 
         return (

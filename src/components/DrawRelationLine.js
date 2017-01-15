@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import jsPlumb from 'jsPlumb';
 
 class DrawRelationLine extends Component {
-    componentDidMount () {
-        jsPlumb.Defaults.Connector = [ 'Flowchart', { cornerRadius: 5 } ];
+    componentDidMount() {
+        jsPlumb.Defaults.Connector = ['Flowchart', { cornerRadius: 5 }];
         jsPlumb.Defaults.Anchor = 'Continuous';
         jsPlumb.Defaults.ConnectionsDetachable = false;
         jsPlumb.Defaults.PaintStyle = { strokeWidth: 6, stroke: '#445566' };
         jsPlumb.Defaults.EndpointStyle = { fillStyle: '#445566' };
     }
 
-    componentDidUpdate () {
+    componentDidUpdate() {
         const { relations } = this.props;
 
         jsPlumb.ready(() => {
@@ -28,13 +28,13 @@ class DrawRelationLine extends Component {
                     //     ['Label', { label: '&infin;', location: 0.9, cssClass: 'many' }]
                     // ],
                     paintStyle: { stroke: '#75624e', strokeWidth: 6 },
-                    endpointStyle: { fillStyle: '#75624e' },
+                    endpointStyle: { fillStyle: '#75624e' }
                 });
             });
         });
     }
 
-    render () {
+    render() {
         return null;
     }
 }
@@ -43,10 +43,8 @@ DrawRelationLine.propTypes = {
     relations: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
-    return {
-        relations: state.relations
-    };
-};
+const mapStateToProps = (state) => ({
+    relations: state.relations
+});
 
 export default connect(mapStateToProps)(DrawRelationLine);

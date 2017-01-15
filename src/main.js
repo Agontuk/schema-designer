@@ -13,7 +13,7 @@ render(
 
 if (module.hot) {
     module.hot.accept('./app', () => {
-        const NextApp = require('./app').default;
+        const NextApp = require('./app').default; // eslint-disable-line global-require
         render(
             <AppContainer>
                 <NextApp />

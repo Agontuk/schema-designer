@@ -8,7 +8,7 @@ class ForeignKeyForm extends Component {
         currentForeignColumnName: ''
     }
 
-    componentDidMount () {
+    componentDidMount() {
         const { editData } = this.props;
 
         const tableId = editData.getIn(['foreignKey', 'on', 'id']) || '';
@@ -33,7 +33,7 @@ class ForeignKeyForm extends Component {
         } = this.state;
 
         if (!currentForeignTableId || !currentForeignColumnId) {
-            return;
+            return false;
         }
 
         return {
@@ -85,7 +85,7 @@ class ForeignKeyForm extends Component {
         });
     }
 
-    render () {
+    render() {
         const { tables, tableId, editData, columns } = this.props;
         const { currentForeignTableId } = this.state;
 
@@ -103,13 +103,11 @@ class ForeignKeyForm extends Component {
                         <option value=''>None</option>
 
                         { columns.get(currentForeignTableId) === undefined ? null :
-                            columns.get(currentForeignTableId).valueSeq().map((column) => {
-                                return (
-                                    <option key={ column.get('id') } value={ column.get('id') }>
-                                        { column.get('name') }
-                                    </option>
-                                );
-                            })
+                            columns.get(currentForeignTableId).valueSeq().map((column) => (
+                                <option key={ column.get('id') } value={ column.get('id') }>
+                                    { column.get('name') }
+                                </option>
+                            ))
                         }
                     </select>
                 </div>
@@ -122,16 +120,13 @@ class ForeignKeyForm extends Component {
                         onChange={ this.setCurrentForeignTable }
                     >
                         <option value=''>None</option>
-                        { tables.filter((table) => {
-                            // Don't include the current table
-                            return table.get('id') !== tableId;
-                        }).map((table) => {
-                            return (
+                        { tables.filter((table) => (table.get('id') !== tableId))
+                            .map((table) => (
                                 <option key={ table.get('id') } value={ table.get('id') }>
                                     { table.get('name') }
                                 </option>
-                            );
-                        })}
+                            ))
+                        }
                     </select>
                 </div>
             </div>
