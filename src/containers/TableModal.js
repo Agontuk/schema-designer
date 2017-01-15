@@ -3,9 +3,9 @@ import TableModal from '../components/TableModal';
 import { saveTable, toggleTableModal, updateTable } from '../actions';
 
 const mapStateToProps = (state) => ({
-    showTableModal: state.ui.getIn(['table', 'showModal']),
-    editMode: state.ui.getIn(['table', 'edit']),
-    editData: state.ui.getIn(['table', 'editData'])
+    showTableModal: state.ui.table.showModal,
+    editMode: state.ui.table.edit,
+    editData: state.ui.table.editData
 });
 
 const mapDispatchToProps = (dispatch) => ({

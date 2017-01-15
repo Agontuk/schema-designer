@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
-import { fromJS } from 'immutable';
 import Columns from '../components/Columns';
 import { removeColumn, enableColumnEdit, toggleColumnModal } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
-    const columns = state.columns.get(ownProps.tableId);
+    const columns = state.columns[ownProps.tableId];
     return {
-        columns: columns || fromJS({})
+        columns: columns || []
     };
 };
 

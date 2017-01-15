@@ -5,9 +5,9 @@ class TableModal extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        const name = this.refs.tableName.value.trim();
-        const softDelete = this.refs.softdelete.checked;
-        const timeStamp = this.refs.timestamp.checked;
+        const name = this.name.value.trim();
+        const softDelete = this.softdelete.checked;
+        const timeStamp = this.timestamp.checked;
 
         if (!name) {
             return;
@@ -17,7 +17,7 @@ class TableModal extends Component {
 
         if (editMode) {
             updateTable({
-                id: editData.get('id'),
+                id: editData.id,
                 name,
                 softDelete,
                 timeStamp
@@ -53,32 +53,35 @@ class TableModal extends Component {
                 <Modal.Body>
                     <form className='form-horizontal' onSubmit={ this.handleSubmit }>
                         <div className='form-group'>
-                            <label className='col-xs-2 control-label'>Name:</label>
+                            <label className='col-xs-2 control-label' htmlFor='name'>Name:</label>
                             <div className='col-xs-10'>
                                 <input
                                     type='text'
-                                    ref='tableName'
+                                    id='name'
+                                    ref={ (name) => { this.name = name; } }
                                     className='form-control'
-                                    defaultValue={ editData.get('name') }
+                                    defaultValue={ editData.name }
                                     autoFocus
                                 />
                             </div>
                         </div>
                         <div className='checkbox'>
-                            <label>
+                            <label htmlFor='softdelete'>
                                 <input
                                     type='checkbox'
-                                    ref='softdelete'
-                                    defaultChecked={ editData.get('softDelete') }
+                                    id='softdelete'
+                                    ref={ (softdelete) => { this.softdelete = softdelete; } }
+                                    defaultChecked={ editData.softDelete }
                                 /> Soft Delete
                             </label>
                         </div>
                         <div className='checkbox'>
-                            <label>
+                            <label htmlFor='timestamp'>
                                 <input
                                     type='checkbox'
-                                    ref='timestamp'
-                                    defaultChecked={ editData.get('timeStamp') }
+                                    id='timestamp'
+                                    ref={ (timestamp) => { this.timestamp = timestamp; } }
+                                    defaultChecked={ editData.timeStamp }
                                 /> Timestamp
                             </label>
                         </div>
@@ -107,7 +110,12 @@ class TableModal extends Component {
 TableModal.propTypes = {
     showTableModal: PropTypes.bool.isRequired,
     editMode: PropTypes.bool.isRequired,
-    editData: PropTypes.object.isRequired,
+    editData: PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        softDelete: React.PropTypes.bool.isRequired,
+        timeStamp: React.PropTypes.bool.isRequired
+    }).isRequired,
     toggleTableModal: PropTypes.func.isRequired,
     saveTable: PropTypes.func.isRequired,
     updateTable: PropTypes.func.isRequired

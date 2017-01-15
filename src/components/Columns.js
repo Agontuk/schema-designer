@@ -5,15 +5,15 @@ class Columns extends Component {
     render() {
         const { columns, tableId, removeColumn, editColumn } = this.props;
 
-        if (columns.size === 0) {
+        if (columns.length === 0) {
             return null;
         }
 
         return (
             <ul className='db-columns'>
-                { columns.valueSeq().map((column) => (
+                { columns.map((column) => (
                     <Column
-                        key={ column.get('id') }
+                        key={ column.id }
                         data={ column }
                         tableId={ tableId }
                         onRemoveColumn={ removeColumn }
@@ -26,7 +26,7 @@ class Columns extends Component {
 }
 
 Columns.propTypes = {
-    columns: PropTypes.object.isRequired,
+    columns: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     tableId: PropTypes.string.isRequired,
     removeColumn: PropTypes.func.isRequired,
     editColumn: PropTypes.func.isRequired

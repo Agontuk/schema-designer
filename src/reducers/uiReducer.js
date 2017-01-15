@@ -1,50 +1,106 @@
-import { fromJS } from 'immutable';
+import update from 'immutability-helper';
 import * as types from '../actions';
 
-const initialState = fromJS({
+const initialState = {
     table: {
         showModal: false,
         edit: false,
-        editData: {}
+        editData: {
+            id: '',
+            name: '',
+            softDelete: false,
+            timeStamp: false
+        }
     },
     column: {
         showModal: false,
         edit: false,
-        editData: {},
+        editData: {
+            id: '',
+            name: '',
+            type: '',
+            length: '',
+            defValue: '',
+            comment: '',
+            autoInc: false,
+            nullable: false,
+            unique: false,
+            index: false,
+            unsigned: false,
+            foreignKey: {
+                references: {
+                    id: '',
+                    name: ''
+                },
+                on: {
+                    id: '',
+                    name: ''
+                }
+            }
+        },
         tableId: ''
     }
-});
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.TOGGLE_TABLE_MODAL: {
-            const show = state.getIn(['table', 'showModal']);
+            const show = state.table.showModal;
 
             if (show) {
                 // Reset edit data & edit mode before hiding modal
-                return state.setIn(['table', 'showModal'], false)
-                    .setIn(['table', 'edit'], false).setIn(['table', 'editData'], fromJS({}));
+                return update(state, {
+                    table: {
+                        showModal: { $set: false },
+                        edit: { $set: false },
+                        editData: { $set: initialState.table.editData }
+                    }
+                });
             }
 
-            return state.setIn(['table', 'showModal'], true);
+            return update(state, {
+                table: {
+                    showModal: { $set: true }
+                }
+            });
         }
         case types.ENABLE_TABLE_EDIT:
-            return state.setIn(['table', 'edit'], true).setIn(['table', 'editData'], fromJS(action.data));
+            return update(state, {
+                table: {
+                    edit: { $set: true },
+                    editData: { $set: action.data }
+                }
+            });
         case types.TOGGLE_COLUMN_MODAL: {
-            const show = state.getIn(['column', 'showModal']);
+            const show = state.column.showModal;
 
             if (show) {
                 // Reset edit data & edit mode before hiding modal
-                return state.setIn(['column', 'showModal'], false)
-                    .setIn(['column', 'tableId'], '')
-                    .setIn(['column', 'edit'], false).setIn(['column', 'editData'], fromJS({}));
+                return update(state, {
+                    column: {
+                        showModal: { $set: false },
+                        tableId: { $set: '' },
+                        edit: { $set: false },
+                        editData: { $set: initialState.column.editData }
+                    }
+                });
             }
 
-            return state.setIn(['column', 'showModal'], true).setIn(['column', 'tableId'], action.tableId);
+            return update(state, {
+                column: {
+                    showModal: { $set: true },
+                    tableId: { $set: action.tableId }
+                }
+            });
         }
         case types.ENABLE_COLUMN_EDIT:
-            return state.setIn(['column', 'edit'], true).setIn(['column', 'editData'], fromJS(action.data))
-                .setIn(['column', 'tableId'], action.tableId);
+            return update(state, {
+                column: {
+                    edit: { $set: true },
+                    editData: { $set: action.data },
+                    tableId: { $set: action.tableId }
+                }
+            });
         default:
             return state;
     }

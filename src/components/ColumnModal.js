@@ -24,6 +24,17 @@ class ColumnModal extends Component {
 
         if (foreignKey) {
             foreignKey = foreignKey.getData();
+        } else {
+            foreignKey = {
+                references: {
+                    id: '',
+                    name: ''
+                },
+                on: {
+                    id: '',
+                    name: ''
+                }
+            };
         }
 
         if (!name) {
@@ -68,7 +79,7 @@ class ColumnModal extends Component {
 
         if (editMode) {
             updateColumn({
-                id: editData.get('id'),
+                id: editData.id,
                 ...data
             }, tableId);
         } else {
@@ -122,7 +133,7 @@ class ColumnModal extends Component {
                                     id='name'
                                     ref={ (name) => { this.name = name; } }
                                     className='form-control'
-                                    defaultValue={ editData.get('name') }
+                                    defaultValue={ editData.name }
                                     autoFocus
                                 />
                             </div>
@@ -134,7 +145,7 @@ class ColumnModal extends Component {
                                     className='form-control'
                                     id='type'
                                     ref={ (type) => { this.type = type; } }
-                                    defaultValue={ editData.get('type') }
+                                    defaultValue={ editData.type }
                                 >
                                     <option value='integer'>INT</option>
                                     <option value='bigInteger'>BIGINT</option>
@@ -152,7 +163,7 @@ class ColumnModal extends Component {
                                     id='length'
                                     ref={ (length) => { this.length = length; } }
                                     className='form-control'
-                                    defaultValue={ editData.get('length') }
+                                    defaultValue={ editData.length }
                                 />
                             </div>
                         </div>
@@ -164,7 +175,7 @@ class ColumnModal extends Component {
                                     id='defVal'
                                     ref={ (defValue) => { this.defValue = defValue; } }
                                     className='form-control'
-                                    defaultValue={ editData.get('defValue') }
+                                    defaultValue={ editData.defValue }
                                 />
                             </div>
                         </div>
@@ -176,7 +187,7 @@ class ColumnModal extends Component {
                                     id='comment'
                                     ref={ (comment) => { this.comment = comment; } }
                                     className='form-control'
-                                    defaultValue={ editData.get('comment') }
+                                    defaultValue={ editData.comment }
                                 />
                             </div>
                         </div>
@@ -188,7 +199,7 @@ class ColumnModal extends Component {
                                         type='checkbox'
                                         id='autoInc'
                                         ref={ (autoInc) => { this.autoInc = autoInc; } }
-                                        defaultChecked={ editData.get('autoInc') }
+                                        defaultChecked={ editData.autoInc }
                                     /> A.I.
                                 </label>
                                 <label className='checkbox-inline' htmlFor='nullable'>
@@ -196,7 +207,7 @@ class ColumnModal extends Component {
                                         type='checkbox'
                                         id='nullable'
                                         ref={ (nullable) => { this.nullable = nullable; } }
-                                        defaultChecked={ editData.get('nullable') }
+                                        defaultChecked={ editData.nullable }
                                     /> Nullable
                                 </label>
                                 <label className='checkbox-inline' htmlFor='unique'>
@@ -204,7 +215,7 @@ class ColumnModal extends Component {
                                         type='checkbox'
                                         id='unique'
                                         ref={ (unique) => { this.unique = unique; } }
-                                        defaultChecked={ editData.get('unique') }
+                                        defaultChecked={ editData.unique }
                                     /> Unique
                                 </label>
                                 <label className='checkbox-inline' htmlFor='index'>
@@ -212,7 +223,7 @@ class ColumnModal extends Component {
                                         type='checkbox'
                                         id='index'
                                         ref={ (index) => { this.index = index; } }
-                                        defaultChecked={ editData.get('index') }
+                                        defaultChecked={ editData.index }
                                     /> Index
                                 </label>
                                 <label className='checkbox-inline' htmlFor='unsigned'>
@@ -247,7 +258,7 @@ class ColumnModal extends Component {
                                 columns={ columns }
                                 tables={ tables }
                                 tableId={ tableId }
-                                editData={ editData }
+                                editData={ editData.foreignKey }
                             /> : null
                         }
                     </form>
@@ -273,10 +284,22 @@ class ColumnModal extends Component {
 ColumnModal.propTypes = {
     showColumnModal: PropTypes.bool.isRequired,
     editMode: PropTypes.bool.isRequired,
-    editData: PropTypes.object.isRequired,
+    editData: React.PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        type: React.PropTypes.string.isRequired,
+        comment: React.PropTypes.string.isRequired,
+        autoInc: React.PropTypes.bool.isRequired,
+        unique: React.PropTypes.bool.isRequired,
+        index: React.PropTypes.bool.isRequired,
+        unsigned: React.PropTypes.bool.isRequired,
+        nullable: React.PropTypes.bool.isRequired,
+        length: React.PropTypes.string.isRequired,
+        defValue: React.PropTypes.string.isRequired
+    }).isRequired,
     tableId: PropTypes.string.isRequired,
-    tables: PropTypes.object.isRequired,
-    columns: PropTypes.object.isRequired,
+    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    columns: PropTypes.objectOf(React.PropTypes.array).isRequired,
     toggleColumnModal: PropTypes.func.isRequired,
     saveColumn: PropTypes.func.isRequired,
     updateColumn: PropTypes.func.isRequired

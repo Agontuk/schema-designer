@@ -1,25 +1,24 @@
-import { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import jsPlumb from 'jsPlumb';
 
 class DrawRelationLine extends Component {
     componentDidMount() {
-        jsPlumb.Defaults.Connector = ['Flowchart', { cornerRadius: 5 }];
-        jsPlumb.Defaults.Anchor = 'Continuous';
-        jsPlumb.Defaults.ConnectionsDetachable = false;
-        jsPlumb.Defaults.PaintStyle = { strokeWidth: 6, stroke: '#445566' };
-        jsPlumb.Defaults.EndpointStyle = { fillStyle: '#445566' };
+        window.jsPlumb.Defaults.Connector = ['Flowchart', { cornerRadius: 5 }];
+        window.jsPlumb.Defaults.Anchor = 'Continuous';
+        window.jsPlumb.Defaults.ConnectionsDetachable = false;
+        window.jsPlumb.Defaults.PaintStyle = { strokeWidth: 6, stroke: '#445566' };
+        window.jsPlumb.Defaults.EndpointStyle = { fillStyle: '#445566' };
     }
 
     componentDidUpdate() {
         const { relations } = this.props;
 
-        jsPlumb.ready(() => {
+        window.jsPlumb.ready(() => {
             // Reset all endpoint & connections first
-            jsPlumb.reset();
+            window.jsPlumb.reset();
 
             relations.forEach((relation) => {
-                jsPlumb.connect({
+                window.jsPlumb.connect({
                     source: relation.get('source'),
                     target: relation.get('target'),
                     // overlays: [
@@ -40,7 +39,7 @@ class DrawRelationLine extends Component {
 }
 
 DrawRelationLine.propTypes = {
-    relations: PropTypes.object.isRequired
+    relations: PropTypes.arrayOf(React.PropTypes.object).isRequired
 };
 
 const mapStateToProps = (state) => ({

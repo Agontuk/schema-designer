@@ -19,7 +19,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel', exclude: /node_modules/
+                loader: 'babel',
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/,
@@ -44,11 +45,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: `${ ROOT_PATH }/index.html`
         }),
-        new ExtractTextPlugin('schema.css'),
-    ],
-    externals: [
-        {
-            'jsPlumb': 'window.jsPlumb'
-        }
+        new ExtractTextPlugin('schema.css')
     ]
 };

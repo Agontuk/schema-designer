@@ -9,21 +9,21 @@ class Table extends Component {
 
     removeTable = () => {
         const { data, onRemoveTable } = this.props;
-        onRemoveTable(data.get('id'));
+        onRemoveTable(data.id);
     }
 
     toggleColumnModal = () => {
         const { data, onToggleColumnModal } = this.props;
-        onToggleColumnModal(data.get('id'));
+        onToggleColumnModal(data.id);
     }
 
     render() {
         const { data } = this.props;
 
         return (
-            <div className='db-table draggable' id={ data.get('id') }>
+            <div className='db-table draggable' id={ data.id }>
                 <div className='table-header clearfix'>
-                    <h4 className='pull-left'>{ data.get('name') }</h4>
+                    <h4 className='pull-left'>{ data.name }</h4>
                     <div className='pull-right'>
                         <span className='glyphicon glyphicon-plus' onClick={ this.toggleColumnModal }></span>
                         <span className='glyphicon glyphicon-pencil' onClick={ this.editTable }></span>
@@ -31,14 +31,19 @@ class Table extends Component {
                     </div>
                 </div>
 
-                <Columns tableId={ data.get('id') } />
+                <Columns tableId={ data.id } />
             </div>
         );
     }
 }
 
 Table.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        softDelete: React.PropTypes.bool.isRequired,
+        timeStamp: React.PropTypes.bool.isRequired
+    }).isRequired,
     onRemoveTable: PropTypes.func.isRequired,
     onEditTable: PropTypes.func.isRequired,
     onToggleColumnModal: PropTypes.func.isRequired

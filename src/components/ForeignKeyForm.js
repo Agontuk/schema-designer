@@ -1,27 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 
 class ForeignKeyForm extends Component {
+    // constructor(props) {
+    //     super(props);
+    //
+    //     const { editData } = props;
+    //     const tableId = editData.getIn(['foreignKey', 'on', 'id']) || '';
+    //     const tableName = editData.getIn(['foreignKey', 'on', 'name']) || '';
+    //     const columnId = editData.getIn(['foreignKey', 'references', 'id']) || '';
+    //     const columnName = editData.getIn(['foreignKey', 'references', 'name']) || '';
+    //
+    //     this.setState({
+    //         currentForeignTableId: tableId,
+    //         currentForeignTableName: tableName,
+    //         currentForeignColumnId: columnId,
+    //         currentForeignColumnName: columnName
+    //     });
+    // }
+
     state = {
         currentForeignTableId: '',
         currentForeignTableName: '',
         currentForeignColumnId: '',
         currentForeignColumnName: ''
-    }
-
-    componentDidMount() {
-        const { editData } = this.props;
-
-        const tableId = editData.getIn(['foreignKey', 'on', 'id']) || '';
-        const tableName = editData.getIn(['foreignKey', 'on', 'name']) || '';
-        const columnId = editData.getIn(['foreignKey', 'references', 'id']) || '';
-        const columnName = editData.getIn(['foreignKey', 'references', 'name']) || '';
-
-        this.setState({
-            currentForeignTableId: tableId,
-            currentForeignTableName: tableName,
-            currentForeignColumnId: columnId,
-            currentForeignColumnName: columnName
-        });
     }
 
     getData = () => {
@@ -55,7 +56,7 @@ class ForeignKeyForm extends Component {
         let name = '';
 
         if (selected) {
-            name = tables.filter((table) => table.get('id') === selected).first().get('name');
+            name = tables.filter((table) => table.id === selected)[0].name;
         }
 
         this.setState({
@@ -74,9 +75,8 @@ class ForeignKeyForm extends Component {
         let name = '';
 
         if (selected) {
-            name = columns.get(currentForeignTableId)
-                .filter((column) => column.get('id') === selected)
-                .first().get('name');
+            name = columns[currentForeignTableId]
+                .filter((column) => column.id === selected)[0].name;
         }
 
         this.setState({
@@ -91,21 +91,20 @@ class ForeignKeyForm extends Component {
 
         return (
             <div className='form-group'>
-                <label className='col-xs-3 control-label'>Foreign Key:</label>
+                <strong className='col-xs-3 control-label'>Foreign Key:</strong>
                 <span className='col-xs-2 control-label'>References:</span>
                 <div className='col-xs-3'>
                     <select
                         className='form-control'
-                        ref='type'
-                        defaultValue={ editData.getIn(['foreignKey', 'references', 'id']) }
+                        defaultValue={ editData.references.id }
                         onChange={ this.setCurrentForeignColumn }
                     >
                         <option value=''>None</option>
 
-                        { columns.get(currentForeignTableId) === undefined ? null :
-                            columns.get(currentForeignTableId).valueSeq().map((column) => (
-                                <option key={ column.get('id') } value={ column.get('id') }>
-                                    { column.get('name') }
+                        { columns[currentForeignTableId] === undefined ? null :
+                            columns[currentForeignTableId].map((column) => (
+                                <option key={ column.id } value={ column.id }>
+                                    { column.name }
                                 </option>
                             ))
                         }
@@ -115,15 +114,14 @@ class ForeignKeyForm extends Component {
                 <div className='col-xs-3'>
                     <select
                         className='form-control'
-                        ref='type'
-                        defaultValue={ editData.getIn(['foreignKey', 'on', 'id']) }
+                        defaultValue={ editData.on.id }
                         onChange={ this.setCurrentForeignTable }
                     >
                         <option value=''>None</option>
-                        { tables.filter((table) => (table.get('id') !== tableId))
+                        { tables.filter((table) => (table.id !== tableId))
                             .map((table) => (
-                                <option key={ table.get('id') } value={ table.get('id') }>
-                                    { table.get('name') }
+                                <option key={ table.id } value={ table.id }>
+                                    { table.name }
                                 </option>
                             ))
                         }
@@ -136,8 +134,8 @@ class ForeignKeyForm extends Component {
 
 ForeignKeyForm.propTypes = {
     tableId: PropTypes.string.isRequired,
-    tables: PropTypes.object.isRequired,
-    columns: PropTypes.object.isRequired,
+    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    columns: PropTypes.objectOf(React.PropTypes.array).isRequired,
     editData: PropTypes.object.isRequired
 };
 

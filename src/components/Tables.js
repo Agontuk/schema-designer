@@ -1,15 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import jsPlumb from 'jsPlumb';
 import Table from './Table';
 
 class Tables extends Component {
     componentDidUpdate(prevProps) {
         const { tables } = this.props;
 
-        if (tables.size !== prevProps.tables.size) {
+        if (tables.length !== prevProps.tables.length) {
             // New tables available, make all tables draggable
-            jsPlumb.ready(() => {
-                jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'));
+            window.jsPlumb.ready(() => {
+                window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'));
             });
         }
     }
@@ -21,7 +20,7 @@ class Tables extends Component {
             <div>
                 { tables.map((table) => (
                     <Table
-                        key={ table.get('id') }
+                        key={ table.id }
                         data={ table }
                         onRemoveTable={ removeTable }
                         onEditTable={ editTable }
@@ -34,7 +33,7 @@ class Tables extends Component {
 }
 
 Tables.propTypes = {
-    tables: PropTypes.object.isRequired,
+    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     removeTable: PropTypes.func.isRequired,
     editTable: PropTypes.func.isRequired,
     toggleColumnModal: PropTypes.func.isRequired

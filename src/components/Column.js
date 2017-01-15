@@ -8,7 +8,7 @@ class Column extends Component {
 
     removeColumn = () => {
         const { data, onRemoveColumn, tableId } = this.props;
-        onRemoveColumn(data.toJS(), tableId);
+        onRemoveColumn(data, tableId);
     }
 
     render() {
@@ -17,7 +17,7 @@ class Column extends Component {
         return (
             <li className='clearfix'>
                 <div className='pull-left'>
-                    { data.get('name') }<span>({ data.get('type') })</span>
+                    { data.name }<span>({ data.type })</span>
                 </div>
                 <div className='pull-right'>
                     <span className='glyphicon glyphicon-pencil' onClick={ this.editColumn }></span>
@@ -29,23 +29,19 @@ class Column extends Component {
 }
 
 Column.propTypes = {
-    // data: React.PropTypes.shape({
-    //     id: React.PropTypes.string.isRequired,
-    //     name: React.PropTypes.string.isRequired,
-    //     type: React.PropTypes.string.isRequired,
-    //     comment: React.PropTypes.string.isRequired,
-    //     autoInc: React.PropTypes.bool.isRequired,
-    //     unique: React.PropTypes.bool.isRequired,
-    //     index: React.PropTypes.bool.isRequired,
-    //     unsigned: React.PropTypes.bool.isRequired,
-    //     nullable: React.PropTypes.bool.isRequired,
-    //     length: React.PropTypes.number.isRequired,
-    //     defValue: React.PropTypes.oneOfType([
-    //         React.PropTypes.string,
-    //         React.PropTypes.number
-    //     ]).isRequired
-    // }).isRequired,
-    data: PropTypes.object.isRequired,
+    data: React.PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        type: React.PropTypes.string.isRequired,
+        comment: React.PropTypes.string.isRequired,
+        autoInc: React.PropTypes.bool.isRequired,
+        unique: React.PropTypes.bool.isRequired,
+        index: React.PropTypes.bool.isRequired,
+        unsigned: React.PropTypes.bool.isRequired,
+        nullable: React.PropTypes.bool.isRequired,
+        length: React.PropTypes.string.isRequired,
+        defValue: React.PropTypes.string.isRequired
+    }).isRequired,
     tableId: PropTypes.string.isRequired,
     onRemoveColumn: PropTypes.func.isRequired,
     onEditColumn: PropTypes.func.isRequired

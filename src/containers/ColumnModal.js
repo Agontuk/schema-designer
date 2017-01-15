@@ -9,10 +9,10 @@ import {
 } from '../actions';
 
 const mapStateToProps = (state) => ({
-    showColumnModal: state.ui.getIn(['column', 'showModal']),
-    editMode: state.ui.getIn(['column', 'edit']),
-    editData: state.ui.getIn(['column', 'editData']),
-    tableId: state.ui.getIn(['column', 'tableId']),
+    showColumnModal: state.ui.column.showModal,
+    editMode: state.ui.column.edit,
+    editData: state.ui.column.editData,
+    tableId: state.ui.column.tableId,
     tables: state.tables,
     columns: state.columns
 });

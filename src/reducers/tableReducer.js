@@ -1,18 +1,18 @@
-import { fromJS } from 'immutable';
+import update from 'immutability-helper';
 import * as types from '../actions';
 
-const initialState = fromJS([]);
+const initialState = [];
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.SAVE_TABLE:
-            return state.push(fromJS(action.data));
+            return update(state, { $push: [action.data] });
         case types.REMOVE_TABLE:
-            return state.filter((table) => table.get('id') !== action.id);
+            return state.filter((table) => table.id !== action.id);
         case types.UPDATE_TABLE:
             return state.map((table) => {
-                if (table.get('id') === action.data.id) {
-                    return fromJS(action.data);
+                if (table.id === action.data.id) {
+                    return action.data;
                 }
 
                 return table;

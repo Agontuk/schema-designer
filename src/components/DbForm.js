@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 class DbForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
-        const name = this.refs.dbname.value.trim();
+        const name = this.dbname.value.trim();
 
         if (!name) {
             return;
@@ -21,7 +21,7 @@ class DbForm extends Component {
                     <form onSubmit={ this.handleSubmit }>
                         <input
                             className='form-control input-lg'
-                            ref='dbname'
+                            ref={ (dbname) => { this.dbname = dbname; } }
                             type='text'
                             placeholder='Enter database name'
                             defaultValue={ name }
