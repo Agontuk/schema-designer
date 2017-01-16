@@ -66,6 +66,10 @@ class ColumnModal extends Component {
         }, tableId, hideModal);
 
         this.form.reset();
+        this.setState({
+            isUnsigned: false,
+            foreignKeyEnabled: false
+        });
     }
 
     saveColumnAndExit = () => {
@@ -258,7 +262,7 @@ class ColumnModal extends Component {
                                 columns={ columns }
                                 tables={ tables }
                                 tableId={ tableId }
-                                editData={ editData.foreignKey }
+                                data={ editData.foreignKey }
                             /> : null
                         }
                     </form>
@@ -295,7 +299,17 @@ ColumnModal.propTypes = {
         unsigned: React.PropTypes.bool.isRequired,
         nullable: React.PropTypes.bool.isRequired,
         length: React.PropTypes.string.isRequired,
-        defValue: React.PropTypes.string.isRequired
+        defValue: React.PropTypes.string.isRequired,
+        foreignKey: React.PropTypes.shape({
+            references: React.PropTypes.shape({
+                id: React.PropTypes.string.isRequired,
+                name: React.PropTypes.string.isRequired
+            }).isRequired,
+            on: React.PropTypes.shape({
+                id: React.PropTypes.string.isRequired,
+                name: React.PropTypes.string.isRequired
+            }).isRequired
+        }).isRequired
     }).isRequired,
     tableId: PropTypes.string.isRequired,
     tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,

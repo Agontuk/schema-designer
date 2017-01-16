@@ -5,7 +5,7 @@ import { removeColumn, enableColumnEdit, toggleColumnModal } from '../actions';
 const mapStateToProps = (state, ownProps) => {
     const columns = state.columns[ownProps.tableId];
     return {
-        columns: columns || []
+        columns
     };
 };
 

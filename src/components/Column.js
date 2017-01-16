@@ -40,7 +40,17 @@ Column.propTypes = {
         unsigned: React.PropTypes.bool.isRequired,
         nullable: React.PropTypes.bool.isRequired,
         length: React.PropTypes.string.isRequired,
-        defValue: React.PropTypes.string.isRequired
+        defValue: React.PropTypes.string.isRequired,
+        foreignKey: React.PropTypes.shape({
+            references: React.PropTypes.shape({
+                id: React.PropTypes.string.isRequired,
+                name: React.PropTypes.string.isRequired
+            }).isRequired,
+            on: React.PropTypes.shape({
+                id: React.PropTypes.string.isRequired,
+                name: React.PropTypes.string.isRequired
+            }).isRequired
+        }).isRequired
     }).isRequired,
     tableId: PropTypes.string.isRequired,
     onRemoveColumn: PropTypes.func.isRequired,

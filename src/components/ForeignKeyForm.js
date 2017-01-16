@@ -1,28 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 
 class ForeignKeyForm extends Component {
-    // constructor(props) {
-    //     super(props);
-    //
-    //     const { editData } = props;
-    //     const tableId = editData.getIn(['foreignKey', 'on', 'id']) || '';
-    //     const tableName = editData.getIn(['foreignKey', 'on', 'name']) || '';
-    //     const columnId = editData.getIn(['foreignKey', 'references', 'id']) || '';
-    //     const columnName = editData.getIn(['foreignKey', 'references', 'name']) || '';
-    //
-    //     this.setState({
-    //         currentForeignTableId: tableId,
-    //         currentForeignTableName: tableName,
-    //         currentForeignColumnId: columnId,
-    //         currentForeignColumnName: columnName
-    //     });
-    // }
+    constructor(props) {
+        super(props);
 
-    state = {
-        currentForeignTableId: '',
-        currentForeignTableName: '',
-        currentForeignColumnId: '',
-        currentForeignColumnName: ''
+        const { data } = props;
+        const tableId = data.on.id;
+        const tableName = data.on.name;
+        const columnId = data.references.id;
+        const columnName = data.references.name;
+
+        this.state = {
+            currentForeignTableId: tableId,
+            currentForeignTableName: tableName,
+            currentForeignColumnId: columnId,
+            currentForeignColumnName: columnName
+        };
     }
 
     getData = () => {
@@ -33,18 +26,20 @@ class ForeignKeyForm extends Component {
             currentForeignTableName
         } = this.state;
 
+        let invalidData = false;
+
         if (!currentForeignTableId || !currentForeignColumnId) {
-            return false;
+            invalidData = true;
         }
 
         return {
             references: {
-                id: currentForeignColumnId,
-                name: currentForeignColumnName
+                id: invalidData ? '' : currentForeignColumnId,
+                name: invalidData ? '' : currentForeignColumnName
             },
             on: {
-                id: currentForeignTableId,
-                name: currentForeignTableName
+                id: invalidData ? '' : currentForeignTableId,
+                name: invalidData ? '' : currentForeignTableName
             }
         };
     }
@@ -86,7 +81,7 @@ class ForeignKeyForm extends Component {
     }
 
     render() {
-        const { tables, tableId, editData, columns } = this.props;
+        const { tables, tableId, data, columns } = this.props;
         const { currentForeignTableId } = this.state;
 
         return (
@@ -96,7 +91,7 @@ class ForeignKeyForm extends Component {
                 <div className='col-xs-3'>
                     <select
                         className='form-control'
-                        defaultValue={ editData.references.id }
+                        defaultValue={ data.references.id }
                         onChange={ this.setCurrentForeignColumn }
                     >
                         <option value=''>None</option>
@@ -114,7 +109,7 @@ class ForeignKeyForm extends Component {
                 <div className='col-xs-3'>
                     <select
                         className='form-control'
-                        defaultValue={ editData.on.id }
+                        defaultValue={ data.on.id }
                         onChange={ this.setCurrentForeignTable }
                     >
                         <option value=''>None</option>
@@ -136,7 +131,16 @@ ForeignKeyForm.propTypes = {
     tableId: PropTypes.string.isRequired,
     tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     columns: PropTypes.objectOf(React.PropTypes.array).isRequired,
-    editData: PropTypes.object.isRequired
+    data: React.PropTypes.shape({
+        references: React.PropTypes.shape({
+            id: React.PropTypes.string.isRequired,
+            name: React.PropTypes.string.isRequired
+        }).isRequired,
+        on: React.PropTypes.shape({
+            id: React.PropTypes.string.isRequired,
+            name: React.PropTypes.string.isRequired
+        }).isRequired
+    }).isRequired
 };
 
 export default ForeignKeyForm;

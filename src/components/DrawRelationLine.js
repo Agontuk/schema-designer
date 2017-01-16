@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 
 class DrawRelationLine extends Component {
     componentDidMount() {
-        window.jsPlumb.Defaults.Connector = ['Flowchart', { cornerRadius: 5 }];
-        window.jsPlumb.Defaults.Anchor = 'Continuous';
-        window.jsPlumb.Defaults.ConnectionsDetachable = false;
-        window.jsPlumb.Defaults.PaintStyle = { strokeWidth: 6, stroke: '#445566' };
-        window.jsPlumb.Defaults.EndpointStyle = { fillStyle: '#445566' };
+        window.jsPlumb.importDefaults({
+            Connector: ['Flowchart', { cornerRadius: 5 }],
+            Anchor: 'Continuous',
+            ConnectionsDetachable: false,
+            PaintStyle: { strokeWidth: 6, stroke: '#445566' },
+            EndpointStyle: { fillStyle: '#445566' }
+        });
     }
 
     componentDidUpdate() {
@@ -19,8 +21,8 @@ class DrawRelationLine extends Component {
 
             relations.forEach((relation) => {
                 window.jsPlumb.connect({
-                    source: relation.get('source'),
-                    target: relation.get('target'),
+                    source: relation.source,
+                    target: relation.target,
                     // overlays: [
                     //     'Arrow',
                     //     ['Label', { label: '1', location: 0.1, cssClass: 'one' }],

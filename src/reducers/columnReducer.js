@@ -39,18 +39,13 @@ export default (state = initialState, action) => {
                 data[key] = columns;
             });
 
-            return data;
-            // const newState = state.map((table) => table.map((column) => {
-            //     const referenceId = column.getIn(['foreignKey', 'references', 'id']);
-            //
-            //     if (referenceId === action.columnData.id) {
-            //         return column.delete('foreignKey');
-            //     }
-            //
-            //     return column;
-            // }));
-            //
-            // return newState.deleteIn([action.tableId, action.columnData.id]);
+            return update(data, {
+                [action.tableId]: {
+                    $apply: (columns) => (
+                        columns.filter((column) => column.id !== action.columnData.id)
+                    )
+                }
+            });
         }
         case types.UPDATE_COLUMN: {
             const data = state[action.tableId].map((column) => {
