@@ -1,9 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import createLogger from 'redux-logger';
 import Reducers from '../reducers';
+import LocalStorageMiddleware from './LocalStorageMiddleware';
 
 const logger = createLogger();
-const middleware = [];
+const middleware = [LocalStorageMiddleware];
 
 let extension = (next) => next;
 
@@ -12,7 +13,11 @@ if (process.env.NODE_ENV !== 'production') {
     extension = window.devToolsExtension ? window.devToolsExtension() : extension;
 }
 
-const store = createStore(Reducers, {}, compose(applyMiddleware(...middleware), extension));
+// Check if state is stored in localStorage
+let initialState = window.localStorage.getItem('schema');
+initialState = initialState ? JSON.parse(initialState) : {};
+
+const store = createStore(Reducers, initialState, compose(applyMiddleware(...middleware), extension));
 
 if (module.hot) {
     // Enable Webpack hot module replacement for reducers

@@ -10,9 +10,16 @@ class DrawRelationLine extends Component {
             PaintStyle: { strokeWidth: 6, stroke: '#445566' },
             EndpointStyle: { fillStyle: '#445566' }
         });
+
+        // Needed for initial render from localStorage
+        this.drawRelation();
     }
 
     componentDidUpdate() {
+        this.drawRelation();
+    }
+
+    drawRelation = () => {
         const { relations } = this.props;
 
         window.jsPlumb.ready(() => {

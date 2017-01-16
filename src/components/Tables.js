@@ -2,6 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import Table from './Table';
 
 class Tables extends Component {
+    componentDidMount() {
+        // Needed for initial render from localStorage
+        window.jsPlumb.ready(() => {
+            window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'));
+        });
+    }
+
     componentDidUpdate(prevProps) {
         const { tables, storeTablePosition } = this.props;
 
