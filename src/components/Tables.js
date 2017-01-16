@@ -4,30 +4,34 @@ import Table from './Table';
 class Tables extends Component {
     componentDidMount() {
         // Needed for initial render from localStorage
-        window.jsPlumb.ready(() => {
-            window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'));
-        });
+        this.makeTablesDraggable();
     }
 
     componentDidUpdate(prevProps) {
-        const { tables, storeTablePosition } = this.props;
+        const { tables } = this.props;
 
         if (tables.length !== prevProps.tables.length) {
             // New tables available, make all tables draggable
-            window.jsPlumb.ready(() => {
-                window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
-                    stop: (event) => {
-                        const newPos = {
-                            id: event.el.id,
-                            x: event.finalPos[0],
-                            y: event.finalPos[1]
-                        };
-
-                        storeTablePosition(newPos);
-                    }
-                });
-            });
+            this.makeTablesDraggable();
         }
+    }
+
+    makeTablesDraggable = () => {
+        const { storeTablePosition } = this.props;
+
+        window.jsPlumb.ready(() => {
+            window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
+                stop: (event) => {
+                    const newPos = {
+                        id: event.el.id,
+                        x: event.finalPos[0],
+                        y: event.finalPos[1]
+                    };
+
+                    storeTablePosition(newPos);
+                }
+            });
+        });
     }
 
     render() {

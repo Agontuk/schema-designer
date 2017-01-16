@@ -41,6 +41,11 @@ class ColumnModal extends Component {
             return false;
         }
 
+        this.setState({
+            isUnsigned: false,
+            foreignKeyEnabled: false
+        });
+
         return {
             name, type, length, defValue, comment, autoInc, nullable, unique, index, unsigned, foreignKey
         };
