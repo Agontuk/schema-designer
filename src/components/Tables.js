@@ -3,12 +3,22 @@ import Table from './Table';
 
 class Tables extends Component {
     componentDidUpdate(prevProps) {
-        const { tables } = this.props;
+        const { tables, storeTablePosition } = this.props;
 
         if (tables.length !== prevProps.tables.length) {
             // New tables available, make all tables draggable
             window.jsPlumb.ready(() => {
-                window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'));
+                window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
+                    stop: (event) => {
+                        const newPos = {
+                            id: event.el.id,
+                            x: event.finalPos[0],
+                            y: event.finalPos[1]
+                        };
+
+                        storeTablePosition(newPos);
+                    }
+                });
             });
         }
     }
@@ -36,7 +46,8 @@ Tables.propTypes = {
     tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     removeTable: PropTypes.func.isRequired,
     editTable: PropTypes.func.isRequired,
-    toggleColumnModal: PropTypes.func.isRequired
+    toggleColumnModal: PropTypes.func.isRequired,
+    storeTablePosition: PropTypes.func.isRequired
 };
 
 export default Tables;

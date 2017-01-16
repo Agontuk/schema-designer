@@ -21,7 +21,11 @@ class Table extends Component {
         const { data } = this.props;
 
         return (
-            <div className='db-table draggable' id={ data.id }>
+            <div
+                className='db-table draggable'
+                id={ data.id }
+                style={ { left: data.position.x, top: data.position.y } }
+            >
                 <div className='table-header clearfix'>
                     <h4 className='pull-left'>{ data.name }</h4>
                     <div className='pull-right'>

@@ -22,6 +22,7 @@ export const ENABLE_COLUMN_EDIT = 'ENABLE_COLUMN_EDIT';
 export const UPDATE_COLUMN = 'UPDATE_COLUMN';
 export const SAVE_FOREIGN_KEY_RELATION = 'SAVE_FOREIGN_KEY_RELATION';
 export const UPDATE_FOREIGN_KEY_RELATION = 'UPDATE_FOREIGN_KEY_RELATION';
+export const STORE_TABLE_POSITION = 'STORE_TABLE_POSITION';
 
 // Action creators
 export const saveDbName = makeActionCreator(SAVE_DB_NAME, 'name');
@@ -37,3 +38,4 @@ export const enableColumnEdit = makeActionCreator(ENABLE_COLUMN_EDIT, 'data', 't
 export const updateColumn = makeActionCreator(UPDATE_COLUMN, 'data', 'tableId');
 export const saveForeignKeyRelation = makeActionCreator(SAVE_FOREIGN_KEY_RELATION, 'columnData', 'tableId');
 export const updateForeignKeyRelation = makeActionCreator(UPDATE_FOREIGN_KEY_RELATION, 'columnData', 'tableId');
+export const storeTablePosition = makeActionCreator(STORE_TABLE_POSITION, 'newPos');

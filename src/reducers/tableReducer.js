@@ -6,13 +6,38 @@ const initialState = [];
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.SAVE_TABLE:
-            return update(state, { $push: [action.data] });
+            return update(state, {
+                $push: [{
+                    ...action.data,
+                    position: {
+                        x: 0,
+                        y: 0
+                    }
+                }]
+            });
         case types.REMOVE_TABLE:
             return state.filter((table) => table.id !== action.id);
         case types.UPDATE_TABLE:
             return state.map((table) => {
                 if (table.id === action.data.id) {
-                    return action.data;
+                    return {
+                        ...table,
+                        ...action.data
+                    };
+                }
+
+                return table;
+            });
+        case types.STORE_TABLE_POSITION:
+            return state.map((table) => {
+                if (table.id === action.newPos.id) {
+                    return {
+                        ...table,
+                        position: {
+                            x: action.newPos.x,
+                            y: action.newPos.y
+                        }
+                    };
                 }
 
                 return table;
