@@ -1,31 +1,36 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import classnames from 'classnames';
+import findIndex from 'lodash/findIndex';
 import ForeignKeyForm from './ForeignKeyForm';
 
 class ColumnModal extends Component {
     state = {
         isUnsigned: false,
-        foreignKeyEnabled: false
+        foreignKeyEnabled: false,
+        duplicateName: false
     }
 
     getFormData = () => {
-        const name = this.name.value.trim();
-        const type = this.type.value;
-        const length = this.length.value.trim();
-        const defValue = this.defValue.value.trim();
-        const comment = this.comment.value.trim();
-        const autoInc = this.autoInc.checked;
-        const nullable = this.nullable.checked;
-        const unique = this.unique.checked;
-        const index = this.index.checked;
-        const unsigned = this.unsigned.checked;
-        let foreignKey = this.foreignKey;
+        const data = {
+            name: this.name.value.trim(),
+            type: this.type.value,
+            length: this.length.value.trim(),
+            defValue: this.defValue.value.trim(),
+            comment: this.comment.value.trim(),
+            autoInc: this.autoInc.checked,
+            nullable: this.nullable.checked,
+            unique: this.unique.checked,
+            index: this.index.checked,
+            unsigned: this.unsigned.checked
+        };
+
+        const foreignKey = this.foreignKey;
 
         if (foreignKey) {
-            foreignKey = foreignKey.getData();
+            data.foreignKey = foreignKey.getData();
         } else {
-            foreignKey = {
+            data.foreignKey = {
                 references: {
                     id: '',
                     name: ''
@@ -37,18 +42,26 @@ class ColumnModal extends Component {
             };
         }
 
-        if (!name) {
+        if (!data.name) {
+            return false;
+        }
+
+        const { tableId, columns } = this.props;
+        const duplicate = findIndex(columns[tableId], (column) => column.name === data.name);
+
+        if (duplicate !== -1) {
+            // Duplicate column name
+            this.setState({ duplicateName: true });
             return false;
         }
 
         this.setState({
             isUnsigned: false,
-            foreignKeyEnabled: false
+            foreignKeyEnabled: false,
+            duplicateName: false
         });
 
-        return {
-            name, type, length, defValue, comment, autoInc, nullable, unique, index, unsigned, foreignKey
-        };
+        return data;
     }
 
     handleSubmit = (event) => {
@@ -71,10 +84,6 @@ class ColumnModal extends Component {
         }, tableId, hideModal);
 
         this.form.reset();
-        this.setState({
-            isUnsigned: false,
-            foreignKeyEnabled: false
-        });
     }
 
     saveColumnAndExit = () => {
@@ -112,7 +121,7 @@ class ColumnModal extends Component {
 
     render() {
         const { showColumnModal, toggleColumnModal, editData, editMode, tables, tableId, columns } = this.props;
-        const { isUnsigned, foreignKeyEnabled } = this.state;
+        const { isUnsigned, foreignKeyEnabled, duplicateName } = this.state;
 
         return (
             <Modal
@@ -134,7 +143,7 @@ class ColumnModal extends Component {
                         ref={ (form) => { this.form = form; } }
                         onSubmit={ this.handleSubmit }
                     >
-                        <div className='form-group'>
+                        <div className={ classnames('form-group', { 'has-error': duplicateName }) }>
                             <label className='col-xs-3 control-label' htmlFor='name'>Name:</label>
                             <div className='col-xs-9'>
                                 <input
@@ -146,6 +155,12 @@ class ColumnModal extends Component {
                                     autoFocus
                                 />
                             </div>
+
+                            { duplicateName ?
+                                <span className='col-xs-offset-3 col-xs-9 help-block'>
+                                    Duplicate column name
+                                </span> : null
+                            }
                         </div>
                         <div className='form-group'>
                             <label className='col-xs-3 control-label' htmlFor='type'>Type:</label>
