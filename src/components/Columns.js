@@ -3,9 +3,9 @@ import Column from './Column';
 
 class Columns extends Component {
     render() {
-        const { columns, tableId, removeColumn, editColumn } = this.props;
+        const { columns, table, removeColumn, editColumn } = this.props;
 
-        if (columns.length === 0) {
+        if (columns.length === 0 && !table.softDelete && !table.timeStamp) {
             return null;
         }
 
@@ -15,11 +15,25 @@ class Columns extends Component {
                     <Column
                         key={ column.id }
                         data={ column }
-                        tableId={ tableId }
+                        tableId={ table.id }
                         onRemoveColumn={ removeColumn }
                         onEditColumn={ editColumn }
                     />
                 ))}
+
+                { table.softDelete ?
+                    <li className='clearfix'>
+                        <div className='pull-left'>softDelete</div>
+                    </li>
+                : null
+                }
+
+                { table.timeStamp ?
+                    <li className='clearfix'>
+                        <div className='pull-left'>timeStamps</div>
+                    </li>
+                : null
+                }
             </ul>
         );
     }
@@ -27,7 +41,12 @@ class Columns extends Component {
 
 Columns.propTypes = {
     columns: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    tableId: PropTypes.string.isRequired,
+    table: PropTypes.shape({
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        softDelete: React.PropTypes.bool.isRequired,
+        timeStamp: React.PropTypes.bool.isRequired
+    }).isRequired,
     removeColumn: PropTypes.func.isRequired,
     editColumn: PropTypes.func.isRequired
 };

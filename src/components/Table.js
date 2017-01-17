@@ -35,7 +35,7 @@ class Table extends Component {
                     </div>
                 </div>
 
-                <Columns tableId={ data.id } />
+                <Columns table={ data } />
             </div>
         );
     }

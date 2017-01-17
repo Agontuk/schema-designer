@@ -3,7 +3,7 @@ import Columns from '../components/Columns';
 import { removeColumn, enableColumnEdit, toggleColumnModal } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    columns: state.columns[ownProps.tableId]
+    columns: state.columns[ownProps.table.id]
 });
 
 const mapDispatchToProps = (dispatch) => ({

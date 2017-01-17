@@ -9,7 +9,7 @@ const initialState = {
             id: '',
             name: '',
             softDelete: false,
-            timeStamp: false
+            timeStamp: true
         }
     },
     column: {
