@@ -108,6 +108,13 @@ class ColumnModal extends Component {
         }
     }
 
+    toggleColumnModal = () => {
+        // Reset duplicateName state
+        this.setState({ duplicateName: false });
+
+        this.props.toggleColumnModal();
+    }
+
     updateUnsignedValue = (event) => {
         this.setState({
             isUnsigned: event.target.checked,
@@ -120,16 +127,16 @@ class ColumnModal extends Component {
     }
 
     render() {
-        const { showColumnModal, toggleColumnModal, editData, editMode, tables, tableId, columns } = this.props;
+        const { showColumnModal, editData, editMode, tables, tableId, columns } = this.props;
         const { isUnsigned, foreignKeyEnabled, duplicateName } = this.state;
 
         return (
             <Modal
                 show={ showColumnModal }
-                onHide={ toggleColumnModal }
+                onHide={ this.toggleColumnModal }
             >
                 <Modal.Header>
-                    <button type='button' className='close' onClick={ toggleColumnModal }>
+                    <button type='button' className='close' onClick={ this.toggleColumnModal }>
                         <span>&times;</span>
                     </button>
                     <Modal.Title>
@@ -298,7 +305,7 @@ class ColumnModal extends Component {
                     <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndExit }>
                         { editMode ? 'Update Column' : 'Save & Exit' }
                     </button>
-                    <button type='button' className='btn btn-default' onClick={ toggleColumnModal }>Cancel</button>
+                    <button type='button' className='btn btn-default' onClick={ this.toggleColumnModal }>Cancel</button>
                 </Modal.Footer>
             </Modal>
         );
