@@ -2,12 +2,9 @@ import { connect } from 'react-redux';
 import Columns from '../components/Columns';
 import { removeColumn, enableColumnEdit, toggleColumnModal } from '../actions';
 
-const mapStateToProps = (state, ownProps) => {
-    const columns = state.columns[ownProps.tableId];
-    return {
-        columns
-    };
-};
+const mapStateToProps = (state, ownProps) => ({
+    columns: state.columns[ownProps.tableId]
+});
 
 const mapDispatchToProps = (dispatch) => ({
     removeColumn: (columnData, tableId) => {
