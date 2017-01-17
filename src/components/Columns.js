@@ -24,15 +24,13 @@ class Columns extends Component {
                 { table.softDelete ?
                     <li className='clearfix'>
                         <div className='pull-left'>softDelete</div>
-                    </li>
-                : null
+                    </li> : null
                 }
 
                 { table.timeStamp ?
                     <li className='clearfix'>
                         <div className='pull-left'>timeStamps</div>
-                    </li>
-                : null
+                    </li> : null
                 }
             </ul>
         );

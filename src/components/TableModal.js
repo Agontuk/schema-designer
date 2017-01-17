@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
+import classnames from 'classnames';
+import findIndex from 'lodash/findIndex';
 
 class TableModal extends Component {
+    state = {
+        duplicateName: false
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -13,7 +19,15 @@ class TableModal extends Component {
             return;
         }
 
-        const { saveTable, updateTable, editMode, editData } = this.props;
+        const { saveTable, updateTable, editMode, editData, tables } = this.props;
+
+        const duplicate = findIndex(tables, (table) => table.name === name);
+
+        if (duplicate !== -1) {
+            // Duplicate table name
+            this.setState({ duplicateName: true });
+            return;
+        }
 
         if (editMode) {
             updateTable({
@@ -30,19 +44,30 @@ class TableModal extends Component {
                 timeStamp
             });
         }
+
+        // Reset state
+        this.setState({ duplicateName: false });
+    }
+
+    toggleTableModal = () => {
+        // Reset state
+        this.setState({ duplicateName: false });
+
+        this.props.toggleTableModal();
     }
 
     render() {
-        const { showTableModal, toggleTableModal, editData, editMode } = this.props;
+        const { showTableModal, editData, editMode } = this.props;
+        const { duplicateName } = this.state;
 
         return (
             <Modal
                 show={ showTableModal }
-                onHide={ toggleTableModal }
+                onHide={ this.toggleTableModal }
                 dialogClassName='modal-sm'
             >
                 <Modal.Header>
-                    <button type='button' className='close' onClick={ toggleTableModal }>
+                    <button type='button' className='close' onClick={ this.toggleTableModal }>
                         <span>&times;</span>
                     </button>
                     <Modal.Title>
@@ -52,7 +77,7 @@ class TableModal extends Component {
 
                 <Modal.Body>
                     <form className='form-horizontal' onSubmit={ this.handleSubmit }>
-                        <div className='form-group'>
+                        <div className={ classnames('form-group', { 'has-error': duplicateName }) }>
                             <label className='col-xs-2 control-label' htmlFor='name'>Name:</label>
                             <div className='col-xs-10'>
                                 <input
@@ -64,6 +89,12 @@ class TableModal extends Component {
                                     autoFocus
                                 />
                             </div>
+
+                            { duplicateName ?
+                                <span className='col-xs-offset-2 col-xs-10 help-block'>
+                                    Duplicate table name
+                                </span> : null
+                            }
                         </div>
                         <div className='checkbox'>
                             <label htmlFor='softdelete'>
@@ -98,7 +129,7 @@ class TableModal extends Component {
                     <button
                         type='button'
                         className='btn btn-primary'
-                        onClick={ toggleTableModal }
+                        onClick={ this.toggleTableModal }
                     >Cancel
                     </button>
                 </Modal.Footer>
@@ -116,6 +147,7 @@ TableModal.propTypes = {
         softDelete: React.PropTypes.bool.isRequired,
         timeStamp: React.PropTypes.bool.isRequired
     }).isRequired,
+    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
     toggleTableModal: PropTypes.func.isRequired,
     saveTable: PropTypes.func.isRequired,
     updateTable: PropTypes.func.isRequired

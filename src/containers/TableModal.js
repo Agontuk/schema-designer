@@ -5,7 +5,8 @@ import { saveTable, toggleTableModal, updateTable } from '../actions';
 const mapStateToProps = (state) => ({
     showTableModal: state.ui.table.showModal,
     editMode: state.ui.table.edit,
-    editData: state.ui.table.editData
+    editData: state.ui.table.editData,
+    tables: state.tables
 });
 
 const mapDispatchToProps = (dispatch) => ({
