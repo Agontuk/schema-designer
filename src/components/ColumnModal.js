@@ -54,13 +54,16 @@ class ColumnModal extends Component {
             return false;
         }
 
-        const { tableId, columns } = this.props;
-        const duplicate = findIndex(columns[tableId], (column) => column.name === data.name);
+        const { tableId, columns, editMode } = this.props;
 
-        if (duplicate !== -1) {
-            // Duplicate column name
-            this.setState({ duplicateName: true });
-            return false;
+        if (!editMode) {
+            const duplicate = findIndex(columns[tableId], (column) => column.name === data.name);
+
+            if (duplicate !== -1) {
+                // Duplicate column name
+                this.setState({ duplicateName: true });
+                return false;
+            }
         }
 
         this.setState({
@@ -207,7 +210,9 @@ class ColumnModal extends Component {
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-3 control-label' htmlFor='defVal'>Default Value:</label>
+                            <label className='col-xs-3 control-label' htmlFor='defVal'>
+                                Default Value:
+                            </label>
                             <div className='col-xs-9'>
                                 <input
                                     type='text'
@@ -305,15 +310,23 @@ class ColumnModal extends Component {
 
                 <Modal.Footer className='modal-footer text-right'>
                     { !editMode ?
-                        <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndContinue }>
-                            Save &amp; Continue
+                        <button
+                            type='button'
+                            className='btn btn-primary'
+                            onClick={ this.saveColumnAndContinue }
+                        >Save &amp; Continue
                         </button> : null
                     }
 
                     <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndExit }>
                         { editMode ? 'Update Column' : 'Save & Exit' }
                     </button>
-                    <button type='button' className='btn btn-default' onClick={ this.toggleColumnModal }>Cancel</button>
+                    <button
+                        type='button'
+                        className='btn btn-default'
+                        onClick={ this.toggleColumnModal }
+                    >Cancel
+                    </button>
                 </Modal.Footer>
             </Modal>
         );
