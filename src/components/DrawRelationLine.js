@@ -22,21 +22,20 @@ class DrawRelationLine extends Component {
         const { relations } = this.props;
 
         window.jsPlumb.ready(() => {
-            relations.forEach((relation) => {
-                const isConnected = document.getElementById(relation.source).className.match(/jtk-connected/);
+            // Reset all endpoints and connections
+            window.jsPlumb.reset();
 
-                if (!isConnected) {
-                    window.jsPlumb.connect({
-                        source: relation.source,
-                        target: relation.target,
-                        overlays: [
-                            ['Arrow', { location: 1 }]
-                        ],
-                        endpoints: ['Dot', 'Blank'],
-                        paintStyle: { stroke: '#75624e', strokeWidth: 2 },
-                        endpointStyle: { fillStyle: '#75624e' }
-                    });
-                }
+            relations.forEach((relation) => {
+                window.jsPlumb.connect({
+                    source: relation.source.columnId,
+                    target: relation.target.columnId,
+                    overlays: [
+                        ['Arrow', { location: 1 }]
+                    ],
+                    endpoints: ['Dot', 'Blank'],
+                    paintStyle: { stroke: '#75624e', strokeWidth: 2 },
+                    endpointStyle: { fillStyle: '#75624e' }
+                });
             });
         });
     }

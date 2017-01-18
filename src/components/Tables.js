@@ -21,6 +21,10 @@ class Tables extends Component {
 
         window.jsPlumb.ready(() => {
             window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
+                drag: () => {
+                    // Repaint all the connections
+                    window.jsPlumb.repaintEverything();
+                },
                 stop: (event) => {
                     const newPos = {
                         id: event.el.id,

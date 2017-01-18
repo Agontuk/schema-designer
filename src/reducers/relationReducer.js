@@ -7,65 +7,26 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case types.REMOVE_TABLE:
             // Drop all associated relations for this table
-            return state.filter((relation) => (relation.data.on.id !== action.id));
-        case types.UPDATE_TABLE: {
-            // Update table name in foreign key data for each relation
-            // which references this table
-            return state.map((relation) => {
-                const foreignKey = relation.data;
-
-                if (foreignKey.on.id === action.data.id) {
-                    return update(relation, {
-                        data: {
-                            on: {
-                                name: {
-                                    $set: action.data.name
-                                }
-                            }
-                        }
-                    });
-                }
-
-                return relation;
-            });
-        }
+            return state.filter((relation) => (relation.source.tableId !== action.id) &&
+                relation.target.tableId !== action.id);
         case types.REMOVE_COLUMN: {
             // Drop all associated relations for this column
-            const foreignColumnId = action.columnData.foreignKey.references.id;
+            const columnId = action.columnData.id;
 
-            return state.filter((relation) => (relation.source !== foreignColumnId &&
-                relation.target !== foreignColumnId));
-        }
-        case types.UPDATE_COLUMN: {
-            // Update column name in foreign key data for each relation
-            // which references this column
-            return state.map((relation) => {
-                const foreignKey = relation.data;
-
-                if (foreignKey.references.id === action.data.id) {
-                    return update(relation, {
-                        data: {
-                            references: {
-                                name: {
-                                    $set: action.data.name
-                                }
-                            }
-                        }
-                    });
-                }
-
-                return relation;
-            });
+            return state.filter((relation) => (relation.source.columnId !== columnId &&
+                relation.target.columnId !== columnId));
         }
         case types.SAVE_FOREIGN_KEY_RELATION:
             if (action.columnData.foreignKey.on.id) {
                 return update(state, {
                     $push: [{
-                        source: action.columnData.id,
-                        target: action.columnData.foreignKey.references.id,
-                        data: {
-                            referrer: action.columnData.id,
-                            ...action.columnData.foreignKey
+                        source: {
+                            columnId: action.columnData.id,
+                            tableId: action.tableId
+                        },
+                        target: {
+                            columnId: action.columnData.foreignKey.references.id,
+                            tableId: action.columnData.foreignKey.on.id
                         }
                     }]
                 });
@@ -78,16 +39,17 @@ export default (state = initialState, action) => {
             if (foreignKey.on.id) {
                 let matched = false;
                 const newState = state.map((relation) => {
-                    if (relation.data.referrer === action.columnData.id) {
+                    if (relation.source.columnId === action.columnData.id) {
                         // Relation exists, so update it
                         matched = true;
                         return {
-                            ...relation,
-                            source: action.tableId,
-                            target: foreignKey.on.id,
-                            data: {
-                                referrer: action.columnData.id,
-                                ...foreignKey
+                            source: {
+                                columnId: action.columnData.id,
+                                tableId: action.tableId
+                            },
+                            target: {
+                                columnId: action.columnData.foreignKey.references.id,
+                                tableId: action.columnData.foreignKey.on.id
                             }
                         };
                     }
@@ -101,18 +63,20 @@ export default (state = initialState, action) => {
 
                 return update(state, {
                     $push: [{
-                        source: action.tableId,
-                        target: foreignKey.on.id,
-                        data: {
-                            referrer: action.columnData.id,
-                            ...foreignKey
+                        source: {
+                            columnId: action.columnData.id,
+                            tableId: action.tableId
+                        },
+                        target: {
+                            columnId: action.columnData.foreignKey.references.id,
+                            tableId: action.columnData.foreignKey.on.id
                         }
                     }]
                 });
             }
 
             // Remove any relation referred by the current column
-            return state.filter((relation) => (relation.data.referrer !== action.columnData.id));
+            return state.filter((relation) => (relation.source.columnId !== action.columnData.id));
         }
         default:
             return state;
