@@ -11,6 +11,14 @@ class ColumnModal extends Component {
         duplicateName: false
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            isUnsigned: nextProps.editData.unsigned,
+            foreignKeyEnabled: !!nextProps.editData.foreignKey.on.id,
+            duplicateName: false
+        });
+    }
+
     getFormData = () => {
         const data = {
             name: this.name.value.trim(),
