@@ -7,8 +7,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case types.REMOVE_TABLE:
             // Drop all associated relations for this table
-            return state.filter((relation) => (relation.source !== action.id &&
-                relation.target !== action.id));
+            return state.filter((relation) => (relation.data.on.id !== action.id));
         case types.UPDATE_TABLE: {
             // Update table name in foreign key data for each relation
             // which references this table
@@ -32,18 +31,10 @@ export default (state = initialState, action) => {
         }
         case types.REMOVE_COLUMN: {
             // Drop all associated relations for this column
-            const foreignKey = action.columnData.foreignKey;
-            const currentTableId = action.tableId;
-            const foreignTableId = foreignKey.on.id;
+            const foreignColumnId = action.columnData.foreignKey.references.id;
 
-            if (foreignTableId) {
-                return state.filter((relation) => (relation.source !== currentTableId &&
-                    relation.target !== foreignTableId));
-            }
-
-            // Remove relations which reference this column
-            return state.filter((relation) => (relation.data.on.id !== currentTableId &&
-                    relation.data.references.id !== action.columnData.id));
+            return state.filter((relation) => (relation.source !== foreignColumnId &&
+                relation.target !== foreignColumnId));
         }
         case types.UPDATE_COLUMN: {
             // Update column name in foreign key data for each relation
@@ -70,8 +61,8 @@ export default (state = initialState, action) => {
             if (action.columnData.foreignKey.on.id) {
                 return update(state, {
                     $push: [{
-                        source: action.tableId,
-                        target: action.columnData.foreignKey.on.id,
+                        source: action.columnData.id,
+                        target: action.columnData.foreignKey.references.id,
                         data: {
                             referrer: action.columnData.id,
                             ...action.columnData.foreignKey

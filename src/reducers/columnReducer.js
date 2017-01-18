@@ -57,8 +57,19 @@ export default (state = initialState, action) => {
                     const foreignKey = column.foreignKey;
 
                     if (foreignKey.references.id === action.columnData.id) {
-                        const { foreign, ...rest } = column; // eslint-disable-line no-unused-vars
-                        return rest;
+                        return {
+                            ...column,
+                            foreignKey: {
+                                references: {
+                                    id: '',
+                                    name: ''
+                                },
+                                on: {
+                                    id: '',
+                                    name: ''
+                                }
+                            }
+                        };
                     }
 
                     return column;

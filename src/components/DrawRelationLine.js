@@ -5,10 +5,9 @@ class DrawRelationLine extends Component {
     componentDidMount() {
         window.jsPlumb.importDefaults({
             Connector: ['Flowchart', { cornerRadius: 5 }],
-            Anchor: 'Continuous',
+            Anchor: ['Continuous', { faces: ['left', 'right'] }],
             ConnectionsDetachable: false,
-            PaintStyle: { strokeWidth: 6, stroke: '#445566' },
-            EndpointStyle: { fillStyle: '#445566' }
+            Container: document.body
         });
 
         // Needed for initial render from localStorage
@@ -23,21 +22,21 @@ class DrawRelationLine extends Component {
         const { relations } = this.props;
 
         window.jsPlumb.ready(() => {
-            // Reset all endpoint & connections first
-            window.jsPlumb.reset();
-
             relations.forEach((relation) => {
-                window.jsPlumb.connect({
-                    source: relation.source,
-                    target: relation.target,
-                    // overlays: [
-                    //     'Arrow',
-                    //     ['Label', { label: '1', location: 0.1, cssClass: 'one' }],
-                    //     ['Label', { label: '&infin;', location: 0.9, cssClass: 'many' }]
-                    // ],
-                    paintStyle: { stroke: '#75624e', strokeWidth: 6 },
-                    endpointStyle: { fillStyle: '#75624e' }
-                });
+                const isConnected = document.getElementById(relation.source).className.match(/jtk-connected/);
+
+                if (!isConnected) {
+                    window.jsPlumb.connect({
+                        source: relation.source,
+                        target: relation.target,
+                        overlays: [
+                            ['Arrow', { location: 1 }]
+                        ],
+                        endpoints: ['Dot', 'Blank'],
+                        paintStyle: { stroke: '#75624e', strokeWidth: 2 },
+                        endpointStyle: { fillStyle: '#75624e' }
+                    });
+                }
             });
         });
     }

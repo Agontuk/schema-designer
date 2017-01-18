@@ -15,7 +15,7 @@ class Column extends Component {
         const { data } = this.props;
 
         return (
-            <li className='clearfix'>
+            <li className='clearfix' id={ data.id }>
                 <div className='pull-left'>
                     { data.name }<span>({ data.type })</span>
                 </div>
