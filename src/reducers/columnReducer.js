@@ -15,6 +15,34 @@ export default (state = initialState, action) => {
             const { [action.id]: omit, ...rest } = state; // eslint-disable-line no-unused-vars
             return rest;
         }
+        case types.UPDATE_TABLE: {
+            // Update table name in foreign key data for each column
+            // which references this table
+            const data = {};
+            Object.keys(state).forEach((key) => {
+                const columns = state[key].map((column) => {
+                    const foreignKey = column.foreignKey;
+
+                    if (foreignKey.on.id === action.data.id) {
+                        return update(column, {
+                            foreignKey: {
+                                on: {
+                                    name: {
+                                        $set: action.data.name
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    return column;
+                });
+
+                data[key] = columns;
+            });
+
+            return data;
+        }
         case types.SAVE_COLUMN:
             return update(state, {
                 [action.tableId]: {
@@ -28,7 +56,7 @@ export default (state = initialState, action) => {
                 const columns = state[key].map((column) => {
                     const foreignKey = column.foreignKey;
 
-                    if (foreignKey && foreignKey.references.id === action.columnData.id) {
+                    if (foreignKey.references.id === action.columnData.id) {
                         const { foreign, ...rest } = column; // eslint-disable-line no-unused-vars
                         return rest;
                     }

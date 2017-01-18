@@ -9,6 +9,27 @@ export default (state = initialState, action) => {
             // Drop all associated relations for this table
             return state.filter((relation) => (relation.source !== action.id &&
                 relation.target !== action.id));
+        case types.UPDATE_TABLE: {
+            // Update table name in foreign key data for each relation
+            // which references this table
+            return state.map((relation) => {
+                const foreignKey = relation.data;
+
+                if (foreignKey.on.id === action.data.id) {
+                    return update(relation, {
+                        data: {
+                            on: {
+                                name: {
+                                    $set: action.data.name
+                                }
+                            }
+                        }
+                    });
+                }
+
+                return relation;
+            });
+        }
         case types.REMOVE_COLUMN: {
             // Drop all associated relations for this column
             const foreignKey = action.columnData.foreignKey;
