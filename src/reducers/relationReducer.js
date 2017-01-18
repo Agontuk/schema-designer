@@ -45,6 +45,27 @@ export default (state = initialState, action) => {
             return state.filter((relation) => (relation.data.on.id !== currentTableId &&
                     relation.data.references.id !== action.columnData.id));
         }
+        case types.UPDATE_COLUMN: {
+            // Update column name in foreign key data for each relation
+            // which references this column
+            return state.map((relation) => {
+                const foreignKey = relation.data;
+
+                if (foreignKey.references.id === action.data.id) {
+                    return update(relation, {
+                        data: {
+                            references: {
+                                name: {
+                                    $set: action.data.name
+                                }
+                            }
+                        }
+                    });
+                }
+
+                return relation;
+            });
+        }
         case types.SAVE_FOREIGN_KEY_RELATION:
             if (action.columnData.foreignKey.on.id) {
                 return update(state, {
