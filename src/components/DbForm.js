@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Modal from 'react-bootstrap/lib/Modal';
 
 class DbForm extends Component {
     handleSubmit = (event) => {
@@ -16,8 +17,8 @@ class DbForm extends Component {
         const { name } = this.props;
 
         return (
-            <div className='container'>
-                <div className='form-group col-xs-6 col-xs-offset-3'>
+            <Modal show>
+                <Modal.Body>
                     <form onSubmit={ this.handleSubmit }>
                         <input
                             className='form-control input-lg'
@@ -28,8 +29,8 @@ class DbForm extends Component {
                             autoFocus
                         />
                     </form>
-                </div>
-            </div>
+                </Modal.Body>
+            </Modal>
         );
     }
 }

@@ -9,9 +9,10 @@
 .site-header h1 {
     margin: 0;
     font-family: 'Lobster', cursive;
+    color: darkslategrey;
 }
 
-.site-header .pull-right strong {
+.site-header .pull-right em {
     font-size: 1.6em;
     line-height: 2;
 }

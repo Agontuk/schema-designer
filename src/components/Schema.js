@@ -1,9 +1,15 @@
 import React, { PropTypes } from 'react';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
 import DbForm from './DbForm';
 import DrawRelationLine from './DrawRelationLine';
 import TableModal from '../containers/TableModal';
 import ColumnModal from '../containers/ColumnModal';
 import Tables from '../containers/Tables';
+
+const tooltip = (
+    <Tooltip id='tooltip'><strong>Create New Table</strong></Tooltip>
+);
 
 const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
     <div>
@@ -12,8 +18,10 @@ const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
                 <div className='container'>
                     <h1 className='pull-left'>Schema Builder</h1>
                     <div className='pull-right'>
-                        <strong>Database: { dbName }</strong>
-                        <span className='glyphicon glyphicon-plus' onClick={ toggleTableModal }></span>
+                        <em>Database: { dbName }</em>
+                        <OverlayTrigger placement='bottom' overlay={ tooltip }>
+                            <span className='glyphicon glyphicon-plus' onClick={ toggleTableModal }></span>
+                        </OverlayTrigger>
                     </div>
                 </div>
             </div>
