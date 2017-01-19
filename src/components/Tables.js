@@ -21,6 +21,7 @@ class Tables extends Component {
 
         window.jsPlumb.ready(() => {
             window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
+                containment: 'parent',
                 drag: () => {
                     // Repaint all the connections
                     window.jsPlumb.repaintEverything();
@@ -40,9 +41,14 @@ class Tables extends Component {
 
     render() {
         const { tables, removeTable, editTable, toggleColumnModal } = this.props;
+        // 80 is the height of site header
+        const height = document.documentElement.clientHeight - 80;
 
         return (
-            <div>
+            <div
+                className='table-wrapper'
+                style={ { height, maxHeight: height } }
+            >
                 { tables.map((table) => (
                     <Table
                         key={ table.id }

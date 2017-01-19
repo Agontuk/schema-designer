@@ -8,7 +8,7 @@ import Tables from '../containers/Tables';
 const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
     <div>
         { dbName ?
-            <div className='container text-center'>
+            <div className='container text-center site-header'>
                 <h2>Database Name: {dbName}</h2>
                 <button type='button' className='btn btn-primary' onClick={ toggleTableModal }>
                     <span className='glyphicon glyphicon-plus'></span> Create Table

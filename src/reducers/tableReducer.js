@@ -10,8 +10,9 @@ export default (state = initialState, action) => {
                 $push: [{
                     ...action.data,
                     position: {
-                        x: 0,
-                        y: 0
+                        // Position each table with some offset
+                        x: 0 + (state.length * 40),
+                        y: 0 + (state.length * 40)
                     }
                 }]
             });
