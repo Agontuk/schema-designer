@@ -44,6 +44,10 @@ class Tables extends Component {
         // 80 is the height of site header
         const height = document.documentElement.clientHeight - 80;
 
+        if (tables.length === 0) {
+            return null;
+        }
+
         return (
             <div
                 className='table-wrapper'

@@ -1,6 +1,27 @@
 .site-header {
+    /*height: 80px;*/
     max-height: 80px;
     max-width: 100%;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+.site-header h1 {
+    margin: 0;
+    font-family: 'Lobster', cursive;
+}
+
+.site-header .pull-right strong {
+    font-size: 1.6em;
+    line-height: 2;
+}
+
+.site-header .pull-right span {
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #00897b;
+    color: white;
 }
 
 .table-wrapper {

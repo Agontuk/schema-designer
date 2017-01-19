@@ -8,11 +8,14 @@ import Tables from '../containers/Tables';
 const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
     <div>
         { dbName ?
-            <div className='container text-center site-header'>
-                <h2>Database Name: {dbName}</h2>
-                <button type='button' className='btn btn-primary' onClick={ toggleTableModal }>
-                    <span className='glyphicon glyphicon-plus'></span> Create Table
-                </button>
+            <div className='container-fluid clearfix site-header'>
+                <div className='container'>
+                    <h1 className='pull-left'>Schema Builder</h1>
+                    <div className='pull-right'>
+                        <strong>Database: { dbName }</strong>
+                        <span className='glyphicon glyphicon-plus' onClick={ toggleTableModal }></span>
+                    </div>
+                </div>
             </div>
         :
             <DbForm name={ dbName } onSubmit={ saveDbName } />
