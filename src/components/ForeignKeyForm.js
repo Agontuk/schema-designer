@@ -96,7 +96,7 @@ class ForeignKeyForm extends Component {
                     >
                         <option value=''>None</option>
 
-                        { columns[currentForeignTableId] === undefined ? null :
+                        { columns[currentForeignTableId] !== undefined &&
                             columns[currentForeignTableId].map((column) => (
                                 <option key={ column.id } value={ column.id }>
                                     { column.name }

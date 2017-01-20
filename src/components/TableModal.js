@@ -92,10 +92,10 @@ class TableModal extends Component {
                                 />
                             </div>
 
-                            { duplicateName ?
+                            { duplicateName &&
                                 <span className='col-xs-offset-2 col-xs-10 help-block'>
                                     Duplicate table name
-                                </span> : null
+                                </span>
                             }
                         </div>
                         <div className='checkbox'>

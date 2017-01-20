@@ -17,7 +17,9 @@ class Column extends Component {
         return (
             <li className='clearfix' id={ data.id }>
                 <div className='pull-left'>
-                    { data.name }<span>({ data.type })</span>
+                    { data.name }
+                    { !!data.foreignKey.references.id && <sup>FK</sup> }
+                    <span>({ data.type })</span>
                 </div>
                 <div className='pull-right'>
                     <span className='glyphicon glyphicon-pencil' onClick={ this.editColumn }></span>

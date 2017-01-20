@@ -55,8 +55,9 @@
 }
 
 .db-columns {
-    padding: 0;
     list-style: none;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 .db-columns li {
@@ -76,6 +77,11 @@
 .db-columns .pull-right span {
     margin: 0 5px;
     cursor: pointer;
+}
+
+sup {
+    margin-left: 1px;
+    font-style: italic;
 }
 
 /* jsPlumb */

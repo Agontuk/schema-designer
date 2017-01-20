@@ -174,10 +174,10 @@ class ColumnModal extends Component {
                                 />
                             </div>
 
-                            { duplicateName ?
+                            { duplicateName &&
                                 <span className='col-xs-offset-3 col-xs-9 help-block'>
                                     Duplicate column name
-                                </span> : null
+                                </span>
                             }
                         </div>
                         <div className='form-group'>
@@ -296,26 +296,26 @@ class ColumnModal extends Component {
                             </div>
                         </div>
 
-                        { foreignKeyEnabled ?
+                        { foreignKeyEnabled &&
                             <ForeignKeyForm
                                 ref={ (foreignKey) => { this.foreignKey = foreignKey; } }
                                 columns={ columns }
                                 tables={ tables }
                                 tableId={ tableId }
                                 data={ editData.foreignKey }
-                            /> : null
+                            />
                         }
                     </form>
                 </Modal.Body>
 
                 <Modal.Footer className='modal-footer text-right'>
-                    { !editMode ?
+                    { !editMode &&
                         <button
                             type='button'
                             className='btn btn-primary'
                             onClick={ this.saveColumnAndContinue }
                         >Save &amp; Continue
-                        </button> : null
+                        </button>
                     }
 
                     <button type='button' className='btn btn-primary' onClick={ this.saveColumnAndExit }>
