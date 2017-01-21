@@ -54,16 +54,14 @@ class ColumnModal extends Component {
             return false;
         }
 
-        const { tableId, columns, editMode } = this.props;
+        const { tableId, columns, editData } = this.props;
 
-        if (!editMode) {
-            const duplicate = findIndex(columns[tableId], (column) => column.name === data.name);
+        const duplicate = findIndex(columns[tableId], (column) => column.name === data.name);
 
-            if (duplicate !== -1) {
-                // Duplicate column name
-                this.setState({ duplicateName: true });
-                return false;
-            }
+        if (duplicate !== -1 && data.name !== editData.name) {
+            // Duplicate column name
+            this.setState({ duplicateName: true });
+            return false;
         }
 
         this.setState({

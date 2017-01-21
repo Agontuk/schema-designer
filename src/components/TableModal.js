@@ -21,14 +21,12 @@ class TableModal extends Component {
 
         const { saveTable, updateTable, editMode, editData, tables } = this.props;
 
-        if (!editMode) {
-            const duplicate = findIndex(tables, (table) => table.name === name);
+        const duplicate = findIndex(tables, (table) => table.name === name);
 
-            if (duplicate !== -1) {
-                // Duplicate table name
-                this.setState({ duplicateName: true });
-                return;
-            }
+        if (duplicate !== -1 && name !== editData.name) {
+            // Duplicate table name
+            this.setState({ duplicateName: true });
+            return;
         }
 
         if (editMode) {
