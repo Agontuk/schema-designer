@@ -91,6 +91,7 @@ sup {
 
 .jtk-dragged {
     cursor: move;
+    z-index: 9999;
 }
 
 .no-select {

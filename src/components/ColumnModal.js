@@ -188,10 +188,21 @@ class ColumnModal extends Component {
                                     defaultValue={ editData.type }
                                 >
                                     <option value='integer'>INT</option>
+                                    <option value='string'>VARCHAR</option>
+                                    <option value='text'>TEXT</option>
+                                    <option value='date'>DATE</option>
+                                    <option value='tinyInteger'>TINYINT</option>
+                                    <option value='smallInteger'>SMALLINT</option>
+                                    <option value='mediumInteger'>MEDIUMINT</option>
                                     <option value='bigInteger'>BIGINT</option>
-                                    <option value='string'>String</option>
-                                    <option value='text'>Text</option>
-                                    <option value='longText'>Long Text</option>
+                                    <option value='boolean'>BOOLEAN</option>
+                                    <option value='dateTime'>DATETIME</option>
+                                    <option value='timestamp'>TIMESTAMP</option>
+                                    <option value='time'>TIME</option>
+                                    <option value='char'>CHAR</option>
+                                    <option value='tinyText'>TINYTEXT</option>
+                                    <option value='mediumText'>MEDIUMTEXT</option>
+                                    <option value='longText'>LONGTEXT</option>
                                 </select>
                             </div>
                         </div>
