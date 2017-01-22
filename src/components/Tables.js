@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import jsPlumb from 'jsplumb';
 import Table from './Table';
 
 class Tables extends Component {
@@ -19,12 +20,12 @@ class Tables extends Component {
     makeTablesDraggable = () => {
         const { storeTablePosition } = this.props;
 
-        window.jsPlumb.ready(() => {
-            window.jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
+        jsPlumb.ready(() => {
+            jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
                 containment: 'parent',
                 drag: () => {
                     // Repaint all the connections
-                    window.jsPlumb.repaintEverything();
+                    jsPlumb.repaintEverything();
                 },
                 stop: (event) => {
                     const newPos = {

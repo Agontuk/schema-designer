@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import jsPlumb from 'jsplumb';
 
 class DrawRelationLine extends Component {
     componentDidMount() {
-        window.jsPlumb.importDefaults({
+        jsPlumb.importDefaults({
             Connector: ['Flowchart', { cornerRadius: 5 }],
             Anchor: ['Continuous', { faces: ['left', 'right'] }],
             ConnectionsDetachable: false,
@@ -21,12 +22,12 @@ class DrawRelationLine extends Component {
     drawRelation = () => {
         const { relations } = this.props;
 
-        window.jsPlumb.ready(() => {
+        jsPlumb.ready(() => {
             // Reset all endpoints and connections
-            window.jsPlumb.reset();
+            jsPlumb.reset();
 
             relations.forEach((relation) => {
-                window.jsPlumb.connect({
+                jsPlumb.connect({
                     source: relation.source.columnId,
                     target: relation.target.columnId,
                     overlays: [

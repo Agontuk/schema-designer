@@ -45,6 +45,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: `${ ROOT_PATH }/index.html`
         }),
-        new ExtractTextPlugin('schema.css')
+        new ExtractTextPlugin('[name].css')
     ]
 };
