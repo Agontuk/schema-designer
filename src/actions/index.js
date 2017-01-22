@@ -39,3 +39,18 @@ export const updateColumn = makeActionCreator(UPDATE_COLUMN, 'data', 'tableId');
 export const saveForeignKeyRelation = makeActionCreator(SAVE_FOREIGN_KEY_RELATION, 'columnData', 'tableId');
 export const updateForeignKeyRelation = makeActionCreator(UPDATE_FOREIGN_KEY_RELATION, 'columnData', 'tableId');
 export const storeTablePosition = makeActionCreator(STORE_TABLE_POSITION, 'newPos');
+
+export function generateMigration() {
+    return (dispatch, getState) => {
+        const formData = new FormData();
+        formData.append('tables', JSON.stringify(getState().tables));
+        formData.append('columns', JSON.stringify(getState().columns));
+        formData.append('relations', JSON.stringify(getState().relations));
+
+        fetch(window.schema.apiEndpoint, {
+            method: 'POST',
+            body: formData
+        })
+        .then(() => {});
+    };
+}

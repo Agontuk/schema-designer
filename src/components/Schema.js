@@ -11,7 +11,7 @@ const tooltip = (
     <Tooltip id='tooltip'><strong>Create New Table</strong></Tooltip>
 );
 
-const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
+const Schema = ({ dbName, saveDbName, toggleTableModal, generateMigration }) => (
     <div>
         { dbName ?
             <div className='container-fluid clearfix site-header'>
@@ -22,6 +22,16 @@ const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
                         <OverlayTrigger placement='bottom' overlay={ tooltip }>
                             <span className='glyphicon glyphicon-plus' onClick={ toggleTableModal }></span>
                         </OverlayTrigger>
+
+                        { typeof schema === 'object' &&
+                            window.schema.packageMode &&
+                            !!window.schema.apiEndpoint &&
+                            <span
+                                className='glyphicon glyphicon-download-alt'
+                                onClick={ generateMigration }
+                            > Export
+                            </span>
+                        }
                     </div>
                 </div>
             </div>
@@ -42,7 +52,8 @@ const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
 Schema.propTypes = {
     dbName: PropTypes.string.isRequired,
     saveDbName: PropTypes.func.isRequired,
-    toggleTableModal: PropTypes.func.isRequired
+    toggleTableModal: PropTypes.func.isRequired,
+    generateMigration: PropTypes.func.isRequired
 };
 
 export default Schema;
