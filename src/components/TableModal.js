@@ -142,12 +142,12 @@ TableModal.propTypes = {
     showTableModal: PropTypes.bool.isRequired,
     editMode: PropTypes.bool.isRequired,
     editData: PropTypes.shape({
-        id: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired,
-        softDelete: React.PropTypes.bool.isRequired,
-        timeStamp: React.PropTypes.bool.isRequired
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        softDelete: PropTypes.bool.isRequired,
+        timeStamp: PropTypes.bool.isRequired
     }).isRequired,
-    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
     toggleTableModal: PropTypes.func.isRequired,
     saveTable: PropTypes.func.isRequired,
     updateTable: PropTypes.func.isRequired

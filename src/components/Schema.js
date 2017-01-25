@@ -3,6 +3,7 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import DbForm from './DbForm';
 import DrawRelationLine from './DrawRelationLine';
+import ExportDatabase from './ExportDatabase';
 import TableModal from '../containers/TableModal';
 import ColumnModal from '../containers/ColumnModal';
 import Tables from '../containers/Tables';
@@ -11,7 +12,7 @@ const tooltip = (
     <Tooltip id='tooltip'><strong>Create New Table</strong></Tooltip>
 );
 
-const Schema = ({ dbName, saveDbName, toggleTableModal, generateMigration }) => (
+const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
     <div>
         { dbName ?
             <div className='container-fluid clearfix site-header'>
@@ -25,12 +26,7 @@ const Schema = ({ dbName, saveDbName, toggleTableModal, generateMigration }) => 
 
                         { typeof schema === 'object' &&
                             window.schema.packageMode &&
-                            !!window.schema.apiEndpoint &&
-                            <span
-                                className='glyphicon glyphicon-download-alt'
-                                onClick={ generateMigration }
-                            > Export
-                            </span>
+                            <ExportDatabase />
                         }
                     </div>
                 </div>
@@ -52,8 +48,7 @@ const Schema = ({ dbName, saveDbName, toggleTableModal, generateMigration }) => 
 Schema.propTypes = {
     dbName: PropTypes.string.isRequired,
     saveDbName: PropTypes.func.isRequired,
-    toggleTableModal: PropTypes.func.isRequired,
-    generateMigration: PropTypes.func.isRequired
+    toggleTableModal: PropTypes.func.isRequired
 };
 
 export default Schema;

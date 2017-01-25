@@ -129,16 +129,16 @@ class ForeignKeyForm extends Component {
 
 ForeignKeyForm.propTypes = {
     tableId: PropTypes.string.isRequired,
-    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    columns: PropTypes.objectOf(React.PropTypes.array).isRequired,
-    data: React.PropTypes.shape({
-        references: React.PropTypes.shape({
-            id: React.PropTypes.string.isRequired,
-            name: React.PropTypes.string.isRequired
+    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
+    columns: PropTypes.objectOf(PropTypes.array).isRequired,
+    data: PropTypes.shape({
+        references: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
         }).isRequired,
-        on: React.PropTypes.shape({
-            id: React.PropTypes.string.isRequired,
-            name: React.PropTypes.string.isRequired
+        on: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
         }).isRequired
     }).isRequired
 };

@@ -69,7 +69,7 @@ class Tables extends Component {
 }
 
 Tables.propTypes = {
-    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
     removeTable: PropTypes.func.isRequired,
     editTable: PropTypes.func.isRequired,
     toggleColumnModal: PropTypes.func.isRequired,

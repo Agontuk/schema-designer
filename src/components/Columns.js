@@ -38,12 +38,12 @@ class Columns extends Component {
 }
 
 Columns.propTypes = {
-    columns: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    columns: PropTypes.arrayOf(PropTypes.object).isRequired,
     table: PropTypes.shape({
-        id: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired,
-        softDelete: React.PropTypes.bool.isRequired,
-        timeStamp: React.PropTypes.bool.isRequired
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        softDelete: PropTypes.bool.isRequired,
+        timeStamp: PropTypes.bool.isRequired
     }).isRequired,
     removeColumn: PropTypes.func.isRequired,
     editColumn: PropTypes.func.isRequired

@@ -345,32 +345,32 @@ class ColumnModal extends Component {
 ColumnModal.propTypes = {
     showColumnModal: PropTypes.bool.isRequired,
     editMode: PropTypes.bool.isRequired,
-    editData: React.PropTypes.shape({
-        id: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired,
-        type: React.PropTypes.string.isRequired,
-        comment: React.PropTypes.string.isRequired,
-        autoInc: React.PropTypes.bool.isRequired,
-        unique: React.PropTypes.bool.isRequired,
-        index: React.PropTypes.bool.isRequired,
-        unsigned: React.PropTypes.bool.isRequired,
-        nullable: React.PropTypes.bool.isRequired,
-        length: React.PropTypes.string.isRequired,
-        defValue: React.PropTypes.string.isRequired,
-        foreignKey: React.PropTypes.shape({
-            references: React.PropTypes.shape({
-                id: React.PropTypes.string.isRequired,
-                name: React.PropTypes.string.isRequired
+    editData: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        comment: PropTypes.string.isRequired,
+        autoInc: PropTypes.bool.isRequired,
+        unique: PropTypes.bool.isRequired,
+        index: PropTypes.bool.isRequired,
+        unsigned: PropTypes.bool.isRequired,
+        nullable: PropTypes.bool.isRequired,
+        length: PropTypes.string.isRequired,
+        defValue: PropTypes.string.isRequired,
+        foreignKey: PropTypes.shape({
+            references: PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired
             }).isRequired,
-            on: React.PropTypes.shape({
-                id: React.PropTypes.string.isRequired,
-                name: React.PropTypes.string.isRequired
+            on: PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired
             }).isRequired
         }).isRequired
     }).isRequired,
     tableId: PropTypes.string.isRequired,
-    tables: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    columns: PropTypes.objectOf(React.PropTypes.array).isRequired,
+    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
+    columns: PropTypes.objectOf(PropTypes.array).isRequired,
     toggleColumnModal: PropTypes.func.isRequired,
     saveColumn: PropTypes.func.isRequired,
     updateColumn: PropTypes.func.isRequired

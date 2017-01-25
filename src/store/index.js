@@ -1,11 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import Reducers from '../reducers';
 import LocalStorageMiddleware from './LocalStorageMiddleware';
 
 const logger = createLogger();
-const middleware = [thunk, LocalStorageMiddleware];
+const middleware = [LocalStorageMiddleware];
 
 let extension = (next) => next;
 
