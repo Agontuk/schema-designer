@@ -191,18 +191,24 @@ class ColumnModal extends Component {
                                     <option value='string'>VARCHAR</option>
                                     <option value='text'>TEXT</option>
                                     <option value='date'>DATE</option>
-                                    <option value='tinyInteger'>TINYINT</option>
-                                    <option value='smallInteger'>SMALLINT</option>
-                                    <option value='mediumInteger'>MEDIUMINT</option>
-                                    <option value='bigInteger'>BIGINT</option>
-                                    <option value='boolean'>BOOLEAN</option>
-                                    <option value='dateTime'>DATETIME</option>
-                                    <option value='timestamp'>TIMESTAMP</option>
-                                    <option value='time'>TIME</option>
-                                    <option value='char'>CHAR</option>
-                                    <option value='tinyText'>TINYTEXT</option>
-                                    <option value='mediumText'>MEDIUMTEXT</option>
-                                    <option value='longText'>LONGTEXT</option>
+                                    <optgroup label='Numeric'>
+                                        <option value='tinyInteger'>TINYINT</option>
+                                        <option value='smallInteger'>SMALLINT</option>
+                                        <option value='mediumInteger'>MEDIUMINT</option>
+                                        <option value='bigInteger'>BIGINT</option>
+                                        <option value='boolean'>BOOLEAN</option>
+                                    </optgroup>
+                                    <optgroup label='Date and time'>
+                                        <option value='dateTime'>DATETIME</option>
+                                        <option value='timestamp'>TIMESTAMP</option>
+                                        <option value='time'>TIME</option>
+                                    </optgroup>
+                                    <optgroup label='String'>
+                                        <option value='char'>CHAR</option>
+                                        <option value='tinyText'>TINYTEXT</option>
+                                        <option value='mediumText'>MEDIUMTEXT</option>
+                                        <option value='longText'>LONGTEXT</option>
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
