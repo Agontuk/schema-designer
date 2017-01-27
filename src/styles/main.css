@@ -101,15 +101,15 @@ header, aside {
     z-index: 1000;
     max-width: 220px;
     min-width: 180px;
-    background-color: azure;
-    -webkit-box-shadow: inset -2px -2px 6px 0px rgba(17,61,59,0.75), 0px -2px 1px 0px rgba(17,61,59,0.75);
-    -moz-box-shadow: inset -2px -2px 6px 0px rgba(17,61,59,0.75), 0px -2px 1px 0px rgba(17,61,59,0.75);
-    box-shadow: inset -2px -2px 6px 0px rgba(17,61,59,0.75), 0px -2px 1px 0px rgba(17,61,59,0.75);
+    background-color: white;
+    -webkit-box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
+    -moz-box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
+    box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
 }
 
 .table-header {
     padding: 10px;
-    background-color: #00897B;
+    background-color: #34495e;
     color: white;
 }
 
@@ -147,9 +147,19 @@ header, aside {
     cursor: pointer;
 }
 
-sup {
+.db-columns sup {
     margin-left: 1px;
     font-style: italic;
+}
+
+/* tooltip */
+.tooltip-inner {
+    background-color: #34495e;
+    color: white;
+}
+
+.tooltip-arrow {
+    border-bottom-color: #34495e !important;
 }
 
 /* jsPlumb */
