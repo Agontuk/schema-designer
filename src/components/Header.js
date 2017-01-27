@@ -11,6 +11,11 @@ const trashTooltip = (
 );
 
 class Header extends Component {
+    clearSchemaData = () => {
+        window.localStorage.removeItem('schema');
+        window.location.reload();
+    }
+
     toggleDbModal = () => {
         const editMode = true;
         this.props.onToggleDbModal(editMode);
@@ -54,6 +59,7 @@ class Header extends Component {
                                     <OverlayTrigger placement='bottom' overlay={ trashTooltip }>
                                         <button
                                             className='glyphicon glyphicon-trash'
+                                            onClick={ this.clearSchemaData }
                                         >
                                         </button>
                                     </OverlayTrigger>
