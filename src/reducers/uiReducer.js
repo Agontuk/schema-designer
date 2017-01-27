@@ -2,6 +2,10 @@ import update from 'immutability-helper';
 import * as types from '../actions';
 
 const initialState = {
+    database: {
+        showModal: false,
+        edit: false
+    },
     table: {
         showModal: false,
         edit: false,
@@ -44,6 +48,27 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case types.TOGGLE_DB_MODAL: {
+            const show = state.database.showModal;
+
+            if (show) {
+                return {
+                    ...state,
+                    database: {
+                        showModal: false,
+                        edit: false
+                    }
+                };
+            }
+
+            return {
+                ...state,
+                database: {
+                    showModal: true,
+                    edit: action.editMode
+                }
+            };
+        }
         case types.TOGGLE_TABLE_MODAL: {
             const show = state.table.showModal;
 

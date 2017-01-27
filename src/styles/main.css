@@ -1,28 +1,96 @@
-.site-header {
-    /*height: 80px;*/
-    max-height: 80px;
-    max-width: 100%;
-    border-bottom: 1px solid gray;
-    margin-bottom: 10px;
+/**
+ * HEADER SECTION
+ */
+body {
+    font-family: 'Roboto', sans-serif;
 }
 
-.site-header h1 {
-    margin: 0;
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.title {
+    font-size: 2em;
+}
+
+.title strong {
+    color: #ecf0f1;
     font-family: 'Lobster', cursive;
-    color: darkslategrey;
 }
 
-.site-header .pull-right em {
-    font-size: 1.6em;
-    line-height: 2;
+.title sub {
+    font-size: 0.5em;
 }
 
-.site-header .pull-right span {
-    margin-left: 10px;
-    cursor: pointer;
-    padding: 5px;
-    background-color: #00897b;
+.title sub a {
+    color: #ecf0f1;
+}
+
+.title sub a:hover {
     color: white;
+}
+
+.db-name {
+    color: #ecf0f1;
+    font-size: 1.6em;
+}
+
+.db-name sup button {
+    background-color: #2c3e50;
+    border: 0;
+    color: #ecf0f1;
+    font-size: 0.7em;
+    outline: none;
+}
+
+.db-name sup button:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.menu {
+    font-size: 1.1em;
+}
+
+.menu ul {
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.menu li button {
+    background-color: #2c3e50;
+    border: 1px solid #2c3e50;
+    border-radius: 50%;
+    color: #ecf0f1;
+    outline: none;
+    padding: 8px;
+    text-decoration: none;
+    top: 0;
+    transition: 0.3s;
+    vertical-align: middle;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+
+.menu li:last-child button {
+    margin-right: -8px;
+}
+
+.menu li button:hover {
+    background-color: white;
+    border: 1px solid white;
+    color: #2c3e50;
+    transition: 0.3s;
+}
+
+header, aside {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.title, .menu, .db-name {
+    line-height: 40px;
 }
 
 .table-wrapper {

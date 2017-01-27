@@ -9,6 +9,7 @@ const makeActionCreator = (type, ...argNames) => ((...args) => {
 });
 
 // Action Constants
+export const TOGGLE_DB_MODAL = 'TOGGLE_DB_MODAL';
 export const SAVE_DB_NAME = 'SAVE_DB_NAME';
 export const TOGGLE_TABLE_MODAL = 'TOGGLE_TABLE_MODAL';
 export const SAVE_TABLE = 'SAVE_TABLE';
@@ -25,6 +26,7 @@ export const UPDATE_FOREIGN_KEY_RELATION = 'UPDATE_FOREIGN_KEY_RELATION';
 export const STORE_TABLE_POSITION = 'STORE_TABLE_POSITION';
 
 // Action creators
+export const toggleDbModal = makeActionCreator(TOGGLE_DB_MODAL, 'editMode');
 export const saveDbName = makeActionCreator(SAVE_DB_NAME, 'name');
 export const toggleTableModal = makeActionCreator(TOGGLE_TABLE_MODAL);
 export const saveTable = makeActionCreator(SAVE_TABLE, 'data');

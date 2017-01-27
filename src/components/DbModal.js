@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 
-class DbForm extends Component {
+class DbModal extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const name = this.dbname.value.trim();
@@ -10,14 +10,24 @@ class DbForm extends Component {
             return;
         }
 
-        this.props.onSubmit(name);
+        const { editMode, saveDbName } = this.props;
+
+        saveDbName(name, editMode);
+    }
+
+    toggleDbModal = () => {
+        const { editMode, toggleDbModal } = this.props;
+
+        if (editMode) {
+            toggleDbModal();
+        }
     }
 
     render() {
-        const { name } = this.props;
+        const { name, showModal } = this.props;
 
         return (
-            <Modal show>
+            <Modal show={ showModal } onHide={ this.toggleDbModal }>
                 <Modal.Body>
                     <form onSubmit={ this.handleSubmit }>
                         <input
@@ -35,9 +45,12 @@ class DbForm extends Component {
     }
 }
 
-DbForm.propTypes = {
+DbModal.propTypes = {
     name: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    showModal: PropTypes.bool.isRequired,
+    editMode: PropTypes.bool.isRequired,
+    saveDbName: PropTypes.func.isRequired,
+    toggleDbModal: PropTypes.func.isRequired
 };
 
-export default DbForm;
+export default DbModal;

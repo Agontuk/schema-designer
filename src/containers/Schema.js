@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import Schema from '../components/Schema';
-import { saveDbName, toggleTableModal } from '../actions';
+import { toggleDbModal, toggleTableModal } from '../actions';
 
 const mapStateToProps = (state) => ({
-    dbName: state.database.name
+    dbName: state.database.name,
+    dbModal: state.ui.database.showModal
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    saveDbName: (name) => {
-        dispatch(saveDbName(name));
-        dispatch(toggleTableModal());
+    toggleDbModal: (editMode = false) => {
+        dispatch(toggleDbModal(editMode));
     },
     toggleTableModal: () => {
         dispatch(toggleTableModal());

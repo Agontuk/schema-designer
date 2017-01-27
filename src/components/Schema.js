@@ -1,53 +1,49 @@
-import React, { PropTypes } from 'react';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
-import DbForm from './DbForm';
+import React, { Component, PropTypes } from 'react';
 import DrawRelationLine from './DrawRelationLine';
-import ExportDatabase from './ExportDatabase';
+import Header from './Header';
+import DbModal from '../containers/DbModal';
 import TableModal from '../containers/TableModal';
 import ColumnModal from '../containers/ColumnModal';
 import Tables from '../containers/Tables';
 
-const tooltip = (
-    <Tooltip id='tooltip'><strong>Create New Table</strong></Tooltip>
-);
+class Schema extends Component {
+    constructor(props) {
+        super(props);
 
-const Schema = ({ dbName, saveDbName, toggleTableModal }) => (
-    <div>
-        { dbName ?
-            <div className='container-fluid clearfix site-header'>
-                <div className='container'>
-                    <h1 className='pull-left'>Schema Builder</h1>
-                    <div className='pull-right'>
-                        <em>Database: { dbName }</em>
-                        <OverlayTrigger placement='bottom' overlay={ tooltip }>
-                            <span className='glyphicon glyphicon-plus' onClick={ toggleTableModal }></span>
-                        </OverlayTrigger>
-
-                        { typeof schema === 'object' &&
-                            window.schema.packageMode &&
-                            <ExportDatabase />
-                        }
-                    </div>
-                </div>
-            </div>
-        :
-            <DbForm name={ dbName } onSubmit={ saveDbName } />
+        if (!props.dbName && !props.dbModal) {
+            props.toggleDbModal();
         }
+    }
 
-        <Tables />
+    render() {
+        const { dbName, toggleDbModal, toggleTableModal } = this.props;
 
-        <TableModal />
+        return (
+            <div className='container-fluid'>
+                <Header
+                    dbName={ dbName }
+                    onToggleDbModal={ toggleDbModal }
+                    onToggleTableModal={ toggleTableModal }
+                />
 
-        <ColumnModal />
+                <Tables />
 
-        <DrawRelationLine />
-    </div>
-);
+                <DbModal />
+
+                <TableModal />
+
+                <ColumnModal />
+
+                <DrawRelationLine />
+            </div>
+        );
+    }
+}
 
 Schema.propTypes = {
     dbName: PropTypes.string.isRequired,
-    saveDbName: PropTypes.func.isRequired,
+    dbModal: PropTypes.bool.isRequired,
+    toggleDbModal: PropTypes.func.isRequired,
     toggleTableModal: PropTypes.func.isRequired
 };
 
