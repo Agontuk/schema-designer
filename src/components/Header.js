@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
+import ExportDatabase from './ExportDatabase';
 
 const tableTooltip = (
     <Tooltip id='tooltip'><strong>Create New Table</strong></Tooltip>
@@ -66,7 +67,7 @@ class Header extends Component {
                                 </li>
                                 { typeof schema === 'object' &&
                                     window.schema.packageMode &&
-                                    <li><button className='glyphicon glyphicon-download-alt'></button></li>
+                                    <ExportDatabase />
                                 }
                             </ul>
                         </div>

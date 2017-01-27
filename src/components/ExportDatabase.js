@@ -1,12 +1,41 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
 
-const ExportDatabase = ({ data }) => (
-    <form className='form-inline' method='POST' action=''>
-        <input type='hidden' name='schema' value={ JSON.stringify(data) } />
-        <button type='submit' className='btn btn-default glyphicon glyphicon-download-alt'> Export</button>
-    </form>
+const exportTooltip = (
+    <Tooltip id='tooltip'><strong>Generate Database Migrations</strong></Tooltip>
 );
+
+class ExportDatabase extends Component {
+    handleSubmit = () => {
+        this.form.submit();
+    }
+
+    render() {
+        const { data } = this.props;
+
+        return (
+            <li>
+                <form
+                    className='form-inline'
+                    method='POST'
+                    action=''
+                    ref={ (form) => { this.form = form; } }
+                >
+                    <input type='hidden' name='schema' value={ JSON.stringify(data) } />
+                </form>
+                <OverlayTrigger placement='bottom' overlay={ exportTooltip }>
+                    <button
+                        className='glyphicon glyphicon-download-alt'
+                        onClick={ this.handleSubmit }
+                    >
+                    </button>
+                </OverlayTrigger>
+            </li>
+        );
+    }
+}
 
 ExportDatabase.propTypes = {
     data: PropTypes.shape({

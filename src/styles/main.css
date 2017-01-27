@@ -145,6 +145,7 @@ header, aside {
 .db-columns .pull-right span {
     margin: 0 5px;
     cursor: pointer;
+    color: #34495e;
 }
 
 .db-columns sup {
