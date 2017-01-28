@@ -29,6 +29,7 @@ class ExportDatabase extends Component {
                     <button
                         className='glyphicon glyphicon-download-alt'
                         onClick={ this.handleSubmit }
+                        disabled={ !data.tables.length }
                     >
                     </button>
                 </OverlayTrigger>

@@ -83,7 +83,7 @@ header {
     margin-right: -8px;
 }
 
-.menu li button:hover {
+.menu li button:not([disabled]):hover {
     background-color: white;
     border: 1px solid white;
     color: #2c3e50;
@@ -166,6 +166,10 @@ header {
     margin-left: 1px;
 }
 
+button[disabled] {
+    cursor: not-allowed;
+}
+
 /* tooltip */
 .tooltip-inner {
     background-color: #34495e;
@@ -193,4 +197,19 @@ header {
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+/* media query */
+@media (max-width: 991px) {
+    .title {
+        font-size: 1.6em;
+    }
+
+    .db-name {
+        font-size: 1.4em;
+    }
+
+    .menu li button {
+        font-size: 0.9em;
+    }
 }
