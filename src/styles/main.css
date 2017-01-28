@@ -101,8 +101,8 @@ header {
 .db-table {
     background-color: white;
     box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
-    max-width: 220px;
-    min-width: 180px;
+    max-width: 250px;
+    min-width: 200px;
     z-index: 100;
     -webkit-box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
     -moz-box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
@@ -117,6 +117,10 @@ header {
 
 .table-header h4 {
     margin: 0;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .table-header span {
@@ -139,7 +143,14 @@ header {
     border-bottom: 0;
 }
 
-.db-columns .pull-left span {
+.db-columns pull-left {
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.db-columns .pull-left small {
     font-style: italic;
     margin: 0 0 0 2px;
 }

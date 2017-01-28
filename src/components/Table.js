@@ -27,7 +27,7 @@ class Table extends Component {
                 style={ { left: data.position.x, top: data.position.y } }
             >
                 <div className='table-header clearfix'>
-                    <h4 className='pull-left'>{ data.name }</h4>
+                    <h4 className='pull-left' title={ data.name }>{ data.name }</h4>
                     <div className='pull-right'>
                         <span className='glyphicon glyphicon-plus' onClick={ this.toggleColumnModal }></span>
                         <span className='glyphicon glyphicon-pencil' onClick={ this.editTable }></span>
