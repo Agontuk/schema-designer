@@ -22,8 +22,20 @@ class Tables extends Component {
 
         jsPlumb.ready(() => {
             jsPlumb.draggable(document.querySelectorAll('.draggable:not(.jtk-draggable)'), {
-                containment: 'parent',
-                drag: () => {
+                // containment: 'parent',
+                drag: (event) => {
+                    if (event.pos[0] < 0 || event.pos[1] < 0) {
+                        const table = document.getElementById(event.el.id);
+
+                        if (event.pos[0] < 0) {
+                            table.style.left = 0;
+                        }
+
+                        if (event.pos[1] < 0) {
+                            table.style.top = 0;
+                        }
+                    }
+
                     // Repaint all the connections
                     jsPlumb.repaintEverything();
                 },
@@ -35,6 +47,17 @@ class Tables extends Component {
                     };
 
                     storeTablePosition(newPos);
+
+                    // Make the current table's z-index larger than the others
+                    const tables = document.querySelectorAll('.db-table');
+
+                    for (let i = 0; i < tables.length; i += 1) {
+                        tables[i].style.zIndex = 100;
+
+                        if (tables[i].id === event.el.id) {
+                            tables[i].style.zIndex = 150;
+                        }
+                    }
                 }
             });
         });

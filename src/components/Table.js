@@ -22,7 +22,7 @@ class Table extends Component {
 
         return (
             <div
-                className='db-table draggable'
+                className='db-table draggable no-select'
                 id={ data.id }
                 style={ { left: data.position.x, top: data.position.y } }
             >

@@ -5,6 +5,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+header {
+    background-color: #2c3e50;
+    color: white;
+    margin-bottom: 5px;
+}
+
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
@@ -84,11 +90,6 @@ body {
     transition: 0.3s;
 }
 
-header, aside {
-    background-color: #2c3e50;
-    color: white;
-}
-
 .title, .menu, .db-name {
     line-height: 40px;
 }
@@ -98,19 +99,20 @@ header, aside {
 }
 
 .db-table {
-    z-index: 1000;
+    background-color: white;
+    box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
     max-width: 220px;
     min-width: 180px;
-    background-color: white;
+    z-index: 100;
     -webkit-box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
     -moz-box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
-    box-shadow: 2px 2px 5px 0px #666, -1px 0px 5px 0px #666;
 }
 
 .table-header {
-    padding: 10px;
     background-color: #34495e;
     color: white;
+    cursor: move;
+    padding: 8px;
 }
 
 .table-header h4 {
@@ -118,8 +120,8 @@ header, aside {
 }
 
 .table-header span {
-    margin: 0 5px;
     cursor: pointer;
+    margin: 0 5px;
 }
 
 .db-columns {
@@ -130,7 +132,7 @@ header, aside {
 
 .db-columns li {
     border-bottom: 1px solid gray;
-    padding: 10px;
+    padding: 8px;
 }
 
 .db-columns li:last-child {
@@ -138,19 +140,19 @@ header, aside {
 }
 
 .db-columns .pull-left span {
-    margin: 0 5px;
     font-style: italic;
+    margin: 0 0 0 2px;
 }
 
 .db-columns .pull-right span {
-    margin: 0 5px;
-    cursor: pointer;
     color: #34495e;
+    cursor: pointer;
+    margin: 0 5px;
 }
 
 .db-columns sup {
-    margin-left: 1px;
     font-style: italic;
+    margin-left: 1px;
 }
 
 /* tooltip */
@@ -170,14 +172,14 @@ header, aside {
 
 .jtk-dragged {
     cursor: move;
-    z-index: 9999;
+    z-index: 200 !important;
 }
 
 .no-select {
+    user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
 }

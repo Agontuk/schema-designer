@@ -31,11 +31,11 @@ class DrawRelationLine extends Component {
                     source: relation.source.columnId,
                     target: relation.target.columnId,
                     overlays: [
-                        ['Arrow', { location: 1 }]
+                        ['Arrow', { location: 1, width: 12, length: 12 }]
                     ],
-                    endpoints: ['Dot', 'Blank'],
-                    paintStyle: { stroke: '#75624e', strokeWidth: 2 },
-                    endpointStyle: { fillStyle: '#75624e' }
+                    endpoints: [['Dot', { radius: 8 }], 'Blank'],
+                    paintStyle: { stroke: '#7f8c8d', strokeWidth: 2 },
+                    endpointStyle: { fillStyle: '#7f8c8d' }
                 });
             });
         });
