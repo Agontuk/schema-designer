@@ -1,7 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import Columns from '../containers/Columns';
+import type { TableType } from '../utils/flowtypes';
 
 class Table extends Component {
+    props: Props
+
     editTable = () => {
         const { data, onEditTable } = this.props;
         onEditTable(data);
@@ -41,16 +47,11 @@ class Table extends Component {
     }
 }
 
-Table.propTypes = {
-    data: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        softDelete: PropTypes.bool.isRequired,
-        timeStamp: PropTypes.bool.isRequired
-    }).isRequired,
-    onRemoveTable: PropTypes.func.isRequired,
-    onEditTable: PropTypes.func.isRequired,
-    onToggleColumnModal: PropTypes.func.isRequired
+type Props = {
+    data: TableType,
+    onEditTable: (data: TableType) => void,
+    onRemoveTable: (id: string) => void,
+    onToggleColumnModal: (id: string) => void
 };
 
 export default Table;

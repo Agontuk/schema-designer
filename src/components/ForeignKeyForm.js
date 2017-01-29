@@ -1,7 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
+import type { ColumnType, ForeignKeyType, TableType } from '../utils/flowtypes';
 
 class ForeignKeyForm extends Component {
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         const { data } = props;
@@ -17,6 +21,10 @@ class ForeignKeyForm extends Component {
             currentForeignColumnName: columnName
         };
     }
+
+    props: Props
+
+    state: State
 
     getData = () => {
         const {
@@ -44,7 +52,7 @@ class ForeignKeyForm extends Component {
         };
     }
 
-    setCurrentForeignTable = (event) => {
+    setCurrentForeignTable = (event: { target: { value: string } }) => {
         const { tables } = this.props;
 
         const selected = event.target.value;
@@ -62,7 +70,7 @@ class ForeignKeyForm extends Component {
         });
     }
 
-    setCurrentForeignColumn = (event) => {
+    setCurrentForeignColumn = (event: { target: { value: string } }) => {
         const { columns } = this.props;
         const { currentForeignTableId } = this.state;
 
@@ -127,20 +135,20 @@ class ForeignKeyForm extends Component {
     }
 }
 
-ForeignKeyForm.propTypes = {
-    tableId: PropTypes.string.isRequired,
-    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
-    columns: PropTypes.objectOf(PropTypes.array).isRequired,
-    data: PropTypes.shape({
-        references: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
-        }).isRequired,
-        on: PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
-        }).isRequired
-    }).isRequired
+type Props = {
+    tableId: string,
+    tables: Array<TableType>,
+    columns: {
+        [tableId: string]: Array<ColumnType>
+    },
+    data: ForeignKeyType
+};
+
+type State = {
+    currentForeignTableId: string,
+    currentForeignTableName: string,
+    currentForeignColumnId: string,
+    currentForeignColumnName: string
 };
 
 export default ForeignKeyForm;

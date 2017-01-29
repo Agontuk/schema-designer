@@ -1,6 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import jsPlumb from 'jsplumb';
 import Table from './Table';
+import type { TableType, TablePositionType } from '../utils/flowtypes';
 
 class Tables extends Component {
     componentDidMount() {
@@ -8,7 +12,7 @@ class Tables extends Component {
         this.makeTablesDraggable();
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps: Props) {
         const { tables } = this.props;
 
         if (tables.length !== prevProps.tables.length) {
@@ -16,6 +20,8 @@ class Tables extends Component {
             this.makeTablesDraggable();
         }
     }
+
+    props: Props
 
     makeTablesDraggable = () => {
         const { storeTablePosition } = this.props;
@@ -27,12 +33,16 @@ class Tables extends Component {
                     if (event.pos[0] < 0 || event.pos[1] < 0) {
                         const table = document.getElementById(event.el.id);
 
+                        if (table === null) {
+                            return;
+                        }
+
                         if (event.pos[0] < 0) {
-                            table.style.left = 0;
+                            table.style.left = '0px';
                         }
 
                         if (event.pos[1] < 0) {
-                            table.style.top = 0;
+                            table.style.top = '0px';
                         }
                     }
 
@@ -52,10 +62,10 @@ class Tables extends Component {
                     const tables = document.querySelectorAll('.db-table');
 
                     for (let i = 0; i < tables.length; i += 1) {
-                        tables[i].style.zIndex = 100;
+                        tables[i].style.zIndex = '100';
 
                         if (tables[i].id === event.el.id) {
-                            tables[i].style.zIndex = 150;
+                            tables[i].style.zIndex = '150';
                         }
                     }
                 }
@@ -65,18 +75,13 @@ class Tables extends Component {
 
     render() {
         const { tables, removeTable, editTable, toggleColumnModal } = this.props;
-        // 80 is the height of site header
-        const height = document.documentElement.clientHeight - 80;
 
         if (tables.length === 0) {
             return null;
         }
 
         return (
-            <div
-                className='table-wrapper'
-                style={ { height, maxHeight: height } }
-            >
+            <div className='table-wrapper'>
                 { tables.map((table) => (
                     <Table
                         key={ table.id }
@@ -91,12 +96,12 @@ class Tables extends Component {
     }
 }
 
-Tables.propTypes = {
-    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
-    removeTable: PropTypes.func.isRequired,
-    editTable: PropTypes.func.isRequired,
-    toggleColumnModal: PropTypes.func.isRequired,
-    storeTablePosition: PropTypes.func.isRequired
+type Props = {
+    tables: Array<TableType>,
+    editTable: (data: TableType) => void,
+    removeTable: (id: string) => void,
+    storeTablePosition: (data: TablePositionType) => void,
+    toggleColumnModal: (id: string) => void
 };
 
 export default Tables;

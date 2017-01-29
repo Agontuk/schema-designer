@@ -1,14 +1,25 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
+import type { TableType } from '../utils/flowtypes';
 
 class TableModal extends Component {
+    props: Props
+
     state = {
         duplicateName: false
     }
 
-    handleSubmit = (event) => {
+    // Flow type for refs
+    name: any
+    softdelete: any
+    timestamp: any
+
+    handleSubmit = (event: Event) => {
         event.preventDefault();
 
         const name = this.name.value.trim();
@@ -31,7 +42,7 @@ class TableModal extends Component {
 
         if (editMode) {
             updateTable({
-                id: editData.id,
+                ...editData,
                 name,
                 softDelete,
                 timeStamp
@@ -41,7 +52,12 @@ class TableModal extends Component {
                 id: Math.random().toString(36).substring(7),
                 name,
                 softDelete,
-                timeStamp
+                timeStamp,
+                position: {
+                    // Position each table with some offset
+                    x: 0 + (tables.length * 40),
+                    y: 0 + (tables.length * 40)
+                }
             });
         }
 
@@ -138,19 +154,14 @@ class TableModal extends Component {
     }
 }
 
-TableModal.propTypes = {
-    showTableModal: PropTypes.bool.isRequired,
-    editMode: PropTypes.bool.isRequired,
-    editData: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        softDelete: PropTypes.bool.isRequired,
-        timeStamp: PropTypes.bool.isRequired
-    }).isRequired,
-    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
-    toggleTableModal: PropTypes.func.isRequired,
-    saveTable: PropTypes.func.isRequired,
-    updateTable: PropTypes.func.isRequired
+type Props = {
+    showTableModal: boolean,
+    editMode: boolean,
+    editData: TableType,
+    tables: Array<TableType>,
+    toggleTableModal: () => void,
+    saveTable: (data: TableType) => void,
+    updateTable: (data: TableType) => void
 };
 
 export default TableModal;

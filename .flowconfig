@@ -1,0 +1,11 @@
+[ignore]
+.*/build/.*
+.*/dev/.*
+.*/node_modules/fbjs/.*
+
+[include]
+./src/*.js
+
+[libs]
+
+[options]

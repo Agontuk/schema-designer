@@ -1,6 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
+import type { ColumnType } from '../utils/flowtypes';
 
 class Column extends Component {
+    props: Props
+
     editColumn = () => {
         const { data, onEditColumn, tableId } = this.props;
         onEditColumn(data, tableId);
@@ -30,33 +36,11 @@ class Column extends Component {
     }
 }
 
-Column.propTypes = {
-    data: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        comment: PropTypes.string.isRequired,
-        autoInc: PropTypes.bool.isRequired,
-        unique: PropTypes.bool.isRequired,
-        index: PropTypes.bool.isRequired,
-        unsigned: PropTypes.bool.isRequired,
-        nullable: PropTypes.bool.isRequired,
-        length: PropTypes.string.isRequired,
-        defValue: PropTypes.string.isRequired,
-        foreignKey: PropTypes.shape({
-            references: PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired
-            }).isRequired,
-            on: PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired
-            }).isRequired
-        }).isRequired
-    }).isRequired,
-    tableId: PropTypes.string.isRequired,
-    onRemoveColumn: PropTypes.func.isRequired,
-    onEditColumn: PropTypes.func.isRequired
+type Props = {
+    data: ColumnType,
+    tableId: string,
+    onRemoveColumn: (data: ColumnType, tabledId: string) => void,
+    onEditColumn: (data: ColumnType, tabledId: string) => void
 };
 
 export default Column;

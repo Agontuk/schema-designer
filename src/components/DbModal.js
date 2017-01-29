@@ -1,8 +1,16 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 
 class DbModal extends Component {
-    handleSubmit = (event) => {
+    props: Props
+
+    // Flow type for ref
+    dbname: any
+
+    handleSubmit = (event: Event) => {
         event.preventDefault();
         const name = this.dbname.value.trim();
 
@@ -45,12 +53,12 @@ class DbModal extends Component {
     }
 }
 
-DbModal.propTypes = {
-    name: PropTypes.string.isRequired,
-    showModal: PropTypes.bool.isRequired,
-    editMode: PropTypes.bool.isRequired,
-    saveDbName: PropTypes.func.isRequired,
-    toggleDbModal: PropTypes.func.isRequired
+type Props = {
+    name: string,
+    showModal: boolean,
+    editMode: boolean,
+    saveDbName: (name: string, editMode: boolean) => void,
+    toggleDbModal: () => void
 };
 
 export default DbModal;

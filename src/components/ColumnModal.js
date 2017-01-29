@@ -1,17 +1,37 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import ForeignKeyForm from './ForeignKeyForm';
+import type { ColumnType, TableType } from '../utils/flowtypes';
 
 class ColumnModal extends Component {
+    props: Props
+
     state = {
         isUnsigned: false,
         foreignKeyEnabled: false,
         duplicateName: false
     }
 
-    componentWillReceiveProps(nextProps) {
+    // Flow type for refs
+    name: any
+    type: any
+    length: any
+    defValue: any
+    comment: any
+    autoInc: any
+    nullable: any
+    unique: any
+    index: any
+    unsigned: any
+    foreignKey: any
+    form: any
+
+    componentWillReceiveProps(nextProps: Props) {
         this.setState({
             isUnsigned: nextProps.editData.unsigned,
             foreignKeyEnabled: !!nextProps.editData.foreignKey.on.id,
@@ -30,15 +50,8 @@ class ColumnModal extends Component {
             nullable: this.nullable.checked,
             unique: this.unique.checked,
             index: this.index.checked,
-            unsigned: this.unsigned.checked
-        };
-
-        const foreignKey = this.foreignKey;
-
-        if (foreignKey) {
-            data.foreignKey = foreignKey.getData();
-        } else {
-            data.foreignKey = {
+            unsigned: this.unsigned.checked,
+            foreignKey: {
                 references: {
                     id: '',
                     name: ''
@@ -47,7 +60,13 @@ class ColumnModal extends Component {
                     id: '',
                     name: ''
                 }
-            };
+            }
+        };
+
+        const foreignKey = this.foreignKey;
+
+        if (foreignKey) {
+            data.foreignKey = foreignKey.getData();
         }
 
         if (!data.name) {
@@ -73,7 +92,7 @@ class ColumnModal extends Component {
         return data;
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = (event: Event) => {
         event.preventDefault();
     }
 
@@ -124,14 +143,14 @@ class ColumnModal extends Component {
         this.props.toggleColumnModal();
     }
 
-    updateUnsignedValue = (event) => {
+    updateUnsignedValue = (event: { target: { checked: boolean } }) => {
         this.setState({
             isUnsigned: event.target.checked,
             foreignKeyEnabled: false
         });
     }
 
-    updateForeignKeyValue = (event) => {
+    updateForeignKeyValue = (event: { target: { checked: boolean } }) => {
         this.setState({ foreignKeyEnabled: event.target.checked });
     }
 
@@ -348,38 +367,18 @@ class ColumnModal extends Component {
     }
 }
 
-ColumnModal.propTypes = {
-    showColumnModal: PropTypes.bool.isRequired,
-    editMode: PropTypes.bool.isRequired,
-    editData: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        comment: PropTypes.string.isRequired,
-        autoInc: PropTypes.bool.isRequired,
-        unique: PropTypes.bool.isRequired,
-        index: PropTypes.bool.isRequired,
-        unsigned: PropTypes.bool.isRequired,
-        nullable: PropTypes.bool.isRequired,
-        length: PropTypes.string.isRequired,
-        defValue: PropTypes.string.isRequired,
-        foreignKey: PropTypes.shape({
-            references: PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired
-            }).isRequired,
-            on: PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired
-            }).isRequired
-        }).isRequired
-    }).isRequired,
-    tableId: PropTypes.string.isRequired,
-    tables: PropTypes.arrayOf(PropTypes.object).isRequired,
-    columns: PropTypes.objectOf(PropTypes.array).isRequired,
-    toggleColumnModal: PropTypes.func.isRequired,
-    saveColumn: PropTypes.func.isRequired,
-    updateColumn: PropTypes.func.isRequired
+type Props = {
+    showColumnModal: boolean,
+    editMode: boolean,
+    editData: ColumnType,
+    tableId: string,
+    tables: Array<TableType>,
+    columns: {
+        [tableId: string]: Array<ColumnType>
+    },
+    toggleColumnModal: () => void,
+    saveColumn: (data: ColumnType, tableId: string, hideModal?: boolean) => void,
+    updateColumn: (data: ColumnType, tableId: string) => void
 };
 
 export default ColumnModal;

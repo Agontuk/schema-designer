@@ -1,4 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import ExportDatabase from './ExportDatabase';
@@ -12,6 +15,8 @@ const trashTooltip = (
 );
 
 class Header extends Component {
+    props: Props
+
     clearSchemaData = () => {
         window.localStorage.removeItem('schema');
         window.location.reload();
@@ -65,7 +70,7 @@ class Header extends Component {
                                         </button>
                                     </OverlayTrigger>
                                 </li>
-                                { typeof schema === 'object' &&
+                                { typeof window.schema === 'object' &&
                                     window.schema.packageMode &&
                                     <ExportDatabase />
                                 }
@@ -78,10 +83,10 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {
-    dbName: PropTypes.string.isRequired,
-    onToggleDbModal: PropTypes.func.isRequired,
-    onToggleTableModal: PropTypes.func.isRequired
+type Props = {
+    dbName: string,
+    onToggleDbModal: (editMode?: boolean) => void,
+    onToggleTableModal: () => void
 };
 
 export default Header;

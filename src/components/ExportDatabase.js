@@ -1,13 +1,22 @@
-import React, { Component, PropTypes } from 'react';
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
+import type { ColumnType, RelationType, TableType, UiType } from '../utils/flowtypes';
 
 const exportTooltip = (
     <Tooltip id='tooltip'><strong>Generate Database Migrations</strong></Tooltip>
 );
 
 class ExportDatabase extends Component {
+    props: Props
+
+    // Flow type for refs
+    form: any
+
     handleSubmit = () => {
         this.form.submit();
     }
@@ -38,14 +47,18 @@ class ExportDatabase extends Component {
     }
 }
 
-ExportDatabase.propTypes = {
-    data: PropTypes.shape({
-        database: PropTypes.object.isRequired,
-        ui: PropTypes.object.isRequired,
-        tables: PropTypes.arrayOf(PropTypes.object).isRequired,
-        columns: PropTypes.objectOf(PropTypes.array).isRequired,
-        relations: PropTypes.arrayOf(PropTypes.object).isRequired
-    }).isRequired
+type Props = {
+    data: {
+        database: {
+            name: string
+        },
+        ui: UiType,
+        tables: Array<TableType>,
+        columns: {
+            [x: string]: Array<ColumnType>
+        },
+        relations: Array<RelationType>
+    }
 };
 
 const mapStateToProps = (state) => ({

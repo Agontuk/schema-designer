@@ -1,7 +1,14 @@
 {
-    extends: ['airbnb'],
+    extends: [
+        'airbnb',
+        'plugin:flowtype/recommended'
+    ],
     parser: 'babel-eslint',
-    plugins: ['react'],
+    plugins: [
+        'react',
+        'flowtype',
+        'flowtype-errors'
+    ],
     rules: {
         # Auto detect arrow body style
         arrow-body-style: ['error', 'as-needed'],
@@ -42,8 +49,38 @@
         # Detect missing key prop
         react/jsx-key: 'error',
 
+        # Enforce component methods order
+        react/sort-comp: 'off',
+
         # Prevent self closing tags for html component
         react/self-closing-comp: ['error', { 'component': true, 'html': false }],
+
+        # Show flow errors with eslint
+        flowtype-errors/show-errors: 'error',
+
+        # Enforces consistent use of trailing commas in Object and Tuple annotations.
+        flowtype/delimiter-dangle: ['error', 'never'],
+
+        # Checks for duplicate properties in Object annotations.
+        flowtype/no-dupe-keys: 'error',
+
+        # Disallows use of primitive constructors as types (e.g. Boolean)
+        flowtype/no-primitive-constructor-types: 'error',
+
+        # Warns against weak type annotations (any, Object and Function).
+        flowtype/no-weak-types: ['error', { 'any': false }],
+
+        # Enforces consistent separators between properties in Flow object types.
+        flowtype/object-type-delimiter: ['error', 'comma'],
+
+        # Requires that all function parameters have type annotations.
+        flowtype/require-parameter-type: ['error', { 'excludeArrowFunctions': true }],
+
+        # Requires that functions have return type annotation.
+        flowtype/require-return-type: ['error', { 'excludeArrowFunctions': true }],
+
+        # Enforces consistent use of semicolons after type aliases.
+        flowtype/semi: ['error', 'always']
     },
 
     env: {

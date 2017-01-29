@@ -7,14 +7,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case types.SAVE_TABLE:
             return update(state, {
-                $push: [{
-                    ...action.data,
-                    position: {
-                        // Position each table with some offset
-                        x: 0 + (state.length * 40),
-                        y: 0 + (state.length * 40)
-                    }
-                }]
+                $push: [action.data]
             });
         case types.REMOVE_TABLE:
             return state.filter((table) => table.id !== action.id);

@@ -112,7 +112,7 @@ header {
     background-color: #34495e;
     color: white;
     cursor: move;
-    padding: 8px;
+    padding: 6px 8px;
 }
 
 .table-header h4 {
@@ -128,6 +128,11 @@ header {
     margin: 0 5px;
 }
 
+.table-header span:last-child {
+    margin-right: 0;
+}
+
+
 .db-columns {
     list-style: none;
     margin-bottom: 0;
@@ -136,7 +141,7 @@ header {
 
 .db-columns li {
     border-bottom: 1px solid gray;
-    padding: 8px;
+    padding: 6px 8px;
 }
 
 .db-columns li:last-child {
@@ -159,6 +164,10 @@ header {
     color: #34495e;
     cursor: pointer;
     margin: 0 5px;
+}
+
+.db-columns .pull-right span:last-child {
+    margin-right: 0;
 }
 
 .db-columns sup {
