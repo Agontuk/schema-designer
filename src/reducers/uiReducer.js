@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import * as types from '../actions';
+import * as types from '../actions/constants';
 
 const initialState = {
     database: {

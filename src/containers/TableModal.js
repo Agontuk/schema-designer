@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import TableModal from '../components/TableModal';
-import { saveTable, toggleTableModal, updateTable } from '../actions';
+import { saveTable, toggleTableModal, updateTable } from '../actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
     showTableModal: state.ui.table.showModal,

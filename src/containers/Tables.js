@@ -6,7 +6,7 @@ import {
     toggleTableModal,
     toggleColumnModal,
     storeTablePosition
-} from '../actions';
+} from '../actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
     tables: state.tables

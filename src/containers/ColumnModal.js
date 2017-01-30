@@ -6,7 +6,7 @@ import {
     updateColumn,
     saveForeignKeyRelation,
     updateForeignKeyRelation
-} from '../actions';
+} from '../actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
     showColumnModal: state.ui.column.showModal,
