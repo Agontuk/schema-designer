@@ -55,7 +55,7 @@ type Props = {
         ui: UiType,
         tables: Array<TableType>,
         columns: {
-            [x: string]: Array<ColumnType>
+            [tableId: string]: Array<ColumnType>
         },
         relations: Array<RelationType>
     }

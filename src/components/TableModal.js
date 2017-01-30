@@ -19,6 +19,10 @@ class TableModal extends Component {
     softdelete: any
     timestamp: any
 
+    focusInput = () => {
+        this.name.focus();
+    }
+
     handleSubmit = (event: Event) => {
         event.preventDefault();
 
@@ -79,6 +83,7 @@ class TableModal extends Component {
         return (
             <Modal
                 show={ showTableModal }
+                onEntered={ this.focusInput }
                 onHide={ this.toggleTableModal }
                 dialogClassName='modal-sm'
             >
@@ -102,7 +107,6 @@ class TableModal extends Component {
                                     ref={ (name) => { this.name = name; } }
                                     className='form-control'
                                     defaultValue={ editData.name }
-                                    autoFocus
                                 />
                             </div>
 
