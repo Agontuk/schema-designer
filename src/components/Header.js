@@ -34,11 +34,11 @@ class Header extends Component {
             <header>
                 <div className='container'>
                     <div className='row'>
-                        <div className='title col-xs-4 text-left'>
+                        <div className='title col-xs-5 col-sm-4 text-left'>
                             <strong>Schema Builder</strong>
                             <sub>by <a href='https://github.com/Agontuk'>Agontuk</a></sub>
                         </div>
-                        <div className='db-name col-xs-4 text-center'>
+                        <div className='db-name col-xs-5 col-sm-4 text-center'>
                             <span><i className='fa fa-database'></i> { dbName }</span>
                             { !!dbName &&
                                 <sup>
@@ -50,7 +50,7 @@ class Header extends Component {
                                 </sup>
                             }
                         </div>
-                        <div className='menu col-xs-4 text-right'>
+                        <div className='menu col-xs-2 col-sm-4 text-right'>
                             <ul className='list-inline'>
                                 <li>
                                     <OverlayTrigger placement='bottom' overlay={ tableTooltip }>
