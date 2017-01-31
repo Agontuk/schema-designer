@@ -43,7 +43,7 @@ class Header extends Component {
                             { !!dbName &&
                                 <sup>
                                     <button
-                                        className='glyphicon glyphicon-edit'
+                                        className='fa fa-edit'
                                         onClick={ this.toggleDbModal }
                                     >
                                     </button>
@@ -55,7 +55,7 @@ class Header extends Component {
                                 <li>
                                     <OverlayTrigger placement='bottom' overlay={ tableTooltip }>
                                         <button
-                                            className='glyphicon glyphicon-plus'
+                                            className='fa fa-plus'
                                             onClick={ onToggleTableModal }
                                         >
                                         </button>
@@ -64,7 +64,7 @@ class Header extends Component {
                                 <li>
                                     <OverlayTrigger placement='bottom' overlay={ trashTooltip }>
                                         <button
-                                            className='glyphicon glyphicon-trash'
+                                            className='fa fa-trash-o'
                                             onClick={ this.clearSchemaData }
                                         >
                                         </button>

@@ -28,8 +28,8 @@ class Column extends Component {
                     <small>({ data.type })</small>
                 </div>
                 <div className='pull-right'>
-                    <span className='glyphicon glyphicon-pencil' onClick={ this.editColumn }></span>
-                    <span className='glyphicon glyphicon-remove' onClick={ this.removeColumn }></span>
+                    <span className='fa fa-pencil' onClick={ this.editColumn }></span>
+                    <span className='fa fa-remove' onClick={ this.removeColumn }></span>
                 </div>
             </li>
         );

@@ -36,7 +36,7 @@ class ExportDatabase extends Component {
                 </form>
                 <OverlayTrigger placement='bottom' overlay={ exportTooltip }>
                     <button
-                        className='glyphicon glyphicon-download-alt'
+                        className='fa fa-download'
                         onClick={ this.handleSubmit }
                         disabled={ !data.tables.length }
                     >

@@ -35,9 +35,9 @@ class Table extends Component {
                 <div className='table-header clearfix'>
                     <h4 className='pull-left' title={ data.name }>{ data.name }</h4>
                     <div className='pull-right'>
-                        <span className='glyphicon glyphicon-plus' onClick={ this.toggleColumnModal }></span>
-                        <span className='glyphicon glyphicon-pencil' onClick={ this.editTable }></span>
-                        <span className='glyphicon glyphicon-remove' onClick={ this.removeTable }></span>
+                        <span className='fa fa-plus' onClick={ this.toggleColumnModal }></span>
+                        <span className='fa fa-pencil' onClick={ this.editTable }></span>
+                        <span className='fa fa-remove' onClick={ this.removeTable }></span>
                     </div>
                 </div>
 
