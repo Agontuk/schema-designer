@@ -4,7 +4,7 @@
 import * as types from './constants';
 import type { ColumnType, TablePositionType, TableType } from '../utils/flowtypes';
 
-export function toggleDbModal(editMode: boolean) {
+export function toggleDbModal(editMode?: boolean) {
     return {
         type: types.TOGGLE_DB_MODAL,
         editMode
@@ -52,7 +52,7 @@ export function updateTable(data: TableType) {
     };
 }
 
-export function toggleColumnModal(tableId: string) {
+export function toggleColumnModal(tableId?: string) {
     return {
         type: types.TOGGLE_COLUMN_MODAL,
         tableId

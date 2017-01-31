@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import { connect } from 'react-redux';
 import Schema from '../components/Schema';
 import { toggleDbModal, toggleTableModal } from '../actions/ActionCreators';

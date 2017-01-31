@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import { connect } from 'react-redux';
 import TableModal from '../components/TableModal';
 import { saveTable, toggleTableModal, updateTable } from '../actions/ActionCreators';

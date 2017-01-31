@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import { connect } from 'react-redux';
 import DbModal from '../components/DbModal';
 import { saveDbName, toggleTableModal, toggleDbModal } from '../actions/ActionCreators';

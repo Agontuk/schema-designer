@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import { connect } from 'react-redux';
 import Tables from '../components/Tables';
 import {
