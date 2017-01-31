@@ -216,6 +216,10 @@ class ColumnModal extends Component {
                                         <option value='mediumInteger'>MEDIUMINT</option>
                                         <option value='bigInteger'>BIGINT</option>
                                         <option value='boolean'>BOOLEAN</option>
+                                        <option disabled='disabled'>-</option>
+                                        <option value='decimal'>DECIMAL</option>
+                                        <option value='float'>FLOAT</option>
+                                        <option value='double'>DOUBLE</option>
                                     </optgroup>
                                     <optgroup label='Date and time'>
                                         <option value='dateTime'>DATETIME</option>
@@ -240,6 +244,7 @@ class ColumnModal extends Component {
                                     ref={ (length) => { this.length = length; } }
                                     className='form-control'
                                     defaultValue={ editData.length }
+                                    placeholder='Use comma separated value for decimal, double or float'
                                 />
                             </div>
                         </div>
