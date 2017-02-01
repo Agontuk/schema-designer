@@ -12,6 +12,7 @@ header {
     position: fixed;
     right: 0;
     top: 0;
+    z-index: 300;
 }
 
 .container-fluid {
@@ -72,6 +73,7 @@ header {
     border: 1px solid #2c3e50;
     border-radius: 50%;
     color: #ecf0f1;
+    font-size: 1.2em;
     outline: none;
     padding: 8px;
     text-decoration: none;

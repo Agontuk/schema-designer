@@ -34,10 +34,12 @@ class ColumnModal extends Component {
     form: any
 
     componentWillReceiveProps(nextProps: Props) {
+        // For edit action
         this.setState({
-            isUnsigned: nextProps.editData.unsigned,
+            columnType: nextProps.editData.type,
+            duplicateName: false,
             foreignKeyEnabled: !!nextProps.editData.foreignKey.on.id,
-            duplicateName: false
+            isUnsigned: nextProps.editData.unsigned
         });
     }
 
@@ -85,10 +87,12 @@ class ColumnModal extends Component {
             return false;
         }
 
+        // Reset all state variables
         this.setState({
-            isUnsigned: false,
+            columnType: '',
+            duplicateName: false,
             foreignKeyEnabled: false,
-            duplicateName: false
+            isUnsigned: false
         });
 
         return data;
@@ -138,17 +142,8 @@ class ColumnModal extends Component {
         }
     }
 
-    toggleColumnModal = () => {
-        // Reset duplicateName state
-        this.setState({ duplicateName: false });
-
-        this.props.toggleColumnModal();
-    }
-
     updateColumnType = (event: { target: { value: string } }) => {
-        this.setState({
-            columnType: event.target.value
-        });
+        this.setState({ columnType: event.target.value });
     }
 
     updateUnsignedValue = (event: { target: { checked: boolean } }) => {
@@ -163,16 +158,24 @@ class ColumnModal extends Component {
     }
 
     render() {
-        const { showColumnModal, editData, editMode, tables, tableId, columns } = this.props;
+        const {
+            columns,
+            editData,
+            editMode,
+            showColumnModal,
+            tables,
+            tableId,
+            toggleColumnModal
+        } = this.props;
         const { columnType, duplicateName, foreignKeyEnabled, isUnsigned } = this.state;
 
         return (
             <Modal
                 show={ showColumnModal }
-                onHide={ this.toggleColumnModal }
+                onHide={ toggleColumnModal }
             >
                 <Modal.Header>
-                    <button type='button' className='close' onClick={ this.toggleColumnModal }>
+                    <button type='button' className='close' onClick={ toggleColumnModal }>
                         <span>&times;</span>
                     </button>
                     <Modal.Title>
@@ -374,7 +377,7 @@ class ColumnModal extends Component {
                     <button
                         type='button'
                         className='btn btn-default'
-                        onClick={ this.toggleColumnModal }
+                        onClick={ toggleColumnModal }
                     >Cancel
                     </button>
                 </Modal.Footer>
