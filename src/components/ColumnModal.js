@@ -7,14 +7,16 @@ import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import ForeignKeyForm from './ForeignKeyForm';
 import type { ColumnType, TableType } from '../utils/flowtypes';
+import { isFractionType } from '../utils/helpers';
 
 class ColumnModal extends Component {
     props: Props
 
     state = {
-        isUnsigned: false,
+        columnType: '',
+        duplicateName: false,
         foreignKeyEnabled: false,
-        duplicateName: false
+        isUnsigned: false
     }
 
     // Flow type for refs
@@ -143,6 +145,12 @@ class ColumnModal extends Component {
         this.props.toggleColumnModal();
     }
 
+    updateColumnType = (event: { target: { value: string } }) => {
+        this.setState({
+            columnType: event.target.value
+        });
+    }
+
     updateUnsignedValue = (event: { target: { checked: boolean } }) => {
         this.setState({
             isUnsigned: event.target.checked,
@@ -156,7 +164,7 @@ class ColumnModal extends Component {
 
     render() {
         const { showColumnModal, editData, editMode, tables, tableId, columns } = this.props;
-        const { isUnsigned, foreignKeyEnabled, duplicateName } = this.state;
+        const { columnType, duplicateName, foreignKeyEnabled, isUnsigned } = this.state;
 
         return (
             <Modal
@@ -205,6 +213,7 @@ class ColumnModal extends Component {
                                     id='type'
                                     ref={ (type) => { this.type = type; } }
                                     defaultValue={ editData.type }
+                                    onChange={ this.updateColumnType }
                                 >
                                     <option value='integer'>INT</option>
                                     <option value='string'>VARCHAR</option>
@@ -244,7 +253,9 @@ class ColumnModal extends Component {
                                     ref={ (length) => { this.length = length; } }
                                     className='form-control'
                                     defaultValue={ editData.length }
-                                    placeholder='Use comma separated value for decimal, double or float'
+                                    placeholder={ !isFractionType(columnType) ? '' :
+                                        'Use comma separated value for decimal, double or float'
+                                    }
                                 />
                             </div>
                         </div>
