@@ -2,6 +2,7 @@
  * @flow
  */
 import React, { Component } from 'react';
+import find from 'lodash/find';
 import type { ColumnType, ForeignKeyType, TableType } from '../utils/flowtypes';
 
 class ForeignKeyForm extends Component {
@@ -9,16 +10,12 @@ class ForeignKeyForm extends Component {
         super(props);
 
         const { data } = props;
-        const tableId = data.on.id;
-        const tableName = data.on.name;
-        const columnId = data.references.id;
-        const columnName = data.references.name;
 
         this.state = {
-            currentForeignTableId: tableId,
-            currentForeignTableName: tableName,
-            currentForeignColumnId: columnId,
-            currentForeignColumnName: columnName
+            currentForeignTableId: data.on.id,
+            currentForeignTableName: data.on.name,
+            currentForeignColumnId: data.references.id,
+            currentForeignColumnName: data.references.name
         };
     }
 
@@ -59,7 +56,7 @@ class ForeignKeyForm extends Component {
         let name = '';
 
         if (selected) {
-            name = tables.filter((table) => table.id === selected)[0].name;
+            name = find(tables, { id: selected }).name;
         }
 
         this.setState({
@@ -78,8 +75,7 @@ class ForeignKeyForm extends Component {
         let name = '';
 
         if (selected) {
-            name = columns[currentForeignTableId]
-                .filter((column) => column.id === selected)[0].name;
+            name = find(columns[currentForeignTableId], { id: selected }).name;
         }
 
         this.setState({
@@ -105,7 +101,9 @@ class ForeignKeyForm extends Component {
                         <option value=''>None</option>
 
                         { columns[currentForeignTableId] !== undefined &&
-                            columns[currentForeignTableId].map((column) => (
+                            columns[currentForeignTableId]
+                            .filter((column) => !column.foreignKey.on.id)
+                            .map((column) => (
                                 <option key={ column.id } value={ column.id }>
                                     { column.name }
                                 </option>
