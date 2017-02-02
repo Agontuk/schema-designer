@@ -4,7 +4,7 @@ import {
     removeTable,
     saveForeignKeyRelation,
     updateForeignKeyRelation
-} from '../src/actions';
+} from '../src/actions/ActionCreators';
 
 describe('relation reducer', () => {
     const state = [
