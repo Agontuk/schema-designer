@@ -158,6 +158,7 @@ class ColumnModal extends Component {
     }
 
     render() {
+        console.log('ColumnModal rendering');
         const {
             columns,
             editData,

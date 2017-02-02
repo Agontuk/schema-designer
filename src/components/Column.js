@@ -18,6 +18,7 @@ class Column extends Component {
     }
 
     render() {
+        console.log('Column rendering');
         const { data } = this.props;
 
         return (

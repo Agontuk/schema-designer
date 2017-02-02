@@ -77,6 +77,7 @@ class TableModal extends Component {
     }
 
     render() {
+        console.log('TableModal rendering');
         const { showTableModal, editData, editMode } = this.props;
         const { duplicateName } = this.state;
 

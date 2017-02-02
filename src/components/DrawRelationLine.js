@@ -50,6 +50,7 @@ class DrawRelationLine extends Component {
     }
 
     render() {
+        console.log('DrawRelationLine rendering');
         return null;
     }
 }

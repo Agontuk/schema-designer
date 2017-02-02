@@ -32,6 +32,7 @@ class DbModal extends Component {
     }
 
     render() {
+        console.log('DbModal rendering');
         const { name, showModal } = this.props;
 
         return (

@@ -22,6 +22,7 @@ class ExportDatabase extends Component {
     }
 
     render() {
+        console.log('ExportDatabase rendering');
         const { data } = this.props;
 
         return (

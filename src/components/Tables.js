@@ -74,6 +74,7 @@ class Tables extends Component {
     }
 
     render() {
+        console.log('Tables rendering');
         const { tables, removeTable, editTable, toggleColumnModal } = this.props;
 
         if (tables.length === 0) {

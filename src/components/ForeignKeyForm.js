@@ -85,6 +85,7 @@ class ForeignKeyForm extends Component {
     }
 
     render() {
+        console.log('ForeignKeyForm rendering');
         const { tables, tableId, data, columns } = this.props;
         const { currentForeignTableId } = this.state;
 

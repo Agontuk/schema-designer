@@ -24,6 +24,7 @@ class Table extends Component {
     }
 
     render() {
+        console.log('Table rendering');
         const { data } = this.props;
 
         return (

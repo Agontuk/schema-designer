@@ -21,6 +21,7 @@ class Schema extends Component {
     props: Props
 
     render() {
+        console.log('Schema rendering');
         const { dbName, toggleDbModal, toggleTableModal } = this.props;
 
         return (

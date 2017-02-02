@@ -9,6 +9,7 @@ class Columns extends Component {
     props: Props
 
     render() {
+        console.log('Columns rendering');
         const { columns, table, removeColumn, editColumn } = this.props;
 
         if (columns.length === 0 && !table.softDelete && !table.timeStamp) {

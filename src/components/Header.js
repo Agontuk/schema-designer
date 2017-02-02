@@ -28,6 +28,7 @@ class Header extends Component {
     }
 
     render() {
+        console.log('Header rendering');
         const { dbName, onToggleTableModal } = this.props;
 
         return (
