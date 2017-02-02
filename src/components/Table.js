@@ -24,7 +24,7 @@ class Table extends Component {
     }
 
     render() {
-        console.log('Table rendering');
+        console.log('Table rendering'); // eslint-disable-line no-console
         const { data } = this.props;
 
         return (

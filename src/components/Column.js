@@ -18,7 +18,7 @@ class Column extends Component {
     }
 
     render() {
-        console.log('Column rendering');
+        console.log('Column rendering'); // eslint-disable-line no-console
         const { data } = this.props;
 
         return (

@@ -15,6 +15,14 @@ const trashTooltip = (
 );
 
 class Header extends Component {
+    constructor(props: Props) {
+        super(props);
+
+        if (!props.dbName && !props.dbModal) {
+            props.toggleDbModal();
+        }
+    }
+
     props: Props
 
     clearSchemaData = () => {
@@ -24,12 +32,12 @@ class Header extends Component {
 
     toggleDbModal = () => {
         const editMode = true;
-        this.props.onToggleDbModal(editMode);
+        this.props.toggleDbModal(editMode);
     }
 
     render() {
-        console.log('Header rendering');
-        const { dbName, onToggleTableModal } = this.props;
+        console.log('Header rendering'); // eslint-disable-line no-console
+        const { dbName, toggleTableModal } = this.props;
 
         return (
             <header>
@@ -57,7 +65,7 @@ class Header extends Component {
                                     <OverlayTrigger placement='bottom' overlay={ tableTooltip }>
                                         <button
                                             className='fa fa-plus'
-                                            onClick={ onToggleTableModal }
+                                            onClick={ toggleTableModal }
                                         >
                                         </button>
                                     </OverlayTrigger>
@@ -86,8 +94,9 @@ class Header extends Component {
 
 type Props = {
     dbName: string,
-    onToggleDbModal: (editMode?: boolean) => void,
-    onToggleTableModal: () => void
+    dbModal: boolean,
+    toggleDbModal: (editMode?: boolean) => void,
+    toggleTableModal: () => void
 };
 
 export default Header;

@@ -22,7 +22,7 @@ class ExportDatabase extends Component {
     }
 
     render() {
-        console.log('ExportDatabase rendering');
+        console.log('ExportDatabase rendering'); // eslint-disable-line no-console
         const { data } = this.props;
 
         return (

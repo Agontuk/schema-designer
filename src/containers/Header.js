@@ -2,7 +2,7 @@
  * @flow
  */
 import { connect } from 'react-redux';
-import Schema from '../components/Schema';
+import Header from '../components/Header';
 import { toggleDbModal, toggleTableModal } from '../actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Schema);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

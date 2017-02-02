@@ -74,7 +74,7 @@ class Tables extends Component {
     }
 
     render() {
-        console.log('Tables rendering');
+        console.log('Tables rendering'); // eslint-disable-line no-console
         const { tables, removeTable, editTable, toggleColumnModal } = this.props;
 
         if (tables.length === 0) {

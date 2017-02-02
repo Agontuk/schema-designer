@@ -32,7 +32,7 @@ class DbModal extends Component {
     }
 
     render() {
-        console.log('DbModal rendering');
+        console.log('DbModal rendering'); // eslint-disable-line no-console
         const { name, showModal } = this.props;
 
         return (

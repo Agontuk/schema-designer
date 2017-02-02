@@ -158,7 +158,7 @@ class ColumnModal extends Component {
     }
 
     render() {
-        console.log('ColumnModal rendering');
+        console.log('ColumnModal rendering'); // eslint-disable-line no-console
         const {
             columns,
             editData,

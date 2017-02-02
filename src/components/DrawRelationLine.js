@@ -50,7 +50,7 @@ class DrawRelationLine extends Component {
     }
 
     render() {
-        console.log('DrawRelationLine rendering');
+        console.log('DrawRelationLine rendering'); // eslint-disable-line no-console
         return null;
     }
 }

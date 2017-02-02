@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import Schema from './containers/Schema';
+import Schema from './components/Schema';
 import './styles/bootstrap.css';
 import './styles/main.css';
 

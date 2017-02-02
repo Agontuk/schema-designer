@@ -77,7 +77,7 @@ class TableModal extends Component {
     }
 
     render() {
-        console.log('TableModal rendering');
+        console.log('TableModal rendering'); // eslint-disable-line no-console
         const { showTableModal, editData, editMode } = this.props;
         const { duplicateName } = this.state;
 

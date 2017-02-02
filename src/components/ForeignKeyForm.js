@@ -85,7 +85,7 @@ class ForeignKeyForm extends Component {
     }
 
     render() {
-        console.log('ForeignKeyForm rendering');
+        console.log('ForeignKeyForm rendering'); // eslint-disable-line no-console
         const { tables, tableId, data, columns } = this.props;
         const { currentForeignTableId } = this.state;
 
