@@ -1,12 +1,12 @@
 /**
  * @flow
  */
-import { Component, PropTypes } from 'react';
+import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import jsPlumb from 'jsplumb';
 import type { RelationType } from '../utils/flowtypes';
 
-class DrawRelationLine extends Component {
+class DrawRelationLine extends PureComponent {
     props: {
         relations: Array<RelationType>
     }
@@ -54,10 +54,6 @@ class DrawRelationLine extends Component {
         return null;
     }
 }
-
-DrawRelationLine.propTypes = {
-    relations: PropTypes.arrayOf(PropTypes.object).isRequired
-};
 
 const mapStateToProps = (state) => ({
     relations: state.relations

@@ -1,11 +1,11 @@
 /**
  * @flow
  */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Columns from '../containers/Columns';
 import type { TableType } from '../utils/flowtypes';
 
-class Table extends Component {
+class Table extends PureComponent {
     props: Props
 
     editTable = () => {

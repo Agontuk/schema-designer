@@ -5,16 +5,31 @@ const initialState = [];
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case types.REMOVE_TABLE:
+        case types.REMOVE_TABLE: {
             // Drop all associated relations for this table
-            return state.filter((relation) => (relation.source.tableId !== action.id) &&
+            const newState = state.filter((relation) => (relation.source.tableId !== action.id) &&
                 relation.target.tableId !== action.id);
+
+            if (state.length === newState.length) {
+                // No changes, return previous state
+                return state;
+            }
+
+            return newState;
+        }
         case types.REMOVE_COLUMN: {
             // Drop all associated relations for this column
             const columnId = action.columnData.id;
 
-            return state.filter((relation) => (relation.source.columnId !== columnId &&
+            const newState = state.filter((relation) => (relation.source.columnId !== columnId &&
                 relation.target.columnId !== columnId));
+
+            if (state.length === newState.length) {
+                // No changes, return previous state
+                return state;
+            }
+
+            return newState;
         }
         case types.SAVE_FOREIGN_KEY_RELATION:
             if (action.columnData.foreignKey.on.id) {

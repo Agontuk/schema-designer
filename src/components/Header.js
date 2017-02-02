@@ -25,6 +25,11 @@ class Header extends Component {
 
     props: Props
 
+    shouldComponentUpdate(nextProps: Props) {
+        // Update only if database name changes
+        return this.props.dbName !== nextProps.dbName;
+    }
+
     clearSchemaData = () => {
         window.localStorage.removeItem('schema');
         window.location.reload();

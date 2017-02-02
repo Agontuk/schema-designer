@@ -1,10 +1,10 @@
 /**
  * @flow
  */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import type { ColumnType } from '../utils/flowtypes';
 
-class Column extends Component {
+class Column extends PureComponent {
     props: Props
 
     editColumn = () => {
