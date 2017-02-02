@@ -26,7 +26,7 @@ class TableModal extends Component {
     handleSubmit = (event: Event) => {
         event.preventDefault();
 
-        const name = this.name.value.trim();
+        const name = this.name.value.trim().toLowerCase();
         const softDelete = this.softdelete.checked;
         const timeStamp = this.timestamp.checked;
 
