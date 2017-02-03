@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import jsPlumb from 'jsplumb';
-import Table from './Table';
+import Table from '../containers/Table';
 import type { TableType, TablePositionType } from '../utils/flowtypes';
 
 class Tables extends Component {

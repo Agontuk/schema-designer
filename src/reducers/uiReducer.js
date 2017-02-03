@@ -43,7 +43,8 @@ const initialState = {
             }
         },
         tableId: ''
-    }
+    },
+    positions: {}
 };
 
 export default (state = initialState, action) => {
@@ -124,6 +125,30 @@ export default (state = initialState, action) => {
                     edit: { $set: true },
                     editData: { $set: action.data },
                     tableId: { $set: action.tableId }
+                }
+            });
+        case types.SAVE_TABLE: {
+            const length = Object.keys(state.positions).length;
+            return update(state, {
+                positions: {
+                    [action.data.id]: {
+                        $set: {
+                            x: 0 + (length * 40),
+                            y: 0 + (length * 40)
+                        }
+                    }
+                }
+            });
+        }
+        case types.STORE_TABLE_POSITION:
+            return update(state, {
+                positions: {
+                    [action.newPos.id]: {
+                        $set: {
+                            x: action.newPos.x,
+                            y: action.newPos.y
+                        }
+                    }
                 }
             });
         default:

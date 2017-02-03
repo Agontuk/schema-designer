@@ -46,7 +46,7 @@ class TableModal extends Component {
 
         if (editMode) {
             updateTable({
-                ...editData,
+                id: editData.id,
                 name,
                 softDelete,
                 timeStamp
@@ -56,12 +56,7 @@ class TableModal extends Component {
                 id: Math.random().toString(36).substring(7),
                 name,
                 softDelete,
-                timeStamp,
-                position: {
-                    // Position each table with some offset
-                    x: 0 + (tables.length * 40),
-                    y: 0 + (tables.length * 40)
-                }
+                timeStamp
             });
         }
 

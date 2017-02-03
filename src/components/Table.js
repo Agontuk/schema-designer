@@ -25,13 +25,13 @@ class Table extends PureComponent {
 
     render() {
         console.log('Table rendering'); // eslint-disable-line no-console
-        const { data } = this.props;
+        const { data, position } = this.props;
 
         return (
             <div
                 className='db-table draggable no-select'
                 id={ data.id }
-                style={ { left: data.position.x, top: data.position.y } }
+                style={ { left: position.x, top: position.y } }
             >
                 <div className='table-header clearfix'>
                     <h4 className='pull-left' title={ data.name }>{ data.name }</h4>
@@ -50,6 +50,10 @@ class Table extends PureComponent {
 
 type Props = {
     data: TableType,
+    position: {
+        x: number,
+        y: number
+    },
     onEditTable: (data: TableType) => void,
     onRemoveTable: (id: string) => void,
     onToggleColumnModal: (id: string) => void

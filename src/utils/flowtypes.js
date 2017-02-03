@@ -32,11 +32,7 @@ export type TableType = {
     id: string,
     name: string,
     softDelete: boolean,
-    timeStamp: boolean,
-    position: {
-        x: number,
-        y: number
-    }
+    timeStamp: boolean
 };
 
 export type RelationType = {

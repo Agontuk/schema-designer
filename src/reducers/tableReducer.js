@@ -14,24 +14,7 @@ export default (state = initialState, action) => {
         case types.UPDATE_TABLE:
             return state.map((table) => {
                 if (table.id === action.data.id) {
-                    return {
-                        ...table,
-                        ...action.data
-                    };
-                }
-
-                return table;
-            });
-        case types.STORE_TABLE_POSITION:
-            return state.map((table) => {
-                if (table.id === action.newPos.id) {
-                    return {
-                        ...table,
-                        position: {
-                            x: action.newPos.x,
-                            y: action.newPos.y
-                        }
-                    };
+                    return action.data;
                 }
 
                 return table;
