@@ -140,6 +140,16 @@ export default (state = initialState, action) => {
                 }
             });
         }
+        case types.REMOVE_TABLE: {
+            return update(state, {
+                positions: {
+                    $apply: (table) => {
+                        const { [action.id]: omit, ...rest } = table; // eslint-disable-line no-unused-vars
+                        return rest;
+                    }
+                }
+            });
+        }
         case types.STORE_TABLE_POSITION:
             return update(state, {
                 positions: {
