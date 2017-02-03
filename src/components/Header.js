@@ -7,11 +7,11 @@ import Tooltip from 'react-bootstrap/lib/Tooltip';
 import ExportDatabase from './ExportDatabase';
 
 const tableTooltip = (
-    <Tooltip id='tooltip'><strong>Create New Table</strong></Tooltip>
+    <Tooltip id='table-tooltip'><strong>Create New Table</strong></Tooltip>
 );
 
 const trashTooltip = (
-    <Tooltip id='tooltip'><strong>Clear Current Schema</strong></Tooltip>
+    <Tooltip id='trash-tooltip'><strong>Clear Current Schema</strong></Tooltip>
 );
 
 class Header extends Component {
@@ -67,7 +67,12 @@ class Header extends Component {
                         <div className='menu col-xs-2 col-sm-4 text-right'>
                             <ul className='list-inline'>
                                 <li>
-                                    <OverlayTrigger placement='bottom' overlay={ tableTooltip }>
+                                    <OverlayTrigger
+                                        placement='bottom'
+                                        overlay={ tableTooltip }
+                                        delayShow={ 300 }
+                                        rootClose
+                                    >
                                         <button
                                             className='fa fa-plus'
                                             onClick={ toggleTableModal }
@@ -76,7 +81,12 @@ class Header extends Component {
                                     </OverlayTrigger>
                                 </li>
                                 <li>
-                                    <OverlayTrigger placement='bottom' overlay={ trashTooltip }>
+                                    <OverlayTrigger
+                                        placement='bottom'
+                                        overlay={ trashTooltip }
+                                        delayShow={ 300 }
+                                        rootClose
+                                    >
                                         <button
                                             className='fa fa-trash-o'
                                             onClick={ this.clearSchemaData }

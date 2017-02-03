@@ -8,7 +8,7 @@ import Tooltip from 'react-bootstrap/lib/Tooltip';
 import type { ColumnType, RelationType, TableType, UiType } from '../utils/flowtypes';
 
 const exportTooltip = (
-    <Tooltip id='tooltip'><strong>Generate Database Migrations</strong></Tooltip>
+    <Tooltip id='export-tooltip'><strong>Generate Database Migrations</strong></Tooltip>
 );
 
 class ExportDatabase extends Component {
@@ -35,7 +35,12 @@ class ExportDatabase extends Component {
                 >
                     <input type='hidden' name='schema' value={ JSON.stringify(data) } />
                 </form>
-                <OverlayTrigger placement='bottom' overlay={ exportTooltip }>
+                <OverlayTrigger
+                    placement='bottom'
+                    overlay={ exportTooltip }
+                    delayShow={ 300 }
+                    rootClose
+                >
                     <button
                         className='fa fa-download'
                         onClick={ this.handleSubmit }
