@@ -6,8 +6,8 @@ import Modal from 'react-bootstrap/lib/Modal';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import ForeignKeyForm from './ForeignKeyForm';
-import type { ColumnType, TableType } from '../utils/flowtypes';
-import { isFractionType } from '../utils/helpers';
+import type { ColumnType, TableType } from '../../utils/flowtypes';
+import { isFractionType } from '../../utils/helpers';
 
 class ColumnModal extends Component {
     props: Props

@@ -2,14 +2,14 @@
  * @flow
  */
 import { connect } from 'react-redux';
-import ColumnModal from '../components/ColumnModal';
+import ColumnModal from '../../components/Modals/ColumnModal';
 import {
     saveColumn,
     toggleColumnModal,
     updateColumn,
     saveForeignKeyRelation,
     updateForeignKeyRelation
-} from '../actions/ActionCreators';
+} from '../../actions/ActionCreators';
 
 const mapStateToProps = (state) => ({
     showColumnModal: state.ui.column.showModal,

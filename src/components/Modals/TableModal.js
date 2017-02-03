@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
-import type { TableType } from '../utils/flowtypes';
+import type { TableType } from '../../utils/flowtypes';
 
 class TableModal extends Component {
     props: Props

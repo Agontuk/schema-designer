@@ -3,7 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import find from 'lodash/find';
-import type { ColumnType, ForeignKeyType, TableType } from '../utils/flowtypes';
+import type { ColumnType, ForeignKeyType, TableType } from '../../utils/flowtypes';
 
 class ForeignKeyForm extends PureComponent {
     constructor(props: Props) {
