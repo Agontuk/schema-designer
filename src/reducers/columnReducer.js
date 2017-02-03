@@ -1,4 +1,5 @@
 import update from 'immutability-helper';
+import mapValues from 'lodash/mapValues';
 import * as types from '../actions/constants';
 
 const initialState = {};
@@ -18,12 +19,13 @@ export default (state = initialState, action) => {
         case types.UPDATE_TABLE: {
             // Update table name in foreign key data for each column
             // which references this table
-            const data = {};
-            Object.keys(state).forEach((key) => {
-                const columns = state[key].map((column) => {
+            let needUpdate = false;
+            const data = mapValues(state, (columns) => (
+                columns.map((column) => {
                     const foreignKey = column.foreignKey;
 
                     if (foreignKey.on.id === action.data.id) {
+                        needUpdate = true;
                         return update(column, {
                             foreignKey: {
                                 on: {
@@ -36,10 +38,14 @@ export default (state = initialState, action) => {
                     }
 
                     return column;
-                });
+                })
+            ));
 
-                data[key] = columns;
-            });
+            if (!needUpdate) {
+                // No changes in column data, return previous
+                // state to prevent re-render
+                return state;
+            }
 
             return data;
         }
@@ -51,12 +57,14 @@ export default (state = initialState, action) => {
             });
         case types.REMOVE_COLUMN: {
             // Update all columns which reference this column as a foreign key
-            const data = {};
-            Object.keys(state).forEach((key) => {
-                const columns = state[key].map((column) => {
+            let needUpdate = false;
+            const data = mapValues(state, (columns) => (
+                columns.map((column) => {
                     const foreignKey = column.foreignKey;
 
                     if (foreignKey.references.id === action.columnData.id) {
+                        needUpdate = true;
+
                         return {
                             ...column,
                             foreignKey: {
@@ -73,10 +81,20 @@ export default (state = initialState, action) => {
                     }
 
                     return column;
-                });
+                })
+            ));
 
-                data[key] = columns;
-            });
+            if (!needUpdate) {
+                // No changes in other columns, update previous state
+                // to prevent re-render in other tables
+                return update(state, {
+                    [action.tableId]: {
+                        $apply: (columns) => (
+                            columns.filter((column) => column.id !== action.columnData.id)
+                        )
+                    }
+                });
+            }
 
             return update(data, {
                 [action.tableId]: {

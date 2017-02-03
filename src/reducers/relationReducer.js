@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
                 relation.target.tableId !== action.id);
 
             if (state.length === newState.length) {
-                // No changes, return previous state
+                // No changes, return previous state to prevent re-render
                 return state;
             }
 
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
                 relation.target.columnId !== columnId));
 
             if (state.length === newState.length) {
-                // No changes, return previous state
+                // No changes, return previous state to prevent re-render
                 return state;
             }
 
@@ -90,8 +90,16 @@ export default (state = initialState, action) => {
                 });
             }
 
-            // Remove any relation referred by the current column
-            return state.filter((relation) => (relation.source.columnId !== action.columnData.id));
+            // No foreign key relation is assigned to the column, so
+            // remove any relation referred by the column if exists
+            const newState = state.filter((relation) => (relation.source.columnId !== action.columnData.id));
+
+            if (state.length === newState.length) {
+                // No changes, return previous state to prevent re-render
+                return state;
+            }
+
+            return newState;
         }
         default:
             return state;
