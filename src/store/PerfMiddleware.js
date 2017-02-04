@@ -10,8 +10,8 @@ const PerfMiddleware = () => (next) => (action) => {
     Perf.stop();
 
     console.group(key); // eslint-disable-line no-console
-    console.info('wasted'); // eslint-disable-line no-console
 
+    console.info('wasted'); // eslint-disable-line no-console
     Perf.printWasted();
 
     console.groupEnd(key); // eslint-disable-line no-console
