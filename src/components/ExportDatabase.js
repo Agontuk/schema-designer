@@ -2,7 +2,6 @@
  * @flow
  */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import type { ColumnType, TableType } from '../utils/flowtypes';
@@ -65,12 +64,4 @@ type Props = {
     }
 };
 
-const mapStateToProps = (state) => ({
-    data: {
-        database: state.database,
-        tables: state.tables,
-        columns: state.columns
-    }
-});
-
-export default connect(mapStateToProps)(ExportDatabase);
+export default ExportDatabase;
