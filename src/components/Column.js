@@ -25,6 +25,7 @@ class Column extends PureComponent {
             <li className='clearfix' id={ data.id }>
                 <div className='pull-left' title={ `${ data.name } (${ data.type })` }>
                     <span>{ data.name }</span>
+                    { !!data.autoInc && <sup>PK</sup> }
                     { !!data.foreignKey.references.id && <sup>FK</sup> }
                     <small>({ data.type })</small>
                 </div>
