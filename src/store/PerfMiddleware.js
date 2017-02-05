@@ -1,4 +1,4 @@
-import Perf from 'react-addons-perf';
+import Perf from 'react-dom/lib/ReactPerf';
 
 const PerfMiddleware = () => (next) => (action) => {
     const key = `performance:${ action.type }`;

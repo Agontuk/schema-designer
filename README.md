@@ -1,3 +1,3 @@
-# Laravel/Lumen schema builder
+# Laravel/Lumen schema designer
 
 ## Work In Progress

@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-boilerplate",
+  "name": "schema-designer",
   "version": "1.0.0",
-  "description": "Minimal boilerplate to setup your react application with redux store",
+  "description": "Database schema designer for laravel & lumen",
   "main": "main.js",
   "scripts": {
     "start": "node dev/server.js",
@@ -10,14 +10,20 @@
     "test": "jest"
   },
   "keywords": [
-    "react",
-    "redux",
-    "boilerplate"
+    "database",
+    "schema",
+    "design",
+    "laravel",
+    "lumen"
   ],
   "author": {
     "name": "Iftekhar Rifat",
     "email": "rifat662@gmail.com",
     "url": "https://github.com/Agontuk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Agontuk/schema-designer.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -26,7 +32,6 @@
     "jsplumb": "^2.2.10",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
-    "react-addons-perf": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
