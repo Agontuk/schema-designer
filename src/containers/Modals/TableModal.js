@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     updateTable: (data) => {
         dispatch(updateTable(data));
-        dispatch(toggleTableModal());
     }
 });
 
