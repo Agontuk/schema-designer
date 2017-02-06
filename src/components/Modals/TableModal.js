@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/lib/Modal';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import type { TableType } from '../../utils/flowtypes';
+import shallowEqual from '../../utils/shallowEqual';
 
 class TableModal extends Component {
     props: Props
@@ -26,38 +27,36 @@ class TableModal extends Component {
     handleSubmit = (event: Event) => {
         event.preventDefault();
 
-        const name = this.name.value.trim().toLowerCase();
-        const softDelete = this.softdelete.checked;
-        const timeStamp = this.timestamp.checked;
+        const { saveTable, updateTable, editMode, editData, tables } = this.props;
 
-        if (!name) {
+        const data = {
+            id: editMode ? editData.id : Math.random().toString(36).substring(7),
+            name: this.name.value.trim().toLowerCase(),
+            softDelete: this.softdelete.checked,
+            timeStamp: this.timestamp.checked
+        };
+
+        if (!data.name) {
             return;
         }
 
-        const { saveTable, updateTable, editMode, editData, tables } = this.props;
+        const duplicate = findIndex(tables, (table) => table.name === data.name);
 
-        const duplicate = findIndex(tables, (table) => table.name === name);
-
-        if (duplicate !== -1 && name !== editData.name) {
+        if (duplicate !== -1 && data.name !== editData.name) {
             // Duplicate table name
             this.setState({ duplicateName: true });
             return;
         }
 
         if (editMode) {
-            updateTable({
-                id: editData.id,
-                name,
-                softDelete,
-                timeStamp
-            });
+            // Only update if data is changed
+            if (!shallowEqual(data, editData)) {
+                updateTable(data);
+            }
+
+            this.toggleTableModal();
         } else {
-            saveTable({
-                id: Math.random().toString(36).substring(7),
-                name,
-                softDelete,
-                timeStamp
-            });
+            saveTable(data);
         }
 
         // Reset state

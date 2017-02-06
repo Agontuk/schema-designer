@@ -22,7 +22,7 @@ const initialState = {
         editData: {
             id: '',
             name: '',
-            type: '',
+            type: 'integer',
             length: '',
             defValue: '',
             comment: '',

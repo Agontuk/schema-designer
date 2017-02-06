@@ -216,7 +216,7 @@ class ColumnModal extends Component {
                                     className='form-control'
                                     id='type'
                                     ref={ (type) => { this.type = type; } }
-                                    defaultValue={ editData.type }
+                                    defaultValue={ columnType }
                                     onChange={ this.updateColumnType }
                                 >
                                     <option value='integer'>INT</option>
