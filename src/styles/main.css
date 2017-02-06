@@ -74,11 +74,12 @@ header {
     border-radius: 50%;
     color: #ecf0f1;
     font-size: 1.2em;
+    height: 35px;
     outline: none;
-    padding: 8px;
     text-decoration: none;
     top: 0;
     transition: 0.3s;
+    width: 35px;
     vertical-align: middle;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -229,5 +230,7 @@ button[disabled] {
 
     .menu li button {
         font-size: 0.9em;
+        height: 25px;
+        width: 25px;
     }
 }

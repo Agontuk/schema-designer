@@ -1,3 +1,7 @@
+/**
+ * Function for shallow comparison between two objects
+ * https://github.com/reactjs/react-redux/blob/master/src/utils/shallowEqual.js
+ */
 const hasOwn = Object.prototype.hasOwnProperty;
 
 function shallowEqual(a, b) { // eslint-disable-line flowtype/require-parameter-type
