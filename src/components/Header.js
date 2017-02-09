@@ -50,7 +50,6 @@ class Header extends Component {
                     <div className='row'>
                         <div className='title col-xs-5 col-sm-4 text-left'>
                             <strong>Schema Builder</strong>
-                            <sub>by <a href='https://github.com/Agontuk'>Agontuk</a></sub>
                         </div>
                         <div className='db-name col-xs-5 col-sm-4 text-center'>
                             <span><i className='fa fa-database'></i> { dbName }</span>

@@ -23,7 +23,7 @@ class Column extends PureComponent {
 
         return (
             <li className='clearfix' id={ data.id }>
-                <div className='pull-left' title={ `${ data.name } (${ data.type })` }>
+                <div className='pull-left' title={ data.comment ? data.comment : `${ data.name } (${ data.type })` }>
                     <span>{ data.name }</span>
                     { !!data.autoInc && <sup>PK</sup> }
                     { !!data.foreignKey.references.id && <sup>FK</sup> }
