@@ -202,14 +202,16 @@ button[disabled] {
 #forkongithub a {
     background: #c0392b;
     color: #fff;
-    text-decoration: none;
     font-family: arial,sans-serif;
-    text-align: center;
     font-weight: bold;
-    padding: 5px 40px;
     font-size: 1.2rem;
+    left: 0;
     line-height: 2rem;
-    position: relative;
+    padding: 5px 40px;
+    position: fixed;
+    text-align: center;
+    text-decoration: none;
+    top: 45px;
     transition: 0.5s;
 }
 
@@ -219,14 +221,14 @@ button[disabled] {
 }
 
 #forkongithub a::before,#forkongithub a::after {
+    background: #fff;
     content: "";
-    width: 100%;
     display: block;
+    height: 1px;
+    left: 0;
     position: absolute;
     top: 1px;
-    left: 0;
-    height: 1px;
-    background: #fff;
+    width: 100%;
 }
 
 #forkongithub a::after {
@@ -235,17 +237,18 @@ button[disabled] {
 
 @media screen and (min-width: 800px) {
     #forkongithub a {
-        width: 200px;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.8);
+        left: inherit;
         position: fixed;
-        top: 45px;
-        right: -45px;
+        right: -55px;
+        top: 35px;
         transform: rotate(45deg);
+        width: 200px;
+        z-index: 9999;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         -moz-transform: rotate(45deg);
         -o-transform: rotate(45deg);
-        box-shadow: 4px 4px 10px rgba(0,0,0,0.8);
-        z-index: 9999;
     }
 }
 
