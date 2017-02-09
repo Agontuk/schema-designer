@@ -25,6 +25,10 @@ const Schema = () => {
             <ColumnModal />
 
             <DrawRelationLine />
+
+            <span id='forkongithub'>
+                <a href='https://github.com/Agontuk/schema-designer'>Fork me on GitHub</a>
+            </span>
         </div>
     );
 };
