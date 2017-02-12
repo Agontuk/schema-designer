@@ -23,6 +23,12 @@ class ExportDatabase extends Component {
     render() {
         console.log('ExportDatabase rendering'); // eslint-disable-line no-console
         const { data } = this.props;
+        const node = document.querySelector('meta[name="csrf-token"]');
+        let csrfToken = '';
+
+        if (node) {
+            csrfToken = node.getAttribute('content');
+        }
 
         return (
             <li>
@@ -33,6 +39,7 @@ class ExportDatabase extends Component {
                     ref={ (form) => { this.form = form; } }
                 >
                     <input type='hidden' name='schema' value={ JSON.stringify(data) } />
+                    <input type='hidden' name='_token' value={ csrfToken } />
                 </form>
                 <OverlayTrigger
                     placement='bottom'
