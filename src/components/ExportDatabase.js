@@ -10,6 +10,10 @@ const exportTooltip = (
     <Tooltip id='export-tooltip'><strong>Generate Database Migrations</strong></Tooltip>
 );
 
+const exportJsonTooltip = (
+    <Tooltip id='export-tooltip'><strong>Export as JSON file</strong></Tooltip>
+);
+
 class ExportDatabase extends Component {
     props: Props
 
@@ -35,6 +39,7 @@ class ExportDatabase extends Component {
     render() {
         console.log('ExportDatabase rendering'); // eslint-disable-line no-console
         const { data } = this.props;
+        const packageMode = typeof window.schema === 'object' && window.schema.packageMode;
         const node = document.querySelector('meta[name="csrf-token"]');
         let csrfToken = '';
 
@@ -55,7 +60,7 @@ class ExportDatabase extends Component {
                 </form>
                 <OverlayTrigger
                     placement='bottom'
-                    overlay={ exportTooltip }
+                    overlay={ packageMode ? exportTooltip : exportJsonTooltip }
                     delayShow={ 300 }
                     rootClose
                 >

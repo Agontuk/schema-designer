@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import ExportDatabase from '../containers/ExportDatabase';
+import ImportDatabase from './ImportDatabase';
 
 const tableTooltip = (
     <Tooltip id='table-tooltip'><strong>Create New Table</strong></Tooltip>
@@ -95,6 +96,8 @@ class Header extends Component {
                                 </li>
 
                                 <ExportDatabase />
+
+                                <ImportDatabase />
 
                             </ul>
                         </div>
