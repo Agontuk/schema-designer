@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
-import type { ColumnType, TableType } from '../utils/flowtypes';
+import type { ColumnType, RelationType, TableType, UiType } from '../utils/flowtypes';
 
 const exportTooltip = (
     <Tooltip id='export-tooltip'><strong>Generate Database Migrations</strong></Tooltip>
@@ -64,10 +64,12 @@ type Props = {
         database: {
             name: string
         },
+        ui: UiType,
         tables: Array<TableType>,
         columns: {
             [tableId: string]: Array<ColumnType>
-        }
+        },
+        relations: Array<RelationType>
     }
 };
 

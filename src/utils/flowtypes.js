@@ -51,3 +51,20 @@ export type TablePositionType = {
     x: number,
     y: number
 };
+
+export type UiType = {
+    database: {
+        showModal: boolean,
+        edit: boolean
+    },
+    table: {
+        showModal: boolean,
+        edit: false,
+        editData: TableType
+    },
+    column: {
+        showModal: boolean,
+        edit: false,
+        editData: ColumnType
+    }
+};
