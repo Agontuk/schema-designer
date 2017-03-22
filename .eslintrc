@@ -6,8 +6,7 @@
     parser: 'babel-eslint',
     plugins: [
         'react',
-        'flowtype',
-        'flowtype-errors'
+        'flowtype'
     ],
     rules: {
         # Auto detect arrow body style
@@ -54,9 +53,6 @@
 
         # Prevent self closing tags for html component
         react/self-closing-comp: ['error', { 'component': true, 'html': false }],
-
-        # Show flow errors with eslint
-        flowtype-errors/show-errors: 'error',
 
         # Enforces consistent use of trailing commas in Object and Tuple annotations.
         flowtype/delimiter-dangle: ['error', 'never'],
