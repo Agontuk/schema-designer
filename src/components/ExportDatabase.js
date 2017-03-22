@@ -14,10 +14,22 @@ class ExportDatabase extends Component {
     props: Props
 
     // Flow type for refs
+    download: any
     form: any
 
     handleSubmit = () => {
-        this.form.submit();
+        if (typeof window.schema === 'object' &&
+                window.schema.packageMode) {
+            this.form.submit();
+        } else {
+            const { data } = this.props;
+            const jsonData = JSON.stringify(data, null, 4);
+            const url = `data:application/json;charset=utf8,${ encodeURIComponent(jsonData) }`;
+
+            this.download.setAttribute('href', url);
+            this.download.setAttribute('download', 'schema.json');
+            this.download.click();
+        }
     }
 
     render() {
@@ -54,6 +66,9 @@ class ExportDatabase extends Component {
                     >
                     </button>
                 </OverlayTrigger>
+                <a className='hidden' ref={ (download) => { this.download = download; } }>
+                    Export as JSON
+                </a>
             </li>
         );
     }

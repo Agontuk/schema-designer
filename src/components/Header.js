@@ -93,10 +93,9 @@ class Header extends Component {
                                         </button>
                                     </OverlayTrigger>
                                 </li>
-                                { typeof window.schema === 'object' &&
-                                    window.schema.packageMode &&
-                                    <ExportDatabase />
-                                }
+
+                                <ExportDatabase />
+
                             </ul>
                         </div>
                     </div>
