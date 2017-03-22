@@ -3,6 +3,7 @@ import createLogger from 'redux-logger';
 import Reducers from '../reducers';
 import LocalStorageMiddleware from './LocalStorageMiddleware';
 import PerfMiddleware from './PerfMiddleware';
+import { getInitialState } from '../utils/helpers';
 
 const logger = createLogger();
 const middleware = [LocalStorageMiddleware];
@@ -15,9 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
     extension = window.devToolsExtension ? window.devToolsExtension() : extension;
 }
 
-// Check if state is stored in localStorage
-let initialState = window.localStorage.getItem('schema');
-initialState = initialState ? JSON.parse(initialState) : {};
+const initialState = getInitialState();
 
 const store = createStore(Reducers, initialState, compose(applyMiddleware(...middleware), extension));
 
