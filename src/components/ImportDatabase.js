@@ -51,14 +51,14 @@ class ImportDatabase extends Component {
                 >
                     <label htmlFor='file-upload' className='custom-file-upload'>
                         <button className='fa fa-upload'></button>
-                        <input
-                            id='file-upload'
-                            type='file'
-                            accept='.json'
-                            onChange={ this.handleFileUpload }
-                        />
                     </label>
                 </OverlayTrigger>
+                <input
+                    id='file-upload'
+                    type='file'
+                    accept='.json'
+                    onChange={ this.handleFileUpload }
+                />
             </li>
         );
     }
