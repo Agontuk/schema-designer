@@ -11,7 +11,7 @@ Design your database diagram with ease. To get started, checkout **[agontuk.gith
 * Easy migration generation for laravel/lumen (see [schema-builder](https://github.com/Agontuk/schema-builder) package)
 
 ## TODO List
-* Add import & export functionality via json file.
+- [x] Add import & export functionality via json file.
 
 ## Contribution
 Any suggestions, pull requests are welcome. But your code should pass eslint validation :)
