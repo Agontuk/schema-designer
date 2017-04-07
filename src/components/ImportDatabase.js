@@ -40,6 +40,10 @@ class ImportDatabase extends Component {
         }
     }
 
+    openFileSelectionWindow = () => {
+        this.input.click();
+    }
+
     render() {
         return (
             <li>
@@ -49,12 +53,11 @@ class ImportDatabase extends Component {
                     delayShow={ 300 }
                     rootClose
                 >
-                    <label htmlFor='file-upload' className='custom-file-upload'>
-                        <button className='fa fa-upload'></button>
-                    </label>
+                    <button className='fa fa-upload' onClick={ this.openFileSelectionWindow }></button>
                 </OverlayTrigger>
                 <input
                     id='file-upload'
+                    ref={ (input) => { this.input = input; } }
                     type='file'
                     accept='.json'
                     onChange={ this.handleFileUpload }
