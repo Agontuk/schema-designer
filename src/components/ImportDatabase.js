@@ -18,21 +18,20 @@ class ImportDatabase extends Component {
         if (typeof FileReader === 'function') {
             const reader = new FileReader();
 
-            reader.onload = (() => (
-                (event) => {
-                    try {
-                        const jsonData = JSON.parse(event.target.result);
+            reader.onload = (event) => {
+                try {
+                    const jsonData = JSON.parse(event.target.result);
 
-                        // Set data to localStorage
-                        window.localStorage.setItem('schema', JSON.stringify(jsonData));
+                    // Set data to localStorage
+                    window.localStorage.setItem('schema', JSON.stringify(jsonData));
 
-                        // Reload the page
-                        window.location.reload();
-                    } catch (error) {
-                        alert('Invalid json supplied'); // eslint-disable-line no-alert
-                    }
+                    // Reload the page
+                    window.location.reload();
+                } catch (error) {
+                    console.error(error); // eslint-disable-line no-console
+                    alert('Invalid json supplied'); // eslint-disable-line no-alert
                 }
-            ))(file);
+            };
 
             reader.readAsText(file);
         } else {
