@@ -18,9 +18,9 @@ class ImportDatabase extends Component {
         if (typeof FileReader === 'function') {
             const reader = new FileReader();
 
-            reader.onload = (event) => {
+            reader.onload = () => {
                 try {
-                    const jsonData = JSON.parse(event.target.result);
+                    const jsonData = JSON.parse(reader.result);
 
                     // Set data to localStorage
                     window.localStorage.setItem('schema', JSON.stringify(jsonData));
