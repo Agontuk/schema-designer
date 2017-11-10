@@ -33,7 +33,7 @@ class Table extends PureComponent {
                 id={ data.id }
                 style={ { left: position.x, top: position.y } }
             >
-                <div className='table-header clearfix'>
+                <div className={ `table-header clearfix ${ data.color }` }>
                     <h4 className='pull-left' title={ data.name }>{ data.name }</h4>
                     <div className='pull-right'>
                         <span className='fa fa-plus' onClick={ this.toggleColumnModal }></span>
