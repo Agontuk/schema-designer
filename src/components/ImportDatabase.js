@@ -12,6 +12,8 @@ class ImportDatabase extends Component {
 
         if (file.type !== 'application/json') {
             alert('Please select the exported json file'); // eslint-disable-line no-alert
+            // Reset the current file input
+            e.target.value = null; // eslint-disable-line no-param-reassign
             return;
         }
 
