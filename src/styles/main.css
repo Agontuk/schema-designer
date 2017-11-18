@@ -129,19 +129,26 @@ header {
     padding: 6px 8px;
 }
 
-.table-header-red{
-    background: #CC3333;
+.table-header-red {
+    background: #c0392b;
 }
-.table-header-green{
-    background: #1B8000;
 
+.table-header-green {
+    background: #16a085;
 }
-.table-header-blue{
-    background: #1B86D6;
+
+.table-header-blue {
+    background: #2980b9;
 }
-.table-header-purple{
-    background: #7F007F;
+
+.table-header-dark-blue {
+    background: #2c3e50;
 }
+
+.table-header-purple {
+    background: #8e44ad;
+}
+
 .table-header h4 {
     margin: 0;
     max-width: 60%;
@@ -158,7 +165,6 @@ header {
 .table-header span:last-child {
     margin-right: 0;
 }
-
 
 .db-columns {
     list-style: none;

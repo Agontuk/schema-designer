@@ -17,6 +17,7 @@ class TableModal extends Component {
 
     // Flow type for refs
     name: any
+    color: any
     softdelete: any
     timestamp: any
 
@@ -110,22 +111,24 @@ class TableModal extends Component {
 
                             {duplicateName &&
                             <span className='col-xs-offset-2 col-xs-10 help-block'>
-                                    Duplicate table name
-                                </span>
+                                Duplicate table name
+                            </span>
                             }
                         </div>
                         <div className='form-group'>
-                            <label className='col-xs-2 control-label' htmlFor='table-color'>Color:</label>
+                            <label className='col-xs-2 control-label' htmlFor='color'>Color:</label>
                             <div className='col-xs-10'>
                                 <select
                                     type='text'
                                     id='color'
                                     ref={ (color) => { this.color = color; } }
                                     className='form-control'
+                                    defaultValue={ editData.color }
                                 >
                                     <option value='table-header-red'>Red</option>
                                     <option value='table-header-green'>Green</option>
                                     <option value='table-header-blue'>Blue</option>
+                                    <option value='table-header-dark-blue'>Dark Blue</option>
                                     <option value='table-header-purple'>Purple</option>
                                 </select>
                             </div>

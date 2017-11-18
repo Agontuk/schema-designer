@@ -31,6 +31,7 @@ export type ColumnType = {
 export type TableType = {
     id: string,
     name: string,
+    color: string,
     softDelete: boolean,
     timeStamp: boolean
 };
