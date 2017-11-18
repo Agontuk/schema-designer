@@ -32,6 +32,7 @@ class TableModal extends Component {
         const data = {
             id: editMode ? editData.id : Math.random().toString(36).substring(7),
             name: this.name.value.trim().toLowerCase(),
+            color: this.color.value.trim(),
             softDelete: this.softdelete.checked,
             timeStamp: this.timestamp.checked
         };
@@ -87,7 +88,7 @@ class TableModal extends Component {
                         <span>&times;</span>
                     </button>
                     <Modal.Title>
-                        { editMode ? 'Update Table' : 'Create Table' }
+                        {editMode ? 'Update Table' : 'Create Table'}
                     </Modal.Title>
                 </Modal.Header>
 
@@ -99,24 +100,45 @@ class TableModal extends Component {
                                 <input
                                     type='text'
                                     id='name'
-                                    ref={ (name) => { this.name = name; } }
+                                    ref={ (name) => {
+                                        this.name = name;
+                                    } }
                                     className='form-control'
                                     defaultValue={ editData.name }
                                 />
                             </div>
 
-                            { duplicateName &&
-                                <span className='col-xs-offset-2 col-xs-10 help-block'>
+                            {duplicateName &&
+                            <span className='col-xs-offset-2 col-xs-10 help-block'>
                                     Duplicate table name
                                 </span>
                             }
                         </div>
+                        <div className='form-group'>
+                            <label className='col-xs-2 control-label' htmlFor='table-color'>Color:</label>
+                            <div className='col-xs-10'>
+                                <select
+                                    type='text'
+                                    id='color'
+                                    ref={ (color) => { this.color = color; } }
+                                    className='form-control'
+                                >
+                                    <option value='table-header-red'>Red</option>
+                                    <option value='table-header-green'>Green</option>
+                                    <option value='table-header-blue'>Blue</option>
+                                    <option value='table-header-purple'>Purple</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div className='checkbox'>
                             <label htmlFor='softdelete'>
                                 <input
                                     type='checkbox'
                                     id='softdelete'
-                                    ref={ (softdelete) => { this.softdelete = softdelete; } }
+                                    ref={ (softdelete) => {
+                                        this.softdelete = softdelete;
+                                    } }
                                     defaultChecked={ editData.softDelete }
                                 /> Soft Delete
                             </label>
@@ -126,7 +148,9 @@ class TableModal extends Component {
                                 <input
                                     type='checkbox'
                                     id='timestamp'
-                                    ref={ (timestamp) => { this.timestamp = timestamp; } }
+                                    ref={ (timestamp) => {
+                                        this.timestamp = timestamp;
+                                    } }
                                     defaultChecked={ editData.timeStamp }
                                 /> Timestamp
                             </label>
@@ -139,7 +163,7 @@ class TableModal extends Component {
                         type='button'
                         className='btn btn-primary'
                         onClick={ this.handleSubmit }
-                    >{ editMode ? 'Update' : 'Save' }
+                    >{editMode ? 'Update' : 'Save'}
                     </button>
                     <button
                         type='button'
