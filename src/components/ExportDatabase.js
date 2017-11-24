@@ -11,7 +11,7 @@ const exportTooltip = (
 );
 
 const exportJsonTooltip = (
-    <Tooltip id='export-tooltip'><strong>Export as JSON file</strong></Tooltip>
+    <Tooltip id='export-tooltip'><strong>Export Schema</strong></Tooltip>
 );
 
 class ExportDatabase extends Component {
@@ -31,7 +31,7 @@ class ExportDatabase extends Component {
             const url = `data:application/json;charset=utf8,${ encodeURIComponent(jsonData) }`;
 
             this.download.setAttribute('href', url);
-            this.download.setAttribute('download', 'schema.json');
+            this.download.setAttribute('download', 'schema.txt');
             this.download.click();
         }
     }
@@ -72,7 +72,7 @@ class ExportDatabase extends Component {
                     </button>
                 </OverlayTrigger>
                 <a className='hidden' ref={ (download) => { this.download = download; } }>
-                    Export as JSON
+                    Export Schema
                 </a>
             </li>
         );

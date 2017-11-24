@@ -3,15 +3,16 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 
 const importTooltip = (
-    <Tooltip id='import-tooltip'><strong>Import JSON file</strong></Tooltip>
+    <Tooltip id='import-tooltip'><strong>Import Schema</strong></Tooltip>
 );
 
 class ImportDatabase extends Component {
     handleFileUpload = (e) => {
         const file = e.target.files[0];
+        const extension = file.name.substr(file.name.lastIndexOf('.'));
 
-        if (file.type !== 'application/json') {
-            alert('Please select the exported json file'); // eslint-disable-line no-alert
+        if (extension !== '.txt' || file.type !== 'text/plain') {
+            alert('Please select the exported schema.txt file'); // eslint-disable-line no-alert
             // Reset the current file input
             e.target.value = null; // eslint-disable-line no-param-reassign
             return;
@@ -60,7 +61,7 @@ class ImportDatabase extends Component {
                     id='file-upload'
                     ref={ (input) => { this.input = input; } }
                     type='file'
-                    accept='.json'
+                    accept='.txt'
                     onChange={ this.handleFileUpload }
                 />
             </li>
