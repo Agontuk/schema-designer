@@ -182,7 +182,6 @@ class ColumnModal extends Component<Props, State> {
             editMode,
             showColumnModal,
             tables,
-            tableId,
             toggleColumnModal
         } = this.props;
         const { columnType, duplicateName, foreignKeyEnabled, isUnsigned } = this.state;
@@ -372,7 +371,6 @@ class ColumnModal extends Component<Props, State> {
                                 ref={ (foreignKey) => { this.foreignKey = foreignKey; } }
                                 columns={ columns }
                                 tables={ tables }
-                                tableId={ tableId }
                                 data={ editData.foreignKey }
                             />
                         }

@@ -6,7 +6,6 @@ import find from 'lodash/find';
 import type { ColumnType, ForeignKeyType, TableType } from '../../utils/flowtypes';
 
 type Props = {
-    tableId: string,
     tables: Array<TableType>,
     columns: {
         [tableId: string]: Array<ColumnType>
@@ -104,7 +103,7 @@ class ForeignKeyForm extends PureComponent<Props, State> {
 
     render() {
         console.log('ForeignKeyForm rendering'); // eslint-disable-line no-console
-        const { tables, tableId, data, columns } = this.props;
+        const { tables, data, columns } = this.props;
         const { currentForeignTableId } = this.state;
 
         return (
@@ -138,13 +137,11 @@ class ForeignKeyForm extends PureComponent<Props, State> {
                         onChange={ this.setCurrentForeignTable }
                     >
                         <option value=''>None</option>
-                        { tables.filter((table) => (table.id !== tableId))
-                            .map((table) => (
-                                <option key={ table.id } value={ table.id }>
-                                    { table.name }
-                                </option>
-                            ))
-                        }
+                        { tables.map((table) => (
+                            <option key={ table.id } value={ table.id }>
+                                { table.name }
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>
