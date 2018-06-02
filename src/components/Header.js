@@ -15,6 +15,10 @@ const trashTooltip = (
     <Tooltip id='trash-tooltip'><strong>Clear Current Schema</strong></Tooltip>
 );
 
+const forkTooltip = (
+    <Tooltip id='fork-tooltip'><strong>Fork me on Github</strong></Tooltip>
+);
+
 type Props = {
     dbName: string,
     dbModal: boolean,
@@ -104,6 +108,18 @@ class Header extends Component<Props> {
 
                                 <ImportDatabase />
 
+                                <li>
+                                    <OverlayTrigger
+                                        placement='bottom'
+                                        overlay={ forkTooltip }
+                                        delayShow={ 300 }
+                                        rootClose
+                                    >
+                                        <a href='https://github.com/Agontuk/schema-designer'>
+                                            <i className='fa fa-github fa-lg' />
+                                        </a>
+                                    </OverlayTrigger>
+                                </li>
                             </ul>
                         </div>
                     </div>
