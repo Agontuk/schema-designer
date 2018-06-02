@@ -9,9 +9,28 @@ import ForeignKeyForm from './ForeignKeyForm';
 import type { ColumnType, TableType } from '../../utils/flowtypes';
 import { isFractionType } from '../../utils/helpers';
 
-class ColumnModal extends Component {
-    props: Props
+type Props = {
+    showColumnModal: boolean,
+    editMode: boolean,
+    editData: ColumnType,
+    tableId: string,
+    tables: Array<TableType>,
+    columns: {
+        [tableId: string]: Array<ColumnType>
+    },
+    toggleColumnModal: () => void,
+    saveColumn: (data: ColumnType, tableId: string, hideModal?: boolean) => void,
+    updateColumn: (data: ColumnType, tableId: string) => void
+};
 
+type State = {
+    columnType: string,
+    duplicateName: boolean,
+    foreignKeyEnabled: boolean,
+    isUnsigned: boolean
+};
+
+class ColumnModal extends Component<Props, State> {
     state = {
         columnType: '',
         duplicateName: false,
@@ -67,10 +86,8 @@ class ColumnModal extends Component {
             }
         };
 
-        const foreignKey = this.foreignKey;
-
-        if (foreignKey) {
-            data.foreignKey = foreignKey.getData();
+        if (this.foreignKey) {
+            data.foreignKey = this.foreignKey.getData();
         }
 
         if (!data.name) {
@@ -386,19 +403,5 @@ class ColumnModal extends Component {
         );
     }
 }
-
-type Props = {
-    showColumnModal: boolean,
-    editMode: boolean,
-    editData: ColumnType,
-    tableId: string,
-    tables: Array<TableType>,
-    columns: {
-        [tableId: string]: Array<ColumnType>
-    },
-    toggleColumnModal: () => void,
-    saveColumn: (data: ColumnType, tableId: string, hideModal?: boolean) => void,
-    updateColumn: (data: ColumnType, tableId: string) => void
-};
 
 export default ColumnModal;

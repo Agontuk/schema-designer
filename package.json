@@ -1,14 +1,7 @@
 {
   "name": "schema-designer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Database schema designer for laravel & lumen",
-  "main": "src/main.js",
-  "scripts": {
-    "start": "node dev/server.js",
-    "build": "node_modules/webpack/bin/webpack.js --config dev/webpack/prod.conf.js",
-    "lint": "node_modules/eslint/bin/eslint.js src/",
-    "test": "jest"
-  },
   "keywords": [
     "database",
     "schema",
@@ -26,42 +19,48 @@
     "url": "https://github.com/Agontuk/schema-designer.git"
   },
   "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "cross-env CI=true yarn test --bail --findRelatedTests",
+      "git add"
+    ]
+  },
   "dependencies": {
     "classnames": "^2.2.5",
-    "immutability-helper": "^2.1.1",
-    "jsplumb": "^2.2.10",
-    "lodash": "^4.17.4",
-    "react": "^15.4.2",
-    "react-bootstrap": "^0.30.7",
-    "react-dom": "^15.4.2",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.7.4",
-    "reselect": "^2.5.4"
+    "immutability-helper": "^2.7.0",
+    "jsplumb": "2.2.10",
+    "lodash": "^4.17.10",
+    "react": "^16.4.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.4.0",
+    "react-hot-loader": "^4.2.0",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
-    "babel-core": "^6.21.0",
-    "babel-eslint": "^7.1.1",
-    "babel-jest": "^18.0.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-2": "^6.18.0",
-    "css-loader": "^0.26.1",
-    "eslint": "^3.13.1",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-flowtype": "^2.30.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.9.0",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "html-webpack-plugin": "^2.26.0",
-    "jest": "^18.1.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2",
-    "webpack-merge": "^2.4.0"
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^20.0.3",
+    "cross-env": "^5.1.6",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
+    "flow-bin": "^0.73.0",
+    "husky": "^0.14.3",
+    "jest": "^20.0.3",
+    "lint-staged": "^7.1.3"
   }
 }

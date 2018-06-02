@@ -5,7 +5,23 @@ import React, { PureComponent } from 'react';
 import find from 'lodash/find';
 import type { ColumnType, ForeignKeyType, TableType } from '../../utils/flowtypes';
 
-class ForeignKeyForm extends PureComponent {
+type Props = {
+    tableId: string,
+    tables: Array<TableType>,
+    columns: {
+        [tableId: string]: Array<ColumnType>
+    },
+    data: ForeignKeyType
+};
+
+type State = {
+    currentForeignTableId: string,
+    currentForeignTableName: string,
+    currentForeignColumnId: string,
+    currentForeignColumnName: string
+};
+
+class ForeignKeyForm extends PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
 
@@ -56,6 +72,7 @@ class ForeignKeyForm extends PureComponent {
         let name = '';
 
         if (selected) {
+            // eslint-disable-next-line
             name = find(tables, { id: selected }).name;
         }
 
@@ -75,6 +92,7 @@ class ForeignKeyForm extends PureComponent {
         let name = '';
 
         if (selected) {
+            // eslint-disable-next-line
             name = find(columns[currentForeignTableId], { id: selected }).name;
         }
 
@@ -103,12 +121,12 @@ class ForeignKeyForm extends PureComponent {
 
                         { columns[currentForeignTableId] !== undefined &&
                             columns[currentForeignTableId]
-                            .filter((column) => !column.foreignKey.on.id)
-                            .map((column) => (
-                                <option key={ column.id } value={ column.id }>
-                                    { column.name }
-                                </option>
-                            ))
+                                .filter((column) => !column.foreignKey.on.id)
+                                .map((column) => (
+                                    <option key={ column.id } value={ column.id }>
+                                        { column.name }
+                                    </option>
+                                ))
                         }
                     </select>
                 </div>
@@ -133,21 +151,5 @@ class ForeignKeyForm extends PureComponent {
         );
     }
 }
-
-type Props = {
-    tableId: string,
-    tables: Array<TableType>,
-    columns: {
-        [tableId: string]: Array<ColumnType>
-    },
-    data: ForeignKeyType
-};
-
-type State = {
-    currentForeignTableId: string,
-    currentForeignTableName: string,
-    currentForeignColumnId: string,
-    currentForeignColumnName: string
-};
 
 export default ForeignKeyForm;

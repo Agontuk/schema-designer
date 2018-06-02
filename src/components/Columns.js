@@ -5,9 +5,14 @@ import React, { PureComponent } from 'react';
 import Column from './Column';
 import type { TableType, ColumnType } from '../utils/flowtypes';
 
-class Columns extends PureComponent {
-    props: Props
+type Props = {
+    columns: Array<ColumnType>,
+    table: TableType,
+    removeColumn: (data: ColumnType, tabledId: string) => void,
+    editColumn: (data: ColumnType, tabledId: string) => void
+};
 
+class Columns extends PureComponent<Props> {
     render() {
         console.log('Columns rendering'); // eslint-disable-line no-console
         const { columns, table, removeColumn, editColumn } = this.props;
@@ -43,12 +48,5 @@ class Columns extends PureComponent {
         );
     }
 }
-
-type Props = {
-    columns: Array<ColumnType>,
-    table: TableType,
-    removeColumn: (data: ColumnType, tabledId: string) => void,
-    editColumn: (data: ColumnType, tabledId: string) => void
-};
 
 export default Columns;

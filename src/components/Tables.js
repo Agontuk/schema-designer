@@ -6,7 +6,15 @@ import jsPlumb from 'jsplumb';
 import Table from '../containers/Table';
 import type { TableType, TablePositionType } from '../utils/flowtypes';
 
-class Tables extends Component {
+type Props = {
+    tables: Array<TableType>,
+    editTable: (data: TableType) => void,
+    removeTable: (id: string) => void,
+    storeTablePosition: (data: TablePositionType) => void,
+    toggleColumnModal: (id: string) => void
+};
+
+class Tables extends Component<Props> {
     componentDidMount() {
         // Needed for initial render from localStorage
         this.makeTablesDraggable();
@@ -20,8 +28,6 @@ class Tables extends Component {
             this.makeTablesDraggable();
         }
     }
-
-    props: Props
 
     makeTablesDraggable = () => {
         const { storeTablePosition } = this.props;
@@ -96,13 +102,5 @@ class Tables extends Component {
         );
     }
 }
-
-type Props = {
-    tables: Array<TableType>,
-    editTable: (data: TableType) => void,
-    removeTable: (id: string) => void,
-    storeTablePosition: (data: TablePositionType) => void,
-    toggleColumnModal: (id: string) => void
-};
 
 export default Tables;

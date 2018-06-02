@@ -14,9 +14,21 @@ const exportJsonTooltip = (
     <Tooltip id='export-tooltip'><strong>Export Schema</strong></Tooltip>
 );
 
-class ExportDatabase extends Component {
-    props: Props
+type Props = {
+    data: {
+        database: {
+            name: string
+        },
+        ui: UiType,
+        tables: Array<TableType>,
+        columns: {
+            [tableId: string]: Array<ColumnType>
+        },
+        relations: Array<RelationType>
+    }
+};
 
+class ExportDatabase extends Component<Props> {
     // Flow type for refs
     download: any
     form: any
@@ -71,6 +83,7 @@ class ExportDatabase extends Component {
                     >
                     </button>
                 </OverlayTrigger>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className='hidden' ref={ (download) => { this.download = download; } }>
                     Export Schema
                 </a>
@@ -78,19 +91,5 @@ class ExportDatabase extends Component {
         );
     }
 }
-
-type Props = {
-    data: {
-        database: {
-            name: string
-        },
-        ui: UiType,
-        tables: Array<TableType>,
-        columns: {
-            [tableId: string]: Array<ColumnType>
-        },
-        relations: Array<RelationType>
-    }
-};
 
 export default ExportDatabase;

@@ -8,9 +8,21 @@ import findIndex from 'lodash/findIndex';
 import type { TableType } from '../../utils/flowtypes';
 import shallowEqual from '../../utils/shallowEqual';
 
-class TableModal extends Component {
-    props: Props
+type Props = {
+    showTableModal: boolean,
+    editMode: boolean,
+    editData: TableType,
+    tables: Array<TableType>,
+    toggleTableModal: () => void,
+    saveTable: (data: TableType) => void,
+    updateTable: (data: TableType) => void
+};
 
+type State = {
+    duplicateName: boolean
+};
+
+class TableModal extends Component<Props, State> {
     state = {
         duplicateName: false
     }
@@ -179,15 +191,5 @@ class TableModal extends Component {
         );
     }
 }
-
-type Props = {
-    showTableModal: boolean,
-    editMode: boolean,
-    editData: TableType,
-    tables: Array<TableType>,
-    toggleTableModal: () => void,
-    saveTable: (data: TableType) => void,
-    updateTable: (data: TableType) => void
-};
 
 export default TableModal;

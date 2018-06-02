@@ -1,96 +1,65 @@
 {
-    extends: [
-        'airbnb',
-        'plugin:flowtype/recommended'
+    "extends": [
+        "airbnb",
+        "plugin:flowtype/recommended"
     ],
-    parser: 'babel-eslint',
-    plugins: [
-        'react',
-        'flowtype'
+    "parser": "babel-eslint",
+    "plugins": [
+        "react",
+        "flowtype"
     ],
-    rules: {
-        # Auto detect arrow body style
-        arrow-body-style: ['error', 'as-needed'],
+    "rules": {
+        "arrow-body-style": ["error", "as-needed"],
+        "arrow-parens": ["error", "always"],
+        "comma-dangle": ["error", "never"],
+        "indent": ["error", 4, {
+            "VariableDeclarator": {
+                "var": 2,
+                "let": 2,
+                "const": 2
+            },
+            "SwitchCase": 1
+        }],
+        "jsx-quotes": ["error", "prefer-single"],
+        "max-len": ["error", 120],
+        "object-curly-newline": ["error", { "consistent": true }],
+        "template-curly-spacing": ["error", "always"],
+        "jsx-a11y/label-has-for": ["error", {
+            "required": {
+              "every": ["id"]
+            }
+        }],
+        "jsx-a11y/no-autofocus": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
 
-        # Always use parentheses around arrow function
-        arrow-parens: ['error', 'always'],
+        "react/jsx-curly-spacing": ["error", "always"],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+        "react/jsx-key": "error",
+        "react/sort-comp": "off",
+        "react/self-closing-comp": ["error", { "component": true, "html": false }],
 
-        # Disable trailing comma
-        comma-dangle: ['error', 'never'],
-
-        # Use indent with 4 spaces
-        indent: ['error', 4, {VariableDeclarator: {var: 2, let: 2, const: 2}, SwitchCase: 1}],
-
-        # Use single quote in jsx attributes
-        jsx-quotes: ['error', 'prefer-single'],
-
-        # Allow max line length of 120
-        max-len: ['error', 120],
-
-        # Enforce spaces inside template literals
-        template-curly-spacing: ['error', 'always'],
-
-        # Allow interaction handlers on non-semantic elements
-        jsx-a11y/no-static-element-interactions: 'off',
-
-        # Use space inside curly brace
-        react/jsx-curly-spacing: ['error', 'always'],
-
-        # Use indent with 4 spaces for jsx
-        react/jsx-indent: ['error', 4],
-
-        # Use indent with 4 spaces in props
-        react/jsx-indent-props: ['error', 4],
-
-        # Allow .js & .jsx extension
-        react/jsx-filename-extension: ['error', { 'extensions': ['.js', '.jsx'] }],
-
-        # Detect missing key prop
-        react/jsx-key: 'error',
-
-        # Enforce component methods order
-        react/sort-comp: 'off',
-
-        # Prevent self closing tags for html component
-        react/self-closing-comp: ['error', { 'component': true, 'html': false }],
-
-        # Enforces consistent use of trailing commas in Object and Tuple annotations.
-        flowtype/delimiter-dangle: ['error', 'never'],
-
-        # Checks for duplicate properties in Object annotations.
-        flowtype/no-dupe-keys: 'error',
-
-        # Disallows use of primitive constructors as types (e.g. Boolean)
-        flowtype/no-primitive-constructor-types: 'error',
-
-        # Warns against weak type annotations (any, Object and Function).
-        flowtype/no-weak-types: ['error', { 'any': false }],
-
-        # Enforces consistent separators between properties in Flow object types.
-        flowtype/object-type-delimiter: ['error', 'comma'],
-
-        # Requires that all function parameters have type annotations.
-        flowtype/require-parameter-type: ['error', { 'excludeArrowFunctions': true }],
-
-        # Requires that functions have return type annotation.
-        flowtype/require-return-type: ['error', { 'excludeArrowFunctions': true }],
-
-        # Enforces consistent use of semicolons after type aliases.
-        flowtype/semi: ['error', 'always']
+        "flowtype/delimiter-dangle": ["error", "never"],
+        "flowtype/no-dupe-keys": "error",
+        "flowtype/no-primitive-constructor-types": "error",
+        "flowtype/no-weak-types": ["error", { "any": false }],
+        "flowtype/object-type-delimiter": ["error", "comma"],
+        "flowtype/require-parameter-type": ["error", { "excludeArrowFunctions": true }],
+        "flowtype/require-return-type": "off",
+        "flowtype/semi": ["error", "always"]
     },
-
-    env: {
-        es6: true,
-        browser: true,
-        node: true,
-        jest: true
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "jest": true
     },
-
-    parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
         }
     }
 }

@@ -1,10 +1,10 @@
-import reducer from '../src/reducers/relationReducer';
+import reducer from '../relationReducer';
 import {
     removeColumn,
     removeTable,
     saveForeignKeyRelation,
     updateForeignKeyRelation
-} from '../src/actions/ActionCreators';
+} from '../../actions/ActionCreators';
 
 describe('relation reducer', () => {
     const state = [
@@ -51,20 +51,20 @@ describe('relation reducer', () => {
         };
 
         expect(reducer(state, saveForeignKeyRelation(columnData.test1, 'table4')))
-        .toEqual([
-            {
-                source: { columnId: 'col22', tableId: 'table2' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            },
-            {
-                source: { columnId: 'col32', tableId: 'table3' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            },
-            {
-                source: { columnId: 'col42', tableId: 'table4' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            }
-        ]);
+            .toEqual([
+                {
+                    source: { columnId: 'col22', tableId: 'table2' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                },
+                {
+                    source: { columnId: 'col32', tableId: 'table3' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                },
+                {
+                    source: { columnId: 'col42', tableId: 'table4' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                }
+            ]);
 
         expect(reducer(state, saveForeignKeyRelation(columnData.test2, 'table4'))).toEqual(state);
     });
@@ -96,41 +96,41 @@ describe('relation reducer', () => {
 
         // Should remove the relation
         expect(reducer(state, updateForeignKeyRelation(columnData.test1, 'table2')))
-        .toEqual([
-            {
-                source: { columnId: 'col32', tableId: 'table3' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            }
-        ]);
+            .toEqual([
+                {
+                    source: { columnId: 'col32', tableId: 'table3' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                }
+            ]);
 
         // Should update the existing foreign key relation with new data
         expect(reducer(state, updateForeignKeyRelation(columnData.test2, 'table3')))
-        .toEqual([
-            {
-                source: { columnId: 'col22', tableId: 'table2' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            },
-            {
-                source: { columnId: 'col32', tableId: 'table3' },
-                target: { columnId: 'col21', tableId: 'table2' }
-            }
-        ]);
+            .toEqual([
+                {
+                    source: { columnId: 'col22', tableId: 'table2' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                },
+                {
+                    source: { columnId: 'col32', tableId: 'table3' },
+                    target: { columnId: 'col21', tableId: 'table2' }
+                }
+            ]);
 
         // Should add new relation for the given data
         expect(reducer(state, updateForeignKeyRelation(columnData.test3, 'table4')))
-        .toEqual([
-            {
-                source: { columnId: 'col22', tableId: 'table2' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            },
-            {
-                source: { columnId: 'col32', tableId: 'table3' },
-                target: { columnId: 'col11', tableId: 'table1' }
-            },
-            {
-                source: { columnId: 'col42', tableId: 'table4' },
-                target: { columnId: 'col31', tableId: 'table3' }
-            }
-        ]);
+            .toEqual([
+                {
+                    source: { columnId: 'col22', tableId: 'table2' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                },
+                {
+                    source: { columnId: 'col32', tableId: 'table3' },
+                    target: { columnId: 'col11', tableId: 'table1' }
+                },
+                {
+                    source: { columnId: 'col42', tableId: 'table4' },
+                    target: { columnId: 'col31', tableId: 'table3' }
+                }
+            ]);
     });
 });

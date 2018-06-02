@@ -15,7 +15,14 @@ const trashTooltip = (
     <Tooltip id='trash-tooltip'><strong>Clear Current Schema</strong></Tooltip>
 );
 
-class Header extends Component {
+type Props = {
+    dbName: string,
+    dbModal: boolean,
+    toggleDbModal: (editMode?: boolean) => void,
+    toggleTableModal: () => void
+};
+
+class Header extends Component<Props> {
     constructor(props: Props) {
         super(props);
 
@@ -23,8 +30,6 @@ class Header extends Component {
             props.toggleDbModal();
         }
     }
-
-    props: Props
 
     shouldComponentUpdate(nextProps: Props) {
         // Update only if database name changes
@@ -107,12 +112,5 @@ class Header extends Component {
         );
     }
 }
-
-type Props = {
-    dbName: string,
-    dbModal: boolean,
-    toggleDbModal: (editMode?: boolean) => void,
-    toggleTableModal: () => void
-};
 
 export default Header;

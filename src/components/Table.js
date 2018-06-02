@@ -1,13 +1,23 @@
 /**
  * @flow
  */
+import noop from 'lodash/noop';
 import React, { PureComponent } from 'react';
 import Columns from '../containers/Columns';
 import type { TableType } from '../utils/flowtypes';
 
-class Table extends PureComponent {
-    props: Props
+type Props = {
+    data: TableType,
+    position: {
+        x: number,
+        y: number
+    },
+    onEditTable: (data: TableType) => void,
+    onRemoveTable: (id: string) => void,
+    onToggleColumnModal: (id: string) => void
+};
 
+class Table extends PureComponent<Props> {
     editTable = () => {
         const { data, onEditTable } = this.props;
         onEditTable(data);
@@ -36,9 +46,24 @@ class Table extends PureComponent {
                 <div className={ `table-header clearfix ${ data.color }` }>
                     <h4 className='pull-left' title={ data.name }>{ data.name }</h4>
                     <div className='pull-right'>
-                        <span className='fa fa-plus' onClick={ this.toggleColumnModal }></span>
-                        <span className='fa fa-pencil' onClick={ this.editTable }></span>
-                        <span className='fa fa-remove' onClick={ this.removeTable }></span>
+                        <span
+                            className='fa fa-plus'
+                            onClick={ this.toggleColumnModal }
+                            onKeyPress={ noop }
+                        >
+                        </span>
+                        <span
+                            className='fa fa-pencil'
+                            onClick={ this.editTable }
+                            onKeyPress={ noop }
+                        >
+                        </span>
+                        <span
+                            className='fa fa-remove'
+                            onClick={ this.removeTable }
+                            onKeyPress={ noop }
+                        >
+                        </span>
                     </div>
                 </div>
 
@@ -47,16 +72,5 @@ class Table extends PureComponent {
         );
     }
 }
-
-type Props = {
-    data: TableType,
-    position: {
-        x: number,
-        y: number
-    },
-    onEditTable: (data: TableType) => void,
-    onRemoveTable: (id: string) => void,
-    onToggleColumnModal: (id: string) => void
-};
 
 export default Table;

@@ -1,12 +1,18 @@
 /**
  * @flow
  */
+import noop from 'lodash/noop';
 import React, { PureComponent } from 'react';
 import type { ColumnType } from '../utils/flowtypes';
 
-class Column extends PureComponent {
-    props: Props
+type Props = {
+    data: ColumnType,
+    tableId: string,
+    onRemoveColumn: (data: ColumnType, tabledId: string) => void,
+    onEditColumn: (data: ColumnType, tabledId: string) => void
+};
 
+class Column extends PureComponent<Props> {
     editColumn = () => {
         const { data, onEditColumn, tableId } = this.props;
         onEditColumn(data, tableId);
@@ -30,19 +36,22 @@ class Column extends PureComponent {
                     <small>({ data.type })</small>
                 </div>
                 <div className='pull-right'>
-                    <span className='fa fa-pencil' onClick={ this.editColumn }></span>
-                    <span className='fa fa-remove' onClick={ this.removeColumn }></span>
+                    <span
+                        className='fa fa-pencil'
+                        onClick={ this.editColumn }
+                        onKeyPress={ noop }
+                    >
+                    </span>
+                    <span
+                        className='fa fa-remove'
+                        onClick={ this.removeColumn }
+                        onKeyPress={ noop }
+                    >
+                    </span>
                 </div>
             </li>
         );
     }
 }
-
-type Props = {
-    data: ColumnType,
-    tableId: string,
-    onRemoveColumn: (data: ColumnType, tabledId: string) => void,
-    onEditColumn: (data: ColumnType, tabledId: string) => void
-};
 
 export default Column;

@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import jsPlumb from 'jsplumb';
 import type { RelationType } from '../utils/flowtypes';
 
-class DrawRelationLine extends PureComponent {
-    props: {
-        relations: Array<RelationType>
-    }
+type Props = {
+    relations: Array<RelationType>
+};
 
+class DrawRelationLine extends PureComponent<Props> {
     componentDidMount() {
         jsPlumb.importDefaults({
             Connector: ['Flowchart', { cornerRadius: 5 }],

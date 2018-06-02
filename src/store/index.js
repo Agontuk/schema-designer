@@ -1,8 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import Reducers from '../reducers';
 import LocalStorageMiddleware from './LocalStorageMiddleware';
-import PerfMiddleware from './PerfMiddleware';
 import { getInitialState } from '../utils/helpers';
 
 const logger = createLogger();
@@ -12,7 +11,6 @@ let extension = (next) => next;
 
 if (process.env.NODE_ENV !== 'production') {
     middleware.push(logger);
-    middleware.push(PerfMiddleware);
     extension = window.devToolsExtension ? window.devToolsExtension() : extension;
 }
 

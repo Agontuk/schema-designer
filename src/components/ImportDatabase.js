@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+/**
+ * @flow
+ */
+// $FlowFixMe
+import React, { Component, SyntheticEvent } from 'react';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 
@@ -6,8 +10,10 @@ const importTooltip = (
     <Tooltip id='import-tooltip'><strong>Import Schema</strong></Tooltip>
 );
 
-class ImportDatabase extends Component {
-    handleFileUpload = (e) => {
+class ImportDatabase extends Component<{}> {
+    input = null;
+
+    handleFileUpload = (e: SyntheticEvent) => {
         const file = e.target.files[0];
         const extension = file.name.substr(file.name.lastIndexOf('.'));
 
@@ -23,6 +29,7 @@ class ImportDatabase extends Component {
 
             reader.onload = () => {
                 try {
+                    // $FlowFixMe
                     const jsonData = JSON.parse(reader.result);
 
                     // Set data to localStorage
@@ -43,7 +50,9 @@ class ImportDatabase extends Component {
     }
 
     openFileSelectionWindow = () => {
-        this.input.click();
+        if (this.input) {
+            this.input.click();
+        }
     }
 
     render() {

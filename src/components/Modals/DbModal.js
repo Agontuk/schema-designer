@@ -4,9 +4,15 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 
-class DbModal extends Component {
-    props: Props
+type Props = {
+    name: string,
+    showModal: boolean,
+    editMode: boolean,
+    saveDbName: (name: string, editMode: boolean) => void,
+    toggleDbModal: () => void
+};
 
+class DbModal extends Component<Props> {
     // Flow type for ref
     dbname: any
 
@@ -53,13 +59,5 @@ class DbModal extends Component {
         );
     }
 }
-
-type Props = {
-    name: string,
-    showModal: boolean,
-    editMode: boolean,
-    saveDbName: (name: string, editMode: boolean) => void,
-    toggleDbModal: () => void
-};
 
 export default DbModal;
