@@ -64,7 +64,7 @@ class ColumnModal extends Component<Props, State> {
 
     getFormData = () => {
         const data = {
-            name: this.name.value.trim().toLowerCase(),
+            name: this.name.value.trim(),
             type: this.type.value,
             length: this.length.value.trim(),
             defValue: this.defValue.value.trim(),
