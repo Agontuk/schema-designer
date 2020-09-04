@@ -43,7 +43,7 @@ class ExportDatabase extends Component<Props> {
             const url = `data:application/json;charset=utf8,${ encodeURIComponent(jsonData) }`;
 
             this.download.setAttribute('href', url);
-            this.download.setAttribute('download', 'schema.txt');
+            this.download.setAttribute('download', 'schema.json');
             this.download.click();
         }
     }
