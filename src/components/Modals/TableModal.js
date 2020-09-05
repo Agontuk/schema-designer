@@ -108,8 +108,8 @@ class TableModal extends Component<Props, State> {
                 <Modal.Body>
                     <form className='form-horizontal' onSubmit={ this.handleSubmit }>
                         <div className={ classnames('form-group row', { 'has-error': duplicateName }) }>
-                            <label className='col-sm-2 col-form-label text-right' htmlFor='name'>Name:</label>
-                            <div className='col-sm-10'>
+                            <label className='col-md-2 col-form-label text-right' htmlFor='name'>Name:</label>
+                            <div className='col-md-10'>
                                 <input
                                     type='text'
                                     id='name'
@@ -122,14 +122,14 @@ class TableModal extends Component<Props, State> {
                             </div>
 
                             {duplicateName &&
-                            <span className='col-sm-offset-2 col-sm-10 help-block'>
+                            <span className='col-md-offset-2 col-md-10 help-block'>
                                 Duplicate table name
                             </span>
                             }
                         </div>
                         <div className='form-group row'>
-                            <label className='col-sm-2 col-form-label text-right' htmlFor='color'>Color:</label>
-                            <div className='col-sm-10'>
+                            <label className='col-md-2 col-form-label text-right' htmlFor='color'>Color:</label>
+                            <div className='col-md-10'>
                                 <select
                                     type='text'
                                     id='color'
