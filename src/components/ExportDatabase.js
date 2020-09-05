@@ -2,8 +2,8 @@
  * @flow
  */
 import React, { Component } from 'react';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
+import { OverlayTrigger } from 'react-bootstrap';
+import { Tooltip } from 'react-bootstrap';
 import type { ColumnType, RelationType, TableType, UiType } from '../utils/flowtypes';
 
 const exportTooltip = (
@@ -60,7 +60,7 @@ class ExportDatabase extends Component<Props> {
         }
 
         return (
-            <li>
+            <li class="list-inline-item">
                 <form
                     className='form-inline'
                     method='POST'
@@ -73,7 +73,7 @@ class ExportDatabase extends Component<Props> {
                 <OverlayTrigger
                     placement='bottom'
                     overlay={ packageMode ? exportTooltip : exportJsonTooltip }
-                    delayShow={ 300 }
+                    delay={{ show: 300 }}
                     rootClose
                 >
                     <button
@@ -84,8 +84,8 @@ class ExportDatabase extends Component<Props> {
                     </button>
                 </OverlayTrigger>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a className='hidden' ref={ (download) => { this.download = download; } }>
-                    Export Schema
+                <a className='d-none' ref={ (download) => { this.download = download; } }>
+                    Eport Schema
                 </a>
             </li>
         );

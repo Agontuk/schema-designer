@@ -2,7 +2,7 @@
  * @flow
  */
 import React, { Component } from 'react';
-import Modal from 'react-bootstrap/lib/Modal';
+import { Modal } from 'react-bootstrap';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import type { TableType } from '../../utils/flowtypes';
@@ -97,19 +97,19 @@ class TableModal extends Component<Props, State> {
                 dialogClassName='modal-sm'
             >
                 <Modal.Header>
-                    <button type='button' className='close' onClick={ this.toggleTableModal }>
-                        <span>&times;</span>
-                    </button>
                     <Modal.Title>
                         {editMode ? 'Update Table' : 'Create Table'}
                     </Modal.Title>
+                    <button type='button' className='close' onClick={ this.toggleTableModal }>
+                        <span>&times;</span>
+                    </button>
                 </Modal.Header>
 
                 <Modal.Body>
                     <form className='form-horizontal' onSubmit={ this.handleSubmit }>
-                        <div className={ classnames('form-group', { 'has-error': duplicateName }) }>
-                            <label className='col-xs-2 control-label' htmlFor='name'>Name:</label>
-                            <div className='col-xs-10'>
+                        <div className={ classnames('form-group row', { 'has-error': duplicateName }) }>
+                            <label className='col-sm-2 col-form-label text-right' htmlFor='name'>Name:</label>
+                            <div className='col-sm-10'>
                                 <input
                                     type='text'
                                     id='name'
@@ -122,14 +122,14 @@ class TableModal extends Component<Props, State> {
                             </div>
 
                             {duplicateName &&
-                            <span className='col-xs-offset-2 col-xs-10 help-block'>
+                            <span className='col-sm-offset-2 col-sm-10 help-block'>
                                 Duplicate table name
                             </span>
                             }
                         </div>
-                        <div className='form-group'>
-                            <label className='col-xs-2 control-label' htmlFor='color'>Color:</label>
-                            <div className='col-xs-10'>
+                        <div className='form-group row'>
+                            <label className='col-sm-2 col-form-label text-right' htmlFor='color'>Color:</label>
+                            <div className='col-sm-10'>
                                 <select
                                     type='text'
                                     id='color'

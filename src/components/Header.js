@@ -2,8 +2,8 @@
  * @flow
  */
 import React, { Component } from 'react';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
+import { OverlayTrigger } from 'react-bootstrap';
+import { Tooltip } from 'react-bootstrap';
 import ExportDatabase from '../containers/ExportDatabase';
 import ImportDatabase from './ImportDatabase';
 
@@ -75,11 +75,11 @@ class Header extends Component<Props> {
                         </div>
                         <div className='menu col-xs-2 col-sm-4 text-right'>
                             <ul className='list-inline'>
-                                <li>
+                                <li class="list-inline-item">
                                     <OverlayTrigger
                                         placement='bottom'
                                         overlay={ tableTooltip }
-                                        delayShow={ 300 }
+                                        delay={{ show: 300 }}
                                         rootClose
                                     >
                                         <button
@@ -89,11 +89,11 @@ class Header extends Component<Props> {
                                         </button>
                                     </OverlayTrigger>
                                 </li>
-                                <li>
+                                <li class="list-inline-item">
                                     <OverlayTrigger
                                         placement='bottom'
                                         overlay={ trashTooltip }
-                                        delayShow={ 300 }
+                                        delay={{ show: 300 }}
                                         rootClose
                                     >
                                         <button
@@ -108,11 +108,11 @@ class Header extends Component<Props> {
 
                                 <ImportDatabase />
 
-                                <li>
+                                <li class="list-inline-item">
                                     <OverlayTrigger
                                         placement='bottom'
                                         overlay={ forkTooltip }
-                                        delayShow={ 300 }
+                                        delay={{ show: 300 }}
                                         rootClose
                                     >
                                         <a href='https://github.com/Agontuk/schema-designer'>
