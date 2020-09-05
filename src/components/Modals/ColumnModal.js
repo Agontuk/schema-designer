@@ -52,7 +52,6 @@ class ColumnModal extends Component<Props, State> {
     foreignKey: any
     form: any
 
-    // componentDidUpdate(nextProps: Props) {
     componentWillReceiveProps(nextProps: Props) {
         // For edit action
         this.setState({
