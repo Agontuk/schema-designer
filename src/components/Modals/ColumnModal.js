@@ -174,14 +174,13 @@ class ColumnModal extends Component<Props, State> {
         this.setState({ foreignKeyEnabled: event.target.checked });
     }
 
-        toggleColumnModal = () => {
-            const { editMode, toggleColumnModal } = this.props;
-    
-            if (editMode) {
-                toggleColumnModal();
-            }
-        }
-        render() {
+    toggleColumnModal = () => {
+        const { toggleColumnModal } = this.props;
+
+        toggleColumnModal();
+    }
+
+    render() {
         console.log('ColumnModal rendering'); // eslint-disable-line no-console
         const {
             columns,
@@ -192,7 +191,6 @@ class ColumnModal extends Component<Props, State> {
         } = this.props;
         const { columnType, duplicateName, foreignKeyEnabled, isUnsigned } = this.state;
  
-
         return (
             <Modal
                 className='wider-modal'
@@ -210,7 +208,6 @@ class ColumnModal extends Component<Props, State> {
 
                 <Modal.Body>
                     <form
-                        // className='form-row'
                         ref={ (form) => { this.form = form; } }
                         onSubmit={ this.handleSubmit }
                     >
