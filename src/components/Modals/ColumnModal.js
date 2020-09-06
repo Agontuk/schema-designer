@@ -236,6 +236,7 @@ class ColumnModal extends Component<Props, State> {
                                     onChange={ this.updateColumnType }
                                 >
                                     <option value='integer'>INT</option>
+                                    <option value='uuid'>UUID</option>
                                     <option value='string'>VARCHAR</option>
                                     <option value='text'>TEXT</option>
                                     <option value='date'>DATE</option>
