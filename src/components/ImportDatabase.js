@@ -17,8 +17,8 @@ class ImportDatabase extends Component<{}> {
         const file = e.target.files[0];
         const extension = file.name.substr(file.name.lastIndexOf('.'));
 
-        if (extension !== '.txt' || file.type !== 'text/plain') {
-            alert('Please select the exported schema.txt file'); // eslint-disable-line no-alert
+        if (extension !== '.json' || file.type !== 'application/json') {
+            alert('Please select the exported schema.json file'); // eslint-disable-line no-alert
             // Reset the current file input
             e.target.value = null; // eslint-disable-line no-param-reassign
             return;
@@ -70,7 +70,7 @@ class ImportDatabase extends Component<{}> {
                     id='file-upload'
                     ref={ (input) => { this.input = input; } }
                     type='file'
-                    accept='.txt'
+                    accept='.json'
                     onChange={ this.handleFileUpload }
                 />
             </li>
