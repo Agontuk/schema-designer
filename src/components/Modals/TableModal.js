@@ -44,7 +44,7 @@ class TableModal extends Component<Props, State> {
 
         const data = {
             id: editMode ? editData.id : Math.random().toString(36).substring(7),
-            name: this.name.value.trim().toLowerCase(),
+            name: this.name.value.trim(),
             color: this.color.value.trim(),
             softDelete: this.softdelete.checked,
             timeStamp: this.timestamp.checked

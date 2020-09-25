@@ -18,7 +18,7 @@ class DbModal extends Component<Props> {
 
     handleSubmit = (event: Event) => {
         event.preventDefault();
-        const name = this.dbname.value.trim().toLowerCase();
+        const name = this.dbname.value.trim();
 
         if (!name) {
             return;
