@@ -1,7 +1,7 @@
 /**
  * HEADER SECTION
  */
-body {
+ body {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -137,24 +137,80 @@ header {
     padding: 6px 8px;
 }
 
+/**
+ * CSS1
+ */
+
+.table-header-maroon {
+    background: #800000;
+}
+
 .table-header-red {
     background: #c0392b;
+}
+
+.table-header-yellow {
+    background: #ffff00;
+}
+
+.table-header-olive {
+    background: #808000;
 }
 
 .table-header-green {
     background: #16a085;
 }
 
+.table-header-purple {
+    background: #8e44ad;
+}
+
+.table-header-fuchsia {
+    background: #ff00ff;
+}
+
+.table-header-lime {
+    background: #00ff00;
+}
+
+.table-header-teal {
+    background: #008080;
+}
+
+.table-header-aqua {
+    background: #00ffff;
+}
+
 .table-header-blue {
     background: #2980b9;
 }
 
-.table-header-dark-blue {
-    background: #2c3e50;
+.table-header-navy {
+    background: #000080;
 }
 
-.table-header-purple {
-    background: #8e44ad;
+.table-header-black {
+    background: #000000;
+}
+
+.table-header-gray {
+    background: #808080;
+}
+
+.table-header-silver {
+    background: #c0c0c0;
+}
+
+.table-header-white {
+    background: #ffffff;
+}
+
+/**
+ * CSS2.1
+ */
+
+ .table-header-orange {
+    background: #ffa500;
 }
 
 .table-header h4 {
