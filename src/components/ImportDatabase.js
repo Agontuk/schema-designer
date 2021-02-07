@@ -3,8 +3,8 @@
  */
 // $FlowFixMe
 import React, { Component, SyntheticEvent } from 'react';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
+import { OverlayTrigger } from 'react-bootstrap';
+import { Tooltip } from 'react-bootstrap';
 
 const importTooltip = (
     <Tooltip id='import-tooltip'><strong>Import Schema</strong></Tooltip>
@@ -57,11 +57,11 @@ class ImportDatabase extends Component<{}> {
 
     render() {
         return (
-            <li>
+            <li class="list-inline-item">
                 <OverlayTrigger
                     placement='bottom'
                     overlay={ importTooltip }
-                    delayShow={ 300 }
+                    delay={{ show: 300 }}
                     rootClose
                 >
                     <button className='fa fa-upload' onClick={ this.openFileSelectionWindow }></button>

@@ -2,7 +2,7 @@
  * @flow
  */
 import React, { Component } from 'react';
-import Modal from 'react-bootstrap/lib/Modal';
+import { Modal } from 'react-bootstrap';
 
 type Props = {
     name: string,

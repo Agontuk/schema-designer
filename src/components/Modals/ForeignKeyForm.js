@@ -107,10 +107,10 @@ class ForeignKeyForm extends PureComponent<Props, State> {
         const { currentForeignTableId } = this.state;
 
         return (
-            <div className='form-group'>
-                <strong className='col-xs-3 control-label'>Foreign Key:</strong>
-                <span className='col-xs-2 control-label'>References:</span>
-                <div className='col-xs-3'>
+            <div className='form-group row'>
+                <strong className='col-md-3 col-form-label text-right'>Foreign Key:</strong>
+                <span className='col-md-2 col-form-label text-right'>References:</span>
+                <div className='col-md-3'>
                     <select
                         className='form-control'
                         defaultValue={ data.references.id }
@@ -129,8 +129,8 @@ class ForeignKeyForm extends PureComponent<Props, State> {
                         }
                     </select>
                 </div>
-                <span className='col-xs-1 control-label'>On:</span>
-                <div className='col-xs-3'>
+                <span className='col-md-1 col-form-label text-right'>On:</span>
+                <div className='col-md-3'>
                     <select
                         className='form-control'
                         defaultValue={ data.on.id }

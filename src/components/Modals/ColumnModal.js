@@ -2,7 +2,7 @@
  * @flow
  */
 import React, { Component } from 'react';
-import Modal from 'react-bootstrap/lib/Modal';
+import { Modal } from 'react-bootstrap';
 import classnames from 'classnames';
 import findIndex from 'lodash/findIndex';
 import ForeignKeyForm from './ForeignKeyForm';
@@ -174,6 +174,12 @@ class ColumnModal extends Component<Props, State> {
         this.setState({ foreignKeyEnabled: event.target.checked });
     }
 
+    toggleColumnModal = () => {
+        const { toggleColumnModal } = this.props;
+
+        toggleColumnModal();
+    }
+
     render() {
         console.log('ColumnModal rendering'); // eslint-disable-line no-console
         const {
@@ -182,33 +188,32 @@ class ColumnModal extends Component<Props, State> {
             editMode,
             showColumnModal,
             tables,
-            toggleColumnModal
         } = this.props;
         const { columnType, duplicateName, foreignKeyEnabled, isUnsigned } = this.state;
-
+ 
         return (
             <Modal
+                className='wider-modal'
                 show={ showColumnModal }
-                onHide={ toggleColumnModal }
+                onHide={ this.toggleColumnModal }
             >
                 <Modal.Header>
-                    <button type='button' className='close' onClick={ toggleColumnModal }>
-                        <span>&times;</span>
-                    </button>
-                    <Modal.Title>
+                <Modal.Title>
                         { editMode ? 'Update Column' : 'Add Column' }
                     </Modal.Title>
+                    <button type='button' className='close' onClick={ this.toggleColumnModal }>
+                        <span>&times;</span>
+                    </button>
                 </Modal.Header>
 
                 <Modal.Body>
                     <form
-                        className='form-horizontal'
                         ref={ (form) => { this.form = form; } }
                         onSubmit={ this.handleSubmit }
                     >
-                        <div className={ classnames('form-group', { 'has-error': duplicateName }) }>
-                            <label className='col-xs-3 control-label' htmlFor='name'>Name:</label>
-                            <div className='col-xs-9'>
+                        <div className={ classnames('form-group row', { 'has-error': duplicateName }) }>
+                            <label className='col-md-3 col-form-label text-right' htmlFor='name'>Name:</label>
+                            <div className='col-md-9'>
                                 <input
                                     type='text'
                                     id='name'
@@ -220,14 +225,14 @@ class ColumnModal extends Component<Props, State> {
                             </div>
 
                             { duplicateName &&
-                                <span className='col-xs-offset-3 col-xs-9 help-block'>
+                                <span className='col-md-offset-3 col-md-9 help-block'>
                                     Duplicate column name
                                 </span>
                             }
                         </div>
-                        <div className='form-group'>
-                            <label className='col-xs-3 control-label' htmlFor='type'>Type:</label>
-                            <div className='col-xs-9'>
+                        <div className='form-group row'>
+                            <label className='col-md-3 col-form-label text-right' htmlFor='type'>Type:</label>
+                            <div className='col-md-9'>
                                 <select
                                     className='form-control'
                                     id='type'
@@ -265,9 +270,9 @@ class ColumnModal extends Component<Props, State> {
                                 </select>
                             </div>
                         </div>
-                        <div className='form-group'>
-                            <label className='col-xs-3 control-label' htmlFor='length'>Length:</label>
-                            <div className='col-xs-9'>
+                        <div className='form-group row'>
+                            <label className='col-md-3 col-form-label text-right' htmlFor='length'>Length:</label>
+                            <div className='col-md-9'>
                                 <input
                                     type='text'
                                     id='length'
@@ -280,11 +285,11 @@ class ColumnModal extends Component<Props, State> {
                                 />
                             </div>
                         </div>
-                        <div className='form-group'>
-                            <label className='col-xs-3 control-label' htmlFor='defVal'>
+                        <div className='form-group row'>
+                            <label className='col-md-3 col-form-label text-right'>
                                 Default Value:
                             </label>
-                            <div className='col-xs-9'>
+                            <div className='col-md-9'>
                                 <input
                                     type='text'
                                     id='defVal'
@@ -294,9 +299,9 @@ class ColumnModal extends Component<Props, State> {
                                 />
                             </div>
                         </div>
-                        <div className='form-group'>
-                            <label className='col-xs-3 control-label' htmlFor='comment'>Comment:</label>
-                            <div className='col-xs-9'>
+                        <div className='form-group row'>
+                            <label className='col-md-3 col-form-label text-right' htmlFor='comment'>Comment:</label>
+                            <div className='col-md-9'>
                                 <input
                                     type='text'
                                     id='comment'
@@ -306,9 +311,9 @@ class ColumnModal extends Component<Props, State> {
                                 />
                             </div>
                         </div>
-                        <div className='form-group'>
-                            <strong className='col-xs-3 control-label'>Misc:</strong>
-                            <div className='col-xs-9'>
+                        <div className='form-group row'>
+                            <strong className='col-md-3 col-form-label text-right'>Misc:</strong>
+                            <div className='col-md-9'>
                                 <label className='checkbox-inline' htmlFor='autoInc'>
                                     <input
                                         type='checkbox'
@@ -351,7 +356,8 @@ class ColumnModal extends Component<Props, State> {
                                     /> Unsigned
                                 </label>
                             </div>
-                            <div className='col-xs-9 col-xs-offset-3'>
+                            <div className='col-md-3'/>
+                            <div className='col-md-9 col-md-offset-3'>
                                 <label
                                     className={ classnames('checkbox-inline', { disabled: !isUnsigned }) }
                                     htmlFor='foreign'
@@ -394,7 +400,7 @@ class ColumnModal extends Component<Props, State> {
                     <button
                         type='button'
                         className='btn btn-default'
-                        onClick={ toggleColumnModal }
+                        onClick={ this.toggleColumnModal }
                     >Cancel
                     </button>
                 </Modal.Footer>
